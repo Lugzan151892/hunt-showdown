@@ -1,5 +1,5 @@
 module.exports = {
-	trailingComma: "none",
+	trailingComma: 'none',
 	tabWidth: 2,
 	semi: true,
 	singleQuote: true,
@@ -8,6 +8,5 @@ module.exports = {
 	vueIndentScriptAndStyle: true,
 	printWidth: 120,
     bracketSameLine: false,
-    arrowParens: "always",
-    endOfLine: "auto"
+    arrowParens: 'always'
 };
