@@ -7,7 +7,7 @@ const dataList = [authEn, mainEn, authRu, mainRu];
 function getTranslate(arr: Array<COMMON.TTranslate>): COMMON.TTranslateMain {
 	const newData = arr.reduce((obj: COMMON.TTranslateMain, item: COMMON.TTranslate) => {
 		const newData: { [key: string]: string } = {};
-		for (let key in item.translations) {
+		for (const key in item.translations) {
 			newData[`${item.name}.${key}`] = item.translations[key];
 		}
 		obj[item.locale] = { ...obj[item.locale], ...newData };
