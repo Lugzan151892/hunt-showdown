@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <h1>{{ $t('loginTitle') }} </h1>
+        <h1>{{ $t('auth.loginTitle') }} </h1>
         <div class="content__form">
             <UiCustomInput />
         </div>

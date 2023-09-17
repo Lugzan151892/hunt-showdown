@@ -1,0 +1,7 @@
+{
+    "name": "main",
+    "locale": "ru",
+    "translations": {
+        "test": "Тестовый текст"
+    }
+}

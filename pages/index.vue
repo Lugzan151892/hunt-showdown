@@ -1,6 +1,14 @@
 <template>
     <div class="content">
-        main page
+        {{ $t('main.test')}}
+
+        <form>
+            <label for="locale-select">Выберите язык: </label>
+            <select id="locale-select" v-model="$i18n.locale">
+                <option value="en">en</option>
+                <option value="ru">ru</option>
+            </select>
+        </form>
     </div>
 </template>
 
@@ -8,7 +16,7 @@
     import { authStore } from '@/store/auth';
     const auth = authStore();
     const isAuth = computed(() => {
-        return auth.isAuth;
+        return !auth.isAuth;
     });
 
     const router = useRouter();
