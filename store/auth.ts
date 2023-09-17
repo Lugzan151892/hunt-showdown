@@ -1,9 +1,9 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
-export const authStore = defineStore("auth", () => {
-    const isAuth = ref(false);
+export const authStore = defineStore('auth', () => {
+	const isAuth = ref(false);
 
-    return {
-        isAuth
-    }
+	return {
+		isAuth
+	};
 });

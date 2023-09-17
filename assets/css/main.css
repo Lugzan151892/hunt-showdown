@@ -1,11 +1,11 @@
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: var(--bg-main, #181818);
-    color: var(--text-color-primary, #ffffff);
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-color: var(--bg-main, #181818);
+	color: var(--text-color-primary, #ffffff);
 }
 .app {
-    max-width: 1280px;
-    margin: 0 auto;
+	max-width: 1280px;
+	margin: 0 auto;
 }

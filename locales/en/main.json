@@ -1,7 +1,7 @@
 {
-    "name": "main",
-    "locale": "en",
-    "translations": {
-        "test": "Test text"
-    }
+	"name": "main",
+	"locale": "en",
+	"translations": {
+		"test": "Test text"
+	}
 }

@@ -3,10 +3,10 @@ module.exports = {
 	tabWidth: 2,
 	semi: true,
 	singleQuote: true,
-    useTabs: true,
+	useTabs: true,
 	bracketSpacing: true,
 	vueIndentScriptAndStyle: true,
 	printWidth: 120,
-    bracketSameLine: false,
-    arrowParens: 'always'
+	bracketSameLine: false,
+	arrowParens: 'always'
 };
