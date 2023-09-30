@@ -22,7 +22,7 @@
 	const router = useRouter();
 
 	onMounted(() => {
-		if (!isAuth.value) {
+		if (isAuth.value) {
 			router.push({ name: 'login' });
 		}
 	});
