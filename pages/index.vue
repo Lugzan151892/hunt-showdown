@@ -16,7 +16,7 @@
 	import { authStore } from '@/store/auth';
 	const auth = authStore();
 	const isAuth = computed(() => {
-		return !auth.isAuth;
+		return auth.isAuth;
 	});
 
 	const router = useRouter();
