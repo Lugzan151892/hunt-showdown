@@ -1,0 +1,21 @@
+:root {
+	--bg-main: #181818;
+	--bg-secondary: #3F3F3F;
+	--bg-additional-blue: #107EFF;
+
+
+	--text-color-primary: #ffffff;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-color: var(--bg-main);
+	color: var(--text-color-primary);
+}
+.app {
+	max-width: 1280px;
+	min-height: 100vh;
+	margin: 0 auto;
+}
