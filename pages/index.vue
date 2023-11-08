@@ -1,15 +1,5 @@
 <template>
-	<div class="content">
-		{{ $t('main.test') }}
-
-		<form>
-			<label for="locale-select">Выберите язык: </label>
-			<select id="locale-select" v-model="$i18n.locale">
-				<option value="en">en</option>
-				<option value="ru">ru</option>
-			</select>
-		</form>
-	</div>
+	<div class="content"></div>
 </template>
 
 <script setup lang="ts">
@@ -30,5 +20,6 @@
 
 <style lang="scss" scoped>
 	.content {
+		max-width: 1280px;
 	}
 </style>

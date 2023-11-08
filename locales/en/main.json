@@ -2,6 +2,7 @@
 	"name": "main",
 	"locale": "en",
 	"translations": {
-		"test": "Test text"
+		"test": "Test text",
+		"chooseLanguage": "Choose language:"
 	}
 }
