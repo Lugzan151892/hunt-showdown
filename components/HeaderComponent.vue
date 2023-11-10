@@ -26,19 +26,20 @@
 	};
 
 	const items = [
-		{ name: 'Counter-Strike-2', img: 'counter-strike' },
-		{ name: 'Hunt Showdown', img: 'hunt' }
+		{ name: 'Counter-Strike-2', img: 'counter-strike', route: 'counter-strike' },
+		{ name: 'Hunt Showdown', img: 'hunt', route: 'hunt-showdown' }
 	];
 </script>
 <style lang="scss" scoped>
 	.header {
-		width: 60px;
+		width: 70px;
 		height: 50px;
 		display: grid;
 		grid-template-columns: max-content 1fr;
+		justify-items: center;
 		align-items: center;
 		column-gap: 10px;
-		padding: 0 10px;
+		padding: 0 10px 0 15px;
 		position: relative;
 		background-color: var(--bg-header, #202020);
 		transition: all 0.5s ease-in-out;
@@ -65,8 +66,8 @@
 			position: absolute;
 			top: 50px;
 			left: 0px;
-			padding: 0 0 0 10px;
-			width: 60px;
+			padding: 0 10px 0;
+			width: 70px;
 			height: calc(100vh - 50px);
 			border-radius: 5px;
 			background-color: var(--bg-header, #202020);

@@ -3,6 +3,7 @@
 	"locale": "en",
 	"translations": {
 		"test": "Test text",
-		"chooseLanguage": "Choose language:"
+		"chooseLanguage": "Choose language:",
+		"toMainPage": "Back to main page"
 	}
 }

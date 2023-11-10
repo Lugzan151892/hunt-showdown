@@ -3,6 +3,7 @@
 	"locale": "ru",
 	"translations": {
 		"test": "Тестовый текст",
-		"chooseLanguage": "Выберите язык:"
+		"chooseLanguage": "Выберите язык:",
+		"toMainPage": "На главную"
 	}
 }
