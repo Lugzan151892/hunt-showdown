@@ -2,6 +2,8 @@
 	"name": "main",
 	"locale": "ru",
 	"translations": {
-		"test": "Тестовый текст"
+		"test": "Тестовый текст",
+		"chooseLanguage": "Выберите язык:",
+		"toMainPage": "На главную"
 	}
 }
