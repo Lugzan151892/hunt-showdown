@@ -1,0 +1,9 @@
+{
+	"name": "hunt",
+	"locale": "ru",
+	"translations": {
+		"game": "Игра",
+		"gunslinger": "Gunslinger",
+		"hunter": "Hunter"
+	}
+}

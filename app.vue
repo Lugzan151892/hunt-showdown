@@ -1,6 +1,8 @@
 <template>
 	<div class="app">
 		<HeaderComponent />
-		<NuxtPage />
+		<div class="content">
+			<NuxtPage />
+		</div>
 	</div>
 </template>
