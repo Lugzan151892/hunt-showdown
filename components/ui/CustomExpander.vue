@@ -54,7 +54,7 @@
 			display: grid;
 			grid-template-columns: max-content 1fr max-content;
 			align-items: center;
-
+			padding: 5px 15px;
 			height: 50px;
 			text-align: center;
 			&_img {
