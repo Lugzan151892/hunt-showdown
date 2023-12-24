@@ -2,7 +2,7 @@
 	<div>
 		tut budet hunt asdasdassssssssssssssssssssssss {{ huntStore.hunt }}
 		<UiCustomExpander title="hunt.game" :opened="isOpen" @open="($event) => (isOpen = $event)">
-			<UiCustomSliderInput v-model:value="value" :options="sliderOptions" />
+			<UiCustomSliderInput v-model="value" :options="sliderOptions" />
 		</UiCustomExpander>
 	</div>
 </template>

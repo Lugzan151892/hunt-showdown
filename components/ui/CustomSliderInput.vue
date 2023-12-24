@@ -1,14 +1,14 @@
 <template>
 	<div class="slider">
-		<img :src="arrow" class="slider__image-prev" @click="handleClick(value - 1)" />
+		<img :src="arrow" class="slider__image slider__image-prev" @click="handleClick(value - 1)" />
 		<p>{{ $t(currentValue || '') }}</p>
-		<img :src="arrow" class="slider__image-next" @click="handleClick(value + 1)" />
+		<img :src="arrow" class="slider__image slider__image-next" @click="handleClick(value + 1)" />
 	</div>
 </template>
 <script lang="ts" setup>
 	import arrow from '@/assets/images/arrow.svg';
 	const props = defineProps({
-		value: {
+		modelValue: {
 			type: Number,
 			required: true
 		},
@@ -17,14 +17,18 @@
 			default: () => []
 		}
 	});
-	const emit = defineEmits(['update:value']);
+	const emit = defineEmits(['update:modelValue']);
 
 	const value = computed({
 		get() {
-			return props.value;
+			return props.modelValue;
 		},
 		set(val) {
-			emit('update:value', val);
+			if (val >= 0) {
+				emit('update:modelValue', val);
+			}
+			// emit('update:modelValue', val);
+			console.log(val, props.modelValue);
 		}
 	});
 
@@ -46,14 +50,12 @@
 		grid-template-columns: max-content 1fr max-content;
 		text-align: center;
 		&__image {
+			width: 15px;
+			height: 15px;
 			&-prev {
-				width: 30px;
-				height: 30px;
 				transform: rotate(90deg);
 			}
 			&-next {
-				width: 30px;
-				height: 30px;
 				transform: rotate(-90deg);
 			}
 		}
