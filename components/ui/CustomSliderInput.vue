@@ -1,11 +1,11 @@
 <template>
 	<div class="slider">
-		<div class="slider__image">
-			<img :src="arrow" class="slider__image-prev" @click="handleClick(true)" />
+		<div class="slider__image" @click="handleClick(true)">
+			<img :src="arrow" class="slider__image-prev" />
 		</div>
 		<p class="slider__text">{{ $t(currentValue?.text || '') }}</p>
-		<div class="slider__image">
-			<img :src="arrow" class="slider__image-next" @click="handleClick()" />
+		<div class="slider__image" @click="handleClick()">
+			<img :src="arrow" class="slider__image-next" />
 		</div>
 		<div class="slider__pagination">
 			<div
@@ -23,7 +23,7 @@
 
 	type TInputValue = {
 		text: string;
-		value: number;
+		id: number;
 	};
 
 	const props = defineProps({
@@ -48,12 +48,12 @@
 		}
 	});
 
-	const currentValue = computed(() => props.options.find((item) => item.value === value.value));
-	const currentIndex = computed(() => props.options.findIndex((item) => item.value === value.value));
+	const currentValue = computed(() => props.options.find((item) => item.id === value.value));
+	const currentIndex = computed(() => props.options.findIndex((item) => item.id === value.value));
 
 	const handleClick = (back: boolean = false) => {
-		const lastValue = props.options[props.options.length - 1].value;
-		const firstValue = props.options[0].value;
+		const lastValue = props.options[props.options.length - 1].id;
+		const firstValue = props.options[0].id;
 		if (back) {
 			value.value = value.value === firstValue ? lastValue : value.value - 1;
 			return;

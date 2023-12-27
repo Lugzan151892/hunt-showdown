@@ -70,4 +70,7 @@
 			background-color: white;
 		}
 	}
+	.number {
+		width: 30px;
+	}
 </style>
