@@ -6,3 +6,8 @@
 		</div>
 	</div>
 </template>
+<style lang="scss" scoped>
+	.content {
+		margin: 0 300px;
+	}
+</style>
