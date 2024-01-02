@@ -65,6 +65,7 @@
 		height: 10px;
 		width: 100%;
 		border: 1px solid white;
+		cursor: pointer;
 		&__filled {
 			height: 100%;
 			background-color: white;

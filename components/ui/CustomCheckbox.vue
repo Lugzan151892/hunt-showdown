@@ -21,6 +21,7 @@
 		&__content {
 			height: 100%;
 			width: 100%;
+			cursor: pointer;
 			&-active {
 				background-color: white;
 			}
