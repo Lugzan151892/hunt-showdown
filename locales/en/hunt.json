@@ -1,0 +1,9 @@
+{
+	"name": "hunt",
+	"locale": "en",
+	"translations": {
+		"game": "Game",
+		"gunslinger": "Gunslinger",
+		"hunter": "Hunter"
+	}
+}

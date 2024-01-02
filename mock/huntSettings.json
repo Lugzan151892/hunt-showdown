@@ -1,0 +1,200 @@
+{
+    "game": {
+        "game_control_sheme": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "Gunslinger"
+                },
+                {
+                    "id": 1,
+                    "text": "Hunter"
+                }
+            ],
+            "text": "Control Scheme"
+        },
+        "game_field_of_view": {
+            "options": [],
+            "text": "Field of view"
+        },
+        "game_lowered_state_field_of_view": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "Default"
+                },
+                {
+                    "id": 1,
+                    "text": "Zoom"
+                }
+            ],
+            "text": "Lowered state filed of view"
+        },
+        "game_shoulder_aim_field_of_view": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "Default"
+                },
+                {
+                    "id": 1,
+                    "text": "Zoom"
+                }
+            ],
+            "text": "Shoulder aim field of view"
+        },
+        "game_title_aim_settings": {
+            "type": "title",
+            "text": "Aim settings"
+        },
+        "game_shoulder_aim_input": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "Hold"
+                },
+                {
+                    "id": 1,
+                    "text": "Toggle"
+                }
+            ],
+            "text": "Shoulder aim input"
+        },
+        "game_aim_down_sights_input": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "Hold"
+                },
+                {
+                    "id": 1,
+                    "text": "Toggle"
+                }
+            ],
+            "text": "Aim down sights input"
+        },
+        "game_title_sensitivies": {
+            "type": "title",
+            "text": "Sensitivies"
+        },
+        "game_sensitivity_default": {
+            "options": [],
+            "text": "Default"
+        },
+        "game_sensitivity_shoulder_aim": {
+            "options": [],
+            "text": "Shoulder aim"
+        },
+        "game_sensitivity_aim_down_sights": {
+            "options": [],
+            "text": "Aim down sights"
+        },
+        "game_sensitivity_deadeye_scope": {
+            "options": [],
+            "text": "Deadeye scope"
+        },
+        "game_sensitivity_marksman_scope": {
+            "options": [],
+            "text": "Marksman scope"
+        },
+        "game_sensitivity_sniper_scope": {
+            "options": [],
+            "text": "Sniper scope"
+        },
+        "game_sensitivity_aperture": {
+            "options": [],
+            "text": "Aperture"
+        },
+        "game_title_miscellaneous_settings": {
+            "type": "title",
+            "text": "Miscellaneous settings"
+        },
+        "game_sprint": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "Hold"
+                },
+                {
+                    "id": 1,
+                    "text": "Toggle"
+                }
+            ],
+            "text": "Sprint"
+        },
+        "game_crouch": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "Hold"
+                },
+                {
+                    "id": 1,
+                    "text": "Toggle"
+                }
+            ],
+            "text": "Crouch"
+        },
+        "game_map": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "Hold"
+                },
+                {
+                    "id": 1,
+                    "text": "Toggle"
+                }
+            ],
+            "text": "Map"
+        },
+        "game_keep_lowered_state": {
+            "options": [],
+            "text": "Keep lowered state",
+            "type": "checkbox"
+        },
+        "game_sprint_to_aim_transition": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "Shoulder aim"
+                },
+                {
+                    "id": 1,
+                    "text": "Aim down sights"
+                }
+            ],
+            "text": "Sprint-to-Aim transition"
+        },
+        "game_auto_move": {
+            "options": [],
+            "text": "Auto-move",
+            "type": "checkbox"
+        },
+        "game_auto_interract": {
+            "options": [],
+            "text": "Auto-interrract",
+            "type": "checkbox"
+        },
+        "game_opt_out_from_rich_presence": {
+            "options": [],
+            "text": "Opt out from rich presence",
+            "type": "checkbox"
+        },
+        "game_show_additional_hint_banners": {
+            "options": [],
+            "text": "Show additional hint banners",
+            "type": "checkbox"
+        },
+        "game_invert_camera_y_axis": {
+            "options": [],
+            "text": "Invert camera Y-Axic",
+            "type": "checkbox"
+        },
+        "game_hide_statistics": {
+            "options": [],
+            "text": "Hide statistics",
+            "type": "checkbox"
+        }
+    }
+}

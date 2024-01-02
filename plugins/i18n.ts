@@ -1,8 +1,8 @@
 import { createI18n } from 'vue-i18n';
 
-import { authRu, authEn, mainEn, mainRu } from '@/locales/locales';
+import { authRu, authEn, mainEn, mainRu, huntEn, huntRu } from '@/locales/locales';
 
-const dataList = [authEn, mainEn, authRu, mainRu];
+const dataList = [authEn, mainEn, authRu, mainRu, huntEn, huntRu];
 
 function getTranslate(arr: Array<COMMON.TTranslate>): COMMON.TTranslateMain {
 	const newData = arr.reduce((obj: COMMON.TTranslateMain, item: COMMON.TTranslate) => {
