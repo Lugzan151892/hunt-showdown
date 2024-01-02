@@ -20,14 +20,16 @@
 	</header>
 </template>
 <script setup lang="ts">
+	import hunt from '~/assets/images/hunt.svg';
+	// import cs from '~/assets/images/counter-strike.svg';
 	const menu = ref(false);
 	const setMenu = () => {
 		menu.value = !menu.value;
 	};
 
 	const items = [
-		{ name: 'Counter-Strike-2', img: 'counter-strike', route: 'counter-strike' },
-		{ name: 'Hunt Showdown', img: 'hunt', route: 'hunt-showdown' }
+		// { name: 'Counter-Strike-2', img: cs, route: 'counter-strike' },
+		{ name: 'Hunt Showdown', img: hunt, route: 'hunt-showdown' }
 	];
 </script>
 <style lang="scss" scoped>

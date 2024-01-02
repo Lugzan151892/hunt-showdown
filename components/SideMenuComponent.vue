@@ -4,17 +4,13 @@
 			v-for="item in items"
 			:key="`${item}-key`"
 			class="menu__item"
-			:class="{ 'menu__item-active': $route.params.game === item.route }"
-			@click="handleClickRoute('games-game', item.route)"
+			:class="{ 'menu__item-active': $route.name === item.route }"
+			@click="handleClickRoute(item.route)"
 		>
-			<img :src="`_nuxt/assets/images/${item.img}.svg`" :alt="item.img" class="menu__item-logo" />
+			<img :src="item.img" :alt="item.img" class="menu__item-logo" />
 			<p v-if="showFullMenu" class="menu__item-name">{{ item.name }}</p>
 		</div>
-		<div
-			class="menu__item"
-			:class="{ 'menu__item-active': $route.fullPath === '/' }"
-			@click="handleClickRoute('index')"
-		>
+		<div class="menu__item" :class="{ 'menu__item-active': $route.fullPath === '/' }" @click="handleClickRoute('home')">
 			<img src="../assets/images/home.svg" alt="home" class="menu__item-logo" />
 			<p v-if="showFullMenu" class="menu__item-name">{{ $t('main.toMainPage') }}</p>
 		</div>
@@ -34,8 +30,8 @@
 
 	const router = useRouter();
 
-	const handleClickRoute = (routeName: string, game?: string): void => {
-		router.push({ name: routeName, ...(game && { params: { game } }) });
+	const handleClickRoute = (routeName: string): void => {
+		router.push({ name: routeName });
 	};
 </script>
 <style lang="scss" scoped>
