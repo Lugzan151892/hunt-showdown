@@ -13,6 +13,11 @@ export default <RouterConfig>{
 			component: () => import('~/pages/auth/LoginView.vue').then((r) => r.default || r)
 		},
 		{
+			name: 'registration',
+			path: '/registration',
+			component: () => import('~/pages/auth/LoginView.vue').then((r) => r.default || r)
+		},
+		{
 			name: 'hunt-showdown',
 			path: '/games/hunt-showdown',
 			component: () => import('~/pages/games/hunt/HuntView.vue').then((r) => r.default || r)

@@ -1,16 +1,17 @@
 <template>
 	<div class="wrapper">
-		<h1 class="wrapper__title">{{ title }}</h1>
+		<h1 class="wrapper__title">{{ $t(title) }}</h1>
 		<div class="wrapper__content">
 			<slot />
 		</div>
 		<div class="wrapper__actions">
-			<UiCustomButton :title="actionTitle" />
+			<UiCustomButton :title="$t(actionTitle)" @click="$emit('submit')" />
 		</div>
 	</div>
 </template>
 
 <script lang="ts" setup>
+	defineEmits(['submit']);
 	defineProps({
 		title: {
 			type: String,
