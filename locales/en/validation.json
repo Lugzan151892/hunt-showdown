@@ -1,0 +1,7 @@
+{
+	"name": "validation",
+	"locale": "en",
+	"translations": {
+        "notEnoughtPasswordLength": "Password must be longer or equal 6 symbols"
+	}
+}

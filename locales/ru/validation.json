@@ -1,0 +1,7 @@
+{
+	"name": "validation",
+	"locale": "en",
+	"translations": {
+        "notEnoughtPasswordLength": "Пароль должен содержать как минимум 6 знаков"
+	}
+}

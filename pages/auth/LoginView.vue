@@ -1,6 +1,6 @@
 <template>
 	<div class="auth">
-		<AuthWrapper :title="authWrapperTitle" :action-title="authWrapperTitle">
+		<AuthWrapper :title="authWrapperTitle" :action-title="authWrapperTitle" @submit="handleSubmit">
 			<div class="auth__content">
 				<UiCustomInput v-model="authStore.userName" :placeholder="$t('auth.username')" />
 				<UiCustomInput v-model="authStore.password" type="password" :placeholder="$t('auth.password')" />
@@ -31,6 +31,9 @@
 
 	const handleRouteLogin = () => {
 		router.push({ name: isLogin.value ? 'registration' : 'login' });
+	};
+	const handleSubmit = async () => {
+		await authStore.handleRegistry();
 	};
 </script>
 
