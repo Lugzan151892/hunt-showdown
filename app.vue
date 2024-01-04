@@ -4,6 +4,7 @@
 		<div class="content">
 			<NuxtPage />
 		</div>
+		<InfoModal />
 	</div>
 </template>
 <style lang="scss" scoped>
