@@ -2,13 +2,23 @@
 	<div class="auth">
 		<AuthWrapper :title="authWrapperTitle" :action-title="authWrapperTitle" @submit="handleSubmit">
 			<div class="auth__content">
-				<UiCustomInput v-model="authStore.userName" :placeholder="$t('auth.username')" />
-				<UiCustomInput v-model="authStore.password" type="password" :placeholder="$t('auth.password')" />
+				<UiCustomInput
+					v-model="authStore.userName"
+					:placeholder="$t('auth.username')"
+					:errors="$t(authStore.validationErrors.username)"
+				/>
+				<UiCustomInput
+					v-model="authStore.password"
+					type="password"
+					:placeholder="$t('auth.password')"
+					:errors="$t(authStore.validationErrors.password)"
+				/>
 				<UiCustomInput
 					v-if="!isLogin"
 					v-model="authStore.repeatedPassword"
 					type="password"
 					:placeholder="$t('auth.repeatedPassword')"
+					:errors="$t(authStore.validationErrors.repeatedPassword)"
 				/>
 				<div class="auth__links">
 					<p class="auth__links-title">{{ $t(existedAccTitle) }}</p>
@@ -43,7 +53,7 @@
 		align-items: center;
 		height: 100vh;
 		&__content {
-			min-width: 280px;
+			width: 300px;
 			display: grid;
 			grid-template-columns: 1fr;
 			grid-template-rows: min-content min-content;

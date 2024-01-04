@@ -1,12 +1,15 @@
 <template>
-	<div class="container">
-		<input v-model="value" class="container__input" :type="computedType" :placeholder="placeholder" />
-		<img
-			v-if="props.type === 'password'"
-			:src="showPassword ? visibly : visiblyOff"
-			class="container__append"
-			@click="showPassword = !showPassword"
-		/>
+	<div class="wrapper">
+		<div class="container" :class="{ 'container-error': errors }">
+			<input v-model="value" class="container__input" :type="computedType" :placeholder="placeholder" />
+			<img
+				v-if="props.type === 'password'"
+				:src="showPassword ? visibly : visiblyOff"
+				class="container__append"
+				@click="showPassword = !showPassword"
+			/>
+		</div>
+		<p v-if="errors">{{ errors }}</p>
 	</div>
 </template>
 <script lang="ts" setup>
@@ -25,6 +28,10 @@
 		type: {
 			type: String,
 			default: 'text'
+		},
+		errors: {
+			type: String,
+			default: ''
 		}
 	});
 
@@ -45,24 +52,33 @@
 	});
 </script>
 <style lang="scss" scoped>
-	.container {
+	.wrapper {
 		display: grid;
-		grid-template-columns: 1fr max-content;
-		column-gap: 10px;
-		border-bottom: 1px solid var(--bg-secondary);
-		align-items: center;
-		&__input {
-			background: none;
-			box-shadow: none;
-			border: none;
-			color: var(--text-color-primary);
-			padding: 10px 0 10px 5px;
-		}
-		&__input:focus {
-			outline: none;
-		}
-		&__append {
-			cursor: pointer;
+		grid-template-rows: min-content min-content;
+		row-gap: 3px;
+		max-width: 300px;
+		.container {
+			display: grid;
+			grid-template-columns: 1fr max-content;
+			column-gap: 10px;
+			border-bottom: 1px solid var(--bg-secondary);
+			align-items: center;
+			&-error {
+				border-bottom: 1px solid red;
+			}
+			&__input {
+				background: none;
+				box-shadow: none;
+				border: none;
+				color: var(--text-color-primary);
+				padding: 10px 0 10px 5px;
+			}
+			&__input:focus {
+				outline: none;
+			}
+			&__append {
+				cursor: pointer;
+			}
 		}
 	}
 </style>

@@ -1,7 +1,10 @@
 {
 	"name": "validation",
-	"locale": "en",
+	"locale": "ru",
 	"translations": {
-        "notEnoughtPasswordLength": "Пароль должен содержать как минимум 6 знаков"
+        "notEnoughtPasswordLength": "Пароль должен содержать как минимум 6 знаков",
+		"notEnoughtUsernameLength": "Имя пользователя должно содержать как минимум 3 знака",
+		"requiredField": "Поле не заполнено",
+		"passwordsNotEqual": "Пароли не совпадают"
 	}
 }

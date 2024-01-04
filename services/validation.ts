@@ -1,27 +1,65 @@
-export function validatePassword(password: string) {
+function validatePassword(password: string) {
 	const errors = {
 		password: ''
 	};
-	let isValid = false;
+
+	if (!password) {
+		errors.password = 'validation.requiredField';
+		return errors;
+	}
 
 	if (password.length < 6) {
 		errors.password = 'validation.notEnoughtPasswordLength';
-		return { isValid, errors };
+		return errors;
 	}
-	isValid = true;
-	return { isValid, errors };
+	return errors;
 }
 
-export function validateUsername(username: string) {
+function validateRepeatedPassword(password: string, repeatedPassword: string) {
+	const errors = {
+		repeatedPassword: ''
+	};
+
+	if (password !== repeatedPassword) {
+		errors.repeatedPassword = 'validation.passwordsNotEqual';
+		return errors;
+	}
+
+	return errors;
+}
+
+function validateUsername(username: string) {
 	const errors = {
 		username: ''
 	};
-	let isValid = false;
 
-	if (username.length < 6) {
-		errors.username = 'validation.notEnoughtPasswordLength';
-		return { isValid, errors };
+	if (!username) {
+		errors.username = 'validation.requiredField';
+		return errors;
 	}
-	isValid = true;
+
+	if (username.length < 3) {
+		errors.username = 'validation.notEnoughtUsernameLength';
+		return errors;
+	}
+	return errors;
+}
+
+const validationFunctions: { [key: string]: any } = {
+	username: validateUsername,
+	password: validatePassword,
+	repeatedPassword: validateRepeatedPassword
+};
+
+export default function validateAll(options: { [key: string]: any }) {
+	const errors: { [key: string]: any } = {};
+	for (const key in options) {
+		if (key === 'repeatedPassword') {
+			Object.assign(errors, validationFunctions.repeatedPassword(options.password, options.repeatedPassword));
+			continue;
+		}
+		Object.assign(errors, validationFunctions[key](options[key]));
+	}
+	const isValid = !Object.values(errors).some((el) => !!el);
 	return { isValid, errors };
 }

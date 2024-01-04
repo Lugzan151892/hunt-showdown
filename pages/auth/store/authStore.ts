@@ -1,23 +1,30 @@
 import { defineStore } from 'pinia';
 import api from '~/services/api';
-import { validatePassword } from '~/services/validation';
+import validateAll from '~/services/validation';
+import { useMainStore } from '~/store/mainStore';
 
 export const useAuthStore = defineStore('authStore', () => {
+	const mainStore = useMainStore();
+
 	const user = ref(null);
 	const isAuth = ref(false);
 	const userName = ref('');
 	const password = ref('');
 	const repeatedPassword = ref('');
-	const errors = ref({});
+	const validationErrors = ref({
+		password: '',
+		username: '',
+		repeatedPassword: ''
+	});
 
 	const handleRegistry = async () => {
-		if (!userName.value || !password.value) {
-			alert('Не введен логин или пароль');
-			return;
-		}
-		const { errors, isValid } = validatePassword(password.value);
+		const { isValid, errors } = validateAll({
+			password: password.value,
+			username: userName.value,
+			repeatedPassword: repeatedPassword.value
+		});
 		if (!isValid) {
-			alert(errors.password);
+			Object.assign(validationErrors.value, errors);
 			return;
 		}
 		try {
@@ -26,15 +33,16 @@ export const useAuthStore = defineStore('authStore', () => {
 				password: password.value
 			});
 			if (result.error) {
-				alert(result.message);
+				mainStore.openModal(result.message, undefined, 'error');
 			} else {
 				user.value = result;
 				isAuth.value = true;
+				mainStore.openModal('auth.userRegistrySuccess', '/games/hunt-showdown');
 			}
 		} catch (e) {
 			console.log(e);
 		}
 	};
 
-	return { isAuth, userName, password, repeatedPassword, handleRegistry };
+	return { isAuth, userName, password, repeatedPassword, handleRegistry, validationErrors };
 });
