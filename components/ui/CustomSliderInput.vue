@@ -108,6 +108,7 @@
 				width: 8px;
 				height: 8px;
 				cursor: pointer;
+				border-radius: 50%;
 				&-active {
 					background-color: white;
 				}

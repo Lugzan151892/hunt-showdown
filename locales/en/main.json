@@ -4,6 +4,7 @@
 	"translations": {
 		"test": "Test text",
 		"chooseLanguage": "Choose language:",
-		"toMainPage": "Back to main page"
+		"toMainPage": "Back to main page",
+		"accept": "Accept"
 	}
 }

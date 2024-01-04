@@ -2,21 +2,7 @@
 	<div class="content"></div>
 </template>
 
-<script setup lang="ts">
-	import { authStore } from '@/store/auth';
-	const auth = authStore();
-	const isAuth = computed(() => {
-		return auth.isAuth;
-	});
-
-	const router = useRouter();
-
-	onMounted(() => {
-		if (isAuth.value) {
-			router.push({ name: 'login' });
-		}
-	});
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped>
 	.content {

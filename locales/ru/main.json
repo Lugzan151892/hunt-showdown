@@ -4,6 +4,7 @@
 	"translations": {
 		"test": "Тестовый текст",
 		"chooseLanguage": "Выберите язык:",
-		"toMainPage": "На главную"
+		"toMainPage": "На главную",
+		"accept": "Принять"
 	}
 }

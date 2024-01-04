@@ -16,7 +16,7 @@
 	.button {
 		padding: 8px 15px;
 		border-radius: 5px;
-		background: #3137c9;
+		background: var(--additional-dark-blue);
 		cursor: pointer;
 		border: 1px solid rgba(48, 55, 201, 0.3);
 	}

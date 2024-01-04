@@ -1,0 +1,10 @@
+{
+	"name": "validation",
+	"locale": "en",
+	"translations": {
+        "notEnoughtPasswordLength": "Password must be longer or equal 6 symbols",
+		"notEnoughtUsernameLength": "Password must be longer or equal 3 symbols",
+		"requiredField": "Field is empty",
+		"passwordsNotEqual": "Passwords not equal"
+	}
+}
