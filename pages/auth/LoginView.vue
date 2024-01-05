@@ -43,7 +43,14 @@
 		router.push({ name: isLogin.value ? 'registration' : 'login' });
 	};
 	const handleSubmit = async () => {
-		await authStore.handleRegistry();
+		if (isLogin.value) {
+			const loginResult = await authStore.handleLogin();
+			if (loginResult) {
+				router.push('/');
+			}
+		} else {
+			await authStore.handleRegistry();
+		}
 	};
 </script>
 

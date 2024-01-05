@@ -1,4 +1,3 @@
-import { jwtDecode } from 'jwt-decode';
 const defaultPath = 'http://localhost:5000/api';
 class Api {
 	path;
@@ -6,10 +5,14 @@ class Api {
 		this.path = defaultPath;
 	}
 
-	async get(path: string) {
-		const response = await fetch(this.path + path);
+	async get(path: string, token?: string) {
+		const response = await fetch(this.path + path, {
+			headers: {
+				...(token && { Authorization: 'Bearer ' + token })
+			}
+		});
 		const result = await response.json();
-		return jwtDecode(result.token);
+		return result;
 	}
 
 	async post(path: string, options: any) {
@@ -22,11 +25,23 @@ class Api {
 				body: JSON.stringify(options)
 			});
 			const result = await response.json();
-			if (result.status === 200 && result.token) {
-				return jwtDecode(result.token);
-			} else {
-				return result;
-			}
+			return result;
+		} catch (e) {
+			console.log(e);
+		}
+	}
+
+	async put(path: string, options: any) {
+		try {
+			const response = await fetch(this.path + path, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8'
+				},
+				body: JSON.stringify(options)
+			});
+			const result = await response.json();
+			return result;
 		} catch (e) {
 			console.log(e);
 		}
