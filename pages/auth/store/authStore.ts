@@ -15,6 +15,12 @@ export const useAuthStore = defineStore('authStore', () => {
 		repeatedPassword: ''
 	});
 
+	const handleClearFields = () => {
+		userName.value = '';
+		password.value = '';
+		repeatedPassword.value = '';
+	};
+
 	const handleRegistry = async () => {
 		const { isValid, errors } = validateAll({
 			password: password.value,
@@ -35,11 +41,12 @@ export const useAuthStore = defineStore('authStore', () => {
 				mainStore.isAuth = true;
 				localStorage.setItem('token', result.token);
 				mainStore.openModal('auth.userRegistrySuccess', '/games/hunt-showdown');
+				handleClearFields();
 			} else {
 				mainStore.openModal(result.message, undefined, 'error');
 			}
 		} catch (e) {
-			console.log(e);
+			mainStore.openModal(e as string, undefined, 'error');
 		}
 	};
 
@@ -61,12 +68,13 @@ export const useAuthStore = defineStore('authStore', () => {
 				mainStore.user = result.user;
 				mainStore.isAuth = true;
 				localStorage.setItem('token', result.token);
+				handleClearFields();
 				return true;
 			} else {
 				mainStore.openModal(result.message, undefined, 'error');
 			}
 		} catch (e) {
-			console.log(e);
+			mainStore.openModal(e as string, undefined, 'error');
 		}
 	};
 	const handleCheckIsAuth = async () => {
@@ -79,7 +87,6 @@ export const useAuthStore = defineStore('authStore', () => {
 			} else {
 				mainStore.openModal(result.message, undefined, 'error');
 			}
-			console.log(result);
 		}
 	};
 
