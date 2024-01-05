@@ -6,14 +6,20 @@ interface IInfoModalSettings {
 	buttonText: string;
 	redirect: string;
 }
+
+const defaultModalSettings = (): IInfoModalSettings => ({
+	type: 'success',
+	text: '',
+	buttonText: 'main.accept',
+	redirect: ''
+});
+
 export const useMainStore = defineStore('mainStore', () => {
 	const mainModal = ref(false);
-	const mainModalSettings = ref<IInfoModalSettings>({
-		type: 'success',
-		text: '',
-		buttonText: 'main.accept',
-		redirect: ''
-	});
+	const mainModalSettings = ref<IInfoModalSettings>(defaultModalSettings());
+
+	const user = ref<null | Partial<COMMON.JwtPayload>>(null);
+	const isAuth = ref(false);
 
 	const openModal = (text: string, redirect: string = '', type: TInfoModalIconType = 'success') => {
 		mainModalSettings.value.text = text;
@@ -22,5 +28,16 @@ export const useMainStore = defineStore('mainStore', () => {
 		mainModal.value = true;
 	};
 
-	return { mainModal, mainModalSettings, openModal };
+	const clearData = () => {
+		mainModalSettings.value = defaultModalSettings();
+	};
+
+	const handleLogout = () => {
+		localStorage.removeItem('token');
+		user.value = null;
+		isAuth.value = false;
+		clearData();
+	};
+
+	return { mainModal, mainModalSettings, openModal, clearData, user, isAuth, handleLogout };
 });

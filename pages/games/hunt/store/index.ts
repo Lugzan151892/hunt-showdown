@@ -1,7 +1,10 @@
 import { defineStore } from 'pinia';
+import api from '~/services/api';
+import { useMainStore } from '~/store/mainStore';
 
 export const useHuntStore = defineStore('hunt', () => {
 	const hunt = ref('Hunt Showdown');
+	const mainStore = useMainStore();
 
 	const settings = ref<{ [key: string]: any }>({
 		game_control_sheme: 0,
@@ -30,8 +33,33 @@ export const useHuntStore = defineStore('hunt', () => {
 		game_hide_statistics: true
 	});
 
+	const saveUserSettings = async () => {
+		try {
+			const result = await api.put('/user/set', { ...mainStore.user, settings: settings.value });
+			if (result.status === 200 && !result.error) {
+				mainStore.user = result.user;
+				Object.assign(settings.value, result.user.settings);
+				mainStore.openModal('Настройки успешно сохранены');
+				console.log(result.user);
+			} else {
+				mainStore.openModal(result.message, undefined, 'error');
+			}
+		} catch (e) {
+			mainStore.openModal(e as string, undefined, 'error');
+		}
+	};
+
+	const handleFillSettings = () => {
+		Object.assign(settings.value, mainStore.user?.settings);
+	};
+
+	const currentUser = computed(() => mainStore.user);
+
 	return {
 		hunt,
-		settings
+		settings,
+		saveUserSettings,
+		handleFillSettings,
+		currentUser
 	};
 });

@@ -12,4 +12,10 @@ type TTranslateMain = {
 	};
 };
 
+interface JwtPayload {
+	id: string;
+	settings: {[key: string]: any},
+	email: string;
+}
+
 export as namespace COMMON;
