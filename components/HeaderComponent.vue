@@ -16,21 +16,37 @@
 		</form>
 		<div class="header__menu" :class="{ 'header__menu-active': menu }">
 			<SideMenuComponent :items="items" :show-full-menu="menu" />
+			<div v-if="user">
+				<p>{{ user.email }}</p>
+				<UiCustomButton title="Выйти" @click="mainStore.handleLogout()" />
+			</div>
+			<div v-else>
+				<UiCustomButton title="Войти" @click="handleLogin" />
+			</div>
 		</div>
 	</header>
 </template>
 <script setup lang="ts">
 	import hunt from '~/assets/images/hunt.svg';
+	import { useMainStore } from '~/store/mainStore';
 	// import cs from '~/assets/images/counter-strike.svg';
+
+	const mainStore = useMainStore();
+
+	const user = computed(() => mainStore.user);
 	const menu = ref(false);
 	const setMenu = () => {
 		menu.value = !menu.value;
 	};
+	const router = useRouter();
 
 	const items = [
 		// { name: 'Counter-Strike-2', img: cs, route: 'counter-strike' },
 		{ name: 'Hunt Showdown', img: hunt, route: 'hunt-showdown' }
 	];
+	const handleLogin = () => {
+		router.push({ name: 'login' });
+	};
 </script>
 <style lang="scss" scoped>
 	.header {

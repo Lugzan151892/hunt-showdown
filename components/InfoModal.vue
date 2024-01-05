@@ -1,5 +1,5 @@
 <template>
-	<div v-if="mainStore.mainModal" class="wrapper" @click.self="setModal">
+	<div v-if="mainStore.mainModal" class="wrapper" @click.self="closeModal">
 		<div class="modal">
 			<div class="modal__content">
 				<img
@@ -10,7 +10,7 @@
 				<p>{{ $t(mainStore.mainModalSettings.text) }}</p>
 			</div>
 			<div class="modal__actions">
-				<UiCustomButton :title="$t(mainStore.mainModalSettings.buttonText)" @click="handleClick" />
+				<UiCustomButton :title="$t(mainStore.mainModalSettings.buttonText)" @click="closeModal" />
 			</div>
 		</div>
 	</div>
@@ -27,17 +27,14 @@
 		warning
 	};
 	const mainStore = useMainStore();
-	const setModal = () => {
-		mainStore.mainModal = !mainStore.mainModal;
-	};
 
-	const handleClick = () => {
-		setModal();
+	const closeModal = () => {
+		mainStore.mainModal = false;
 		if (mainStore.mainModalSettings.redirect) {
 			const router = useRouter();
 			router.push(mainStore.mainModalSettings.redirect);
 		}
-		mainStore.$reset();
+		mainStore.clearData();
 	};
 </script>
 <style lang="scss" scoped>
