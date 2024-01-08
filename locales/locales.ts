@@ -6,5 +6,7 @@ import huntRu from './ru/hunt.json';
 import huntEn from './en/hunt.json';
 import validationEn from './en/validation.json';
 import validationRu from './ru/validation.json';
+import infoRu from './ru/info.json';
+import infoEn from './en/info.json';
 
-export { authEn, authRu, mainEn, mainRu, huntRu, huntEn, validationEn, validationRu };
+export { authEn, authRu, mainEn, mainRu, huntRu, huntEn, validationEn, validationRu, infoRu, infoEn };

@@ -1,0 +1,27 @@
+{
+        "name": "info",
+        "locale": "en",
+        "translations": {
+                "huntInfoTitle": "Save your Hunt Showdown game settings",
+                "huntInfoText": "You can save and download your in-game settings and not lose it when reinstall game",
+                "huntInfoButton": "Go to settings",
+                "updatesInfoTitle": "Incoming updates",
+                "updatesVisualTitle": "Визуальные улучшения:",
+                "updatesVisualList1": "Обновление дизайна",
+                "updatesVisualList2": "Улучшение производительности",
+                "updatesVisualList3": "Обновление локализации",
+                "updatesVisualList4": "Обновление локализации настроек Hunt Showdown",
+                "updatesVisualList5": "Обновление дизайна",
+                "updatesVisualList6": "Обновление дизайна",
+                "updatesLogicTitle": "Технические улучшения и обновления:",
+                "updatesLogicList1": "Улучшение производительности",
+                "updatesLogicList2": "Улучшение и оптимизация процесса регистрации и запросов",
+                "updatesLogicList3": "Добавление калькулятора чувствительности мыши для Hunt Showdown",
+                "updatesLogicList4": "Добавление возможности просмотра оптимальных настроек для Hunt Showdown",
+                "updatesLogicList5": "Запуск сервиса для сохранения профилей steam подозрительных противников, для возможности отслеживать их статус (в бане или нет)",
+                "updatesLogicList6": "Добавление мобильной версии приложения",
+                "updatesLogicList7": "Добавление возможности скачивания сохраненных настроек в виде файла",
+                "authInfoTitle": "Войти, для отображения всех функций",
+                "authInfoText": "Войдите в свой аккаунт, для того, чтобы пользоваться всем доступным функционалом сервиса."
+        }
+}
