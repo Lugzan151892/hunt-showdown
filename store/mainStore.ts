@@ -18,7 +18,7 @@ export const useMainStore = defineStore('mainStore', () => {
 	const mainModal = ref(false);
 	const mainModalSettings = ref<IInfoModalSettings>(defaultModalSettings());
 
-	const user = ref<null | Partial<COMMON.JwtPayload>>(null);
+	const user = ref<null | COMMON.IUserData>(null);
 	const isAuth = ref(false);
 
 	const openModal = (text: string, redirect: string = '', type: TInfoModalIconType = 'success') => {

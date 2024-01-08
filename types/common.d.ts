@@ -12,7 +12,7 @@ type TTranslateMain = {
 	};
 };
 
-interface JwtPayload {
+interface IUserData {
 	id: string;
 	settings: {[key: string]: any},
 	email: string;
