@@ -39,18 +39,14 @@
 		display: grid;
 		width: 100%;
 		grid-template-columns: 1fr;
-		row-gap: 10px;
-		background: var(--bg-header, #202020);
 		&__item {
 			display: grid;
-			padding: 10px;
+			padding: 5px;
 			cursor: pointer;
 			grid-template-columns: max-content max-content;
 			align-items: center;
 			border-radius: 10px;
-			&-active {
-				background-color: rgba(88, 88, 88, 0.137);
-			}
+			margin-bottom: 15px;
 			&-logo {
 				height: 30px;
 				width: 30px;
@@ -58,9 +54,15 @@
 			&-name {
 				margin-left: 15px;
 			}
+			&-active {
+				background-color: var(--menu-icon-active);
+			}
+		}
+		&__item:last-child {
+			margin-bottom: 0;
 		}
 		&__item:hover {
-			background-color: rgba(88, 88, 88, 0.137);
+			background-color: var(--menu-icon-active);
 		}
 	}
 </style>

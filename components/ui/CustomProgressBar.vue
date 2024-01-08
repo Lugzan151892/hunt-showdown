@@ -53,6 +53,13 @@
 	onMounted(() => {
 		fillPercent.value = (value.value / props.max) * 100;
 	});
+
+	watch(
+		() => props.modelValue,
+		() => {
+			fillPercent.value = (value.value / props.max) * 100;
+		}
+	);
 </script>
 <style lang="scss" scoped>
 	.container {
