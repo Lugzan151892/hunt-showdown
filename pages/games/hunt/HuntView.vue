@@ -19,7 +19,7 @@
 				</div>
 			</UiCustomExpander>
 			<div v-if="huntStore.isSettingsChanged" class="hunt__save">
-				<UiCustomButton title="save" @click="handleSave" />
+				<UiCustomButton title="main.save" @click="handleSave" />
 			</div>
 		</div>
 	</div>
@@ -45,8 +45,6 @@
 	onMounted(() => {
 		huntStore.handleFillSettings();
 	});
-
-	watch(() => huntStore.currentUser, huntStore.handleFillSettings);
 </script>
 <style lang="scss" scoped>
 	.hunt {
