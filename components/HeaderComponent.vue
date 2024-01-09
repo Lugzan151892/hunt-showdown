@@ -22,10 +22,10 @@
 		<div class="header__bottom">
 			<div v-if="user" class="header__bottom-user">
 				<p v-if="menu">{{ user.email }}</p>
-				<UiCustomButton title="Выйти" @click="mainStore.handleLogout()" />
+				<UiCustomButton title="auth.logout" @click="mainStore.handleLogout()" />
 			</div>
 			<div v-else>
-				<UiCustomButton title="Войти" @click="handleLogin" />
+				<UiCustomButton title="auth.login" @click="handleLogin" />
 			</div>
 		</div>
 	</header>
