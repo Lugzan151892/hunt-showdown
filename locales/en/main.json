@@ -5,6 +5,8 @@
 		"test": "Test text",
 		"chooseLanguage": "Choose language:",
 		"toMainPage": "Back to main page",
-		"accept": "Accept"
+		"accept": "Accept",
+		"save": "Save",
+		"mainTitle": "Hunt Showdown Service"
 	}
 }

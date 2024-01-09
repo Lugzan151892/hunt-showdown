@@ -50,11 +50,24 @@ export const useHuntStore = defineStore('hunt', () => {
 		}
 	};
 
-	const handleFillSettings = () => {
+	const handleFillSettings = async () => {
 		if (!currentUser.value) {
 			settings.value = defaultSettings();
 		} else {
-			Object.assign(settings.value, mainStore.user?.settings);
+			const token = localStorage.getItem('token');
+			if (token) {
+				try {
+					const result = await api.get('/user/get', token);
+					if (result.status === 200 && !result.error) {
+						mainStore.user = result.user;
+						Object.assign(settings.value, result.user.settings);
+					} else mainStore.openModal(result.message, undefined, 'error');
+				} catch (e) {
+					mainStore.openModal(e as string, undefined, 'error');
+				}
+			} else {
+				Object.assign(settings.value, mainStore.user?.settings);
+			}
 		}
 	};
 

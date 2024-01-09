@@ -5,6 +5,8 @@
 		"test": "Тестовый текст",
 		"chooseLanguage": "Выберите язык:",
 		"toMainPage": "На главную",
-		"accept": "Принять"
+		"accept": "Принять",
+		"save": "Сохранить",
+		"mainTitle": "Hunt Showdown Service"
 	}
 }

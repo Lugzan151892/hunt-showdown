@@ -80,12 +80,17 @@ export const useAuthStore = defineStore('authStore', () => {
 	const handleCheckIsAuth = async () => {
 		const token = localStorage.getItem('token');
 		if (token) {
-			const result = await api.get('/user/auth', token);
-			if (result.status === 200 && !result.error) {
-				mainStore.isAuth = true;
-				mainStore.user = result.user;
-				localStorage.setItem('token', result.token);
-			} else if (result.status === 401 && result.error) localStorage.removeItem('token');
+			try {
+				const result = await api.get('/user/auth', token);
+				if (result.status === 200 && !result.error) {
+					mainStore.isAuth = true;
+					mainStore.user = result.user;
+					localStorage.setItem('token', result.token);
+				} else if (result.status === 401 && result.error) localStorage.removeItem('token');
+				else mainStore.openModal(result.message, undefined, 'error');
+			} catch (e) {
+				mainStore.openModal(e as string, undefined, 'error');
+			}
 		}
 	};
 

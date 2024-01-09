@@ -1,5 +1,6 @@
 <template>
 	<div class="content">
+		<div class="content__title">{{ $t('main.mainTitle') }}</div>
 		<ContentBlock
 			class="content__hunt"
 			title="info.huntInfoTitle"
@@ -33,8 +34,13 @@
 		margin-top: 20px;
 		grid-template-columns: 1fr 1fr;
 		gap: 20px;
+		&__title {
+			grid-area: 1 / 1 / 2 / 3;
+			text-align: center;
+			font-size: 30px;
+		}
 		&__updates {
-			grid-area: 1 / 2 / 6 / 3;
+			grid-area: 2 / 2 / 6 / 3;
 		}
 	}
 </style>
