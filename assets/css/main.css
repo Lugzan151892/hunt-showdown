@@ -16,8 +16,8 @@
 .app {
 	width: 100%;
 	min-height: 100vh;
+	overflow: hidden;
 	margin: 0 auto;
-	position: relative;
 	background-color: var(--bg-main);
 	color: var(--text-color-primary);
 }
