@@ -25,7 +25,7 @@
 				<UiCustomButton title="auth.logout" @click="mainStore.handleLogout()" />
 			</div>
 			<div v-else>
-				<UiCustomButton title="auth.login" @click="handleLogin" />
+				<UiCustomButton title="auth.loginTitle" @click="handleLogin" />
 			</div>
 		</div>
 	</header>
