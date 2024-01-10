@@ -1,4 +1,4 @@
-const defaultPath = 'http://localhost:5000/api';
+const defaultPath = 'http://5.35.90.223:5000/api';
 class Api {
 	path;
 	constructor() {
