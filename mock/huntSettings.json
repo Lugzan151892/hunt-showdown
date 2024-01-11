@@ -4,120 +4,120 @@
             "options": [
                 {
                     "id": 0,
-                    "text": "Gunslinger"
+                    "text": "hunt.gunslinger"
                 },
                 {
                     "id": 1,
-                    "text": "Hunter"
+                    "text": "hunt.hunter"
                 }
             ],
-            "text": "Control Scheme"
+            "text": "hunt.controlSheme"
         },
         "game_field_of_view": {
             "options": [],
-            "text": "Field of view"
+            "text": "hunt.fieldOfView"
         },
         "game_lowered_state_field_of_view": {
             "options": [
                 {
                     "id": 0,
-                    "text": "Default"
+                    "text": "hunt.default"
                 },
                 {
                     "id": 1,
-                    "text": "Zoom"
+                    "text": "hunt.zoom"
                 }
             ],
-            "text": "Lowered state filed of view"
+            "text": "hunt.loweredStateOfField"
         },
         "game_shoulder_aim_field_of_view": {
             "options": [
                 {
                     "id": 0,
-                    "text": "Default"
+                    "text": "hunt.default"
                 },
                 {
                     "id": 1,
-                    "text": "Zoom"
+                    "text": "hunt.zoom"
                 }
             ],
-            "text": "Shoulder aim field of view"
+            "text": "hunt.shoulderAimFieldOfView"
         },
         "game_title_aim_settings": {
             "type": "title",
-            "text": "Aim settings"
+            "text": "hunt.aimSettings"
         },
         "game_shoulder_aim_input": {
             "options": [
                 {
                     "id": 0,
-                    "text": "Hold"
+                    "text": "hunt.hold"
                 },
                 {
                     "id": 1,
-                    "text": "Toggle"
+                    "text": "hunt.toggle"
                 }
             ],
-            "text": "Shoulder aim input"
+            "text": "hunt.shoulderAimInput"
         },
         "game_aim_down_sights_input": {
             "options": [
                 {
                     "id": 0,
-                    "text": "Hold"
+                    "text": "hunt.hold"
                 },
                 {
                     "id": 1,
-                    "text": "Toggle"
+                    "text": "hunt.toggle"
                 }
             ],
-            "text": "Aim down sights input"
+            "text": "hunt.aimDownSightsInput"
         },
         "game_title_sensitivies": {
             "type": "title",
-            "text": "Sensitivies"
+            "text": "hunt.sensitivies"
         },
         "game_sensitivity_default": {
             "options": [],
-            "text": "Default"
+            "text": "hunt.default"
         },
         "game_sensitivity_shoulder_aim": {
             "options": [],
-            "text": "Shoulder aim"
+            "text": "hunt.shoulderAim"
         },
         "game_sensitivity_aim_down_sights": {
             "options": [],
-            "text": "Aim down sights"
+            "text": "hunt.aimDownSights"
         },
         "game_sensitivity_deadeye_scope": {
             "options": [],
-            "text": "Deadeye scope"
+            "text": "hunt.deadeyeScope"
         },
         "game_sensitivity_marksman_scope": {
             "options": [],
-            "text": "Marksman scope"
+            "text": "hunt.marksmanScope"
         },
         "game_sensitivity_sniper_scope": {
             "options": [],
-            "text": "Sniper scope"
+            "text": "hunt.sniperScope"
         },
         "game_sensitivity_aperture": {
             "options": [],
-            "text": "Aperture"
+            "text": "hunt.aperture"
         },
         "game_title_miscellaneous_settings": {
             "type": "title",
-            "text": "Miscellaneous settings"
+            "text": "hunt.miscellaneousSettings"
         },
         "game_sprint": {
             "options": [
                 {
                     "id": 0,
-                    "text": "Hold"
+                    "text": "hunt.hold"
                 },
                 {
                     "id": 1,
-                    "text": "Toggle"
+                    "text": "hunt.toggle"
                 }
             ],
             "text": "Sprint"
@@ -126,11 +126,11 @@
             "options": [
                 {
                     "id": 0,
-                    "text": "Hold"
+                    "text": "hunt.hold"
                 },
                 {
                     "id": 1,
-                    "text": "Toggle"
+                    "text": "hunt.toggle"
                 }
             ],
             "text": "Crouch"
@@ -139,11 +139,11 @@
             "options": [
                 {
                     "id": 0,
-                    "text": "Hold"
+                    "text": "hunt.hold"
                 },
                 {
                     "id": 1,
-                    "text": "Toggle"
+                    "text": "hunt.toggle"
                 }
             ],
             "text": "Map"
@@ -157,11 +157,11 @@
             "options": [
                 {
                     "id": 0,
-                    "text": "Shoulder aim"
+                    "text": "hunt.shoulderAim"
                 },
                 {
                     "id": 1,
-                    "text": "Aim down sights"
+                    "text": "hunt.aimDownSights"
                 }
             ],
             "text": "Sprint-to-Aim transition"
