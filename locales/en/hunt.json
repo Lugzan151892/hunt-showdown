@@ -4,6 +4,25 @@
 	"translations": {
 		"game": "Game",
 		"gunslinger": "Gunslinger",
-		"hunter": "Hunter"
+		"hunter": "Hunter",
+		"controlSheme": "Control sheme",
+		"fieldOfView": "Field of view",
+		"default": "Default",
+		"zoom": "Zoom",
+		"loweredStateOfField": "Lowered state filed of view",
+		"shoulderAimFieldOfView": "Shoulder aim field of view",
+		"aimSettings": "Aim settings",
+		"hold": "Hold",
+		"toggle": "Toggle",
+		"shoulderAimInput": "Shoulder aim input",
+		"aimDownSightsInput": "Aim down sights input",
+		"sensitivies": "Sensitivies",
+		"shoulderAim": "Shoulder aim",
+		"aimDownSights": "Aim down sights",
+		"deadeyeScope": "Deadeye scope",
+		"marksmanScope": "Marksman scope",
+		"sniperScope": "Sniper scope",
+		"aperture": "Aperture",
+		"miscellaneousSettings": "Miscellaneous settings"
 	}
 }

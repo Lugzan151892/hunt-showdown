@@ -3,7 +3,26 @@
 	"locale": "ru",
 	"translations": {
 		"game": "Игра",
-		"gunslinger": "Gunslinger",
-		"hunter": "Hunter"
+		"gunslinger": "Наемник",
+		"hunter": "Охотник",
+		"controlSheme": "Схема управления",
+		"fieldOfView": "Поле зрения",
+		"default": "По умолчанию",
+		"zoom": "Приближение",
+		"loweredStateOfField": "Поле зрения в опущенном положении",
+		"shoulderAimFieldOfView": "Поле зрения при прицеливании от плеча",
+		"aimSettings": "Настройки прицеливания",
+		"hold": "Удержание",
+		"toggle": "Переключение",
+		"shoulderAimInput": "Прицеливание от плеча",
+		"aimDownSightsInput": "Точное прицеливание",
+		"sensitivies": "Чувствительность",
+		"shoulderAim": "От плеча",
+		"aimDownSights": "Режим точного прицеливания",
+		"deadeyeScope": "Прицел 'Меткий глаз'",
+		"marksmanScope": "Прицел 'Опытный стрелок'",
+		"sniperScope": "Прицел 'Снайпер'",
+		"aperture": "Прицел 'Линза'",
+		"miscellaneousSettings": "Miscellaneous settings"
 	}
 }
