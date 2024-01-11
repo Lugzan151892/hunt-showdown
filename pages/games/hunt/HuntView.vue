@@ -5,8 +5,7 @@
 				v-for="(group, key) in huntDefaultSettings"
 				:key="key"
 				title="hunt.game"
-				:opened="isOpen"
-				@open="($event) => (isOpen = $event)"
+				:opened="Boolean(key === 'game')"
 			>
 				<div
 					v-for="(settings, settingsKey) in group"
@@ -14,7 +13,7 @@
 					class="hunt__item"
 					:class="{ 'hunt__item-title': isTitle(settings.type) }"
 				>
-					<p>{{ settings.text }}</p>
+					<p>{{ $t(settings.text) }}</p>
 					<HuntSettingsItem :settings="settings" :settings-key="settingsKey" />
 				</div>
 			</UiCustomExpander>
@@ -31,8 +30,6 @@
 
 	const huntStore = useHuntStore();
 	const huntDefaultSettings = computed(() => huntSettings as unknown as HUNT.IHuntSettings);
-
-	const isOpen = ref(true);
 
 	const isTitle = (type?: 'title' | 'checkbox') => {
 		return type === 'title';
@@ -51,6 +48,10 @@
 		margin: 40px 0;
 		max-height: calc(100vh - 80px);
 		overflow-y: auto;
+		&__content {
+			display: grid;
+			row-gap: 20px;
+		}
 		&__item {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
@@ -64,6 +65,9 @@
 				border-bottom: none;
 				margin-top: 30px;
 			}
+		}
+		&__item:last-child {
+			border-bottom: none;
 		}
 		&__save {
 			position: fixed;

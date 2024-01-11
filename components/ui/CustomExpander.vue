@@ -3,14 +3,14 @@
 		<div class="expander__header">
 			<img
 				class="expander__header_img"
-				:class="{ 'expander__header_img-opened': opened }"
+				:class="{ 'expander__header_img-opened': open }"
 				:src="arrow"
 				@click="open = !open"
 			/>
 			<p>{{ $t(title) }}</p>
 			<img
 				class="expander__header_img"
-				:class="{ 'expander__header_img-opened': opened }"
+				:class="{ 'expander__header_img-opened': open }"
 				:src="arrow"
 				@click="open = !open"
 			/>
@@ -32,16 +32,8 @@
 			default: false
 		}
 	});
-	const emit = defineEmits(['open']);
 
-	const open = computed({
-		get() {
-			return props.opened;
-		},
-		set(val) {
-			emit('open', val);
-		}
-	});
+	const open = ref(props.opened);
 </script>
 <style lang="scss" scoped>
 	.expander {
