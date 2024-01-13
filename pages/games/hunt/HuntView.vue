@@ -1,12 +1,7 @@
 <template>
 	<div class="hunt">
 		<div class="hunt__content">
-			<UiCustomExpander
-				v-for="(group, key) in huntDefaultSettings"
-				:key="key"
-				title="hunt.game"
-				:opened="Boolean(key === 'game')"
-			>
+			<UiCustomExpander v-for="(group, key) in huntDefaultSettings" :key="key" :title="`hunt.${key}`">
 				<div
 					v-for="(settings, settingsKey) in group"
 					:key="`${key}` + settingsKey"
@@ -17,8 +12,18 @@
 					<HuntSettingsItem :settings="settings" :settings-key="settingsKey" />
 				</div>
 			</UiCustomExpander>
-			<div v-if="huntStore.isSettingsChanged" class="hunt__save">
-				<UiCustomButton title="main.save" @click="handleSave" />
+			<div class="hunt__actions">
+				<UiCustomButton v-if="huntStore.isSettingsChanged" title="main.save" @click="handleSave" />
+				<UiCustomButton
+					v-if="huntStore.isNotRecommendedSettings"
+					title="hunt.showRecommendedSettings"
+					@click="handleShowDefault"
+				/>
+				<UiCustomButton
+					v-else-if="huntStore.isUserHasSettings && huntStore.isSettingsChanged"
+					title="hunt.showMySettings"
+					@click="handleShowCurrentUserSettings"
+				/>
 			</div>
 		</div>
 	</div>
@@ -37,6 +42,14 @@
 
 	const handleSave = () => {
 		huntStore.saveUserSettings();
+	};
+
+	const handleShowDefault = () => {
+		huntStore.fillDefaultSettings();
+	};
+
+	const handleShowCurrentUserSettings = () => {
+		huntStore.handleFillSettings();
 	};
 
 	onMounted(() => {
@@ -69,8 +82,11 @@
 		&__item:last-child {
 			border-bottom: none;
 		}
-		&__save {
+		&__actions {
 			position: fixed;
+			display: grid;
+			grid-template-columns: max-content max-content;
+			column-gap: 20px;
 			bottom: 50px;
 			left: 50%;
 			transform: translate(-50%, 50%);
