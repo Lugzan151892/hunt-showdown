@@ -8,8 +8,8 @@
 		<UiCustomProgressBar
 			v-else-if="settings.type !== 'title' && settings.type !== 'checkbox'"
 			v-model="huntStore.settings[settingsKey]"
-			:min="0"
-			:max="2"
+			:min="settings.min || 0"
+			:max="settings.max || 2"
 			:step="0.1"
 		/>
 		<div v-else-if="settings.type === 'checkbox'" class="content__checkbox">
