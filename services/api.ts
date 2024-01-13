@@ -1,4 +1,4 @@
-const defaultPath = 'http://api.hunter-service.fun/api';
+const defaultPath = 'https://api.hunter-service.fun/api';
 class Api {
 	path;
 	constructor() {

@@ -4,7 +4,7 @@
 			<UiCustomExpander
 				v-for="(group, key) in huntDefaultSettings"
 				:key="key"
-				title="hunt.game"
+				:title="`hunt.${key}`"
 				:opened="Boolean(key === 'game')"
 			>
 				<div

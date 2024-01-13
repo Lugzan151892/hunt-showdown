@@ -120,7 +120,7 @@
                     "text": "hunt.toggle"
                 }
             ],
-            "text": "Sprint"
+            "text": "hunt.sprint"
         },
         "game_crouch": {
             "options": [
@@ -133,7 +133,7 @@
                     "text": "hunt.toggle"
                 }
             ],
-            "text": "Crouch"
+            "text": "hunt.crouch"
         },
         "game_map": {
             "options": [
@@ -146,11 +146,11 @@
                     "text": "hunt.toggle"
                 }
             ],
-            "text": "Map"
+            "text": "hunt.map"
         },
         "game_keep_lowered_state": {
             "options": [],
-            "text": "Keep lowered state",
+            "text": "hunt.keepLoweredState",
             "type": "checkbox"
         },
         "game_sprint_to_aim_transition": {
@@ -164,36 +164,636 @@
                     "text": "hunt.aimDownSights"
                 }
             ],
-            "text": "Sprint-to-Aim transition"
+            "text": "hunt.sprintToAimTransition"
         },
         "game_auto_move": {
             "options": [],
-            "text": "Auto-move",
+            "text": "hunt.autoMove",
             "type": "checkbox"
         },
         "game_auto_interract": {
             "options": [],
-            "text": "Auto-interrract",
+            "text": "hunt.autoInterrract",
             "type": "checkbox"
         },
         "game_opt_out_from_rich_presence": {
             "options": [],
-            "text": "Opt out from rich presence",
+            "text": "hunt.optOutFromRichPresence",
             "type": "checkbox"
         },
         "game_show_additional_hint_banners": {
             "options": [],
-            "text": "Show additional hint banners",
+            "text": "hunt.showAdditionalHintBanners",
             "type": "checkbox"
         },
         "game_invert_camera_y_axis": {
             "options": [],
-            "text": "Invert camera Y-Axic",
+            "text": "hunt.invertCameraYAxic",
             "type": "checkbox"
         },
         "game_hide_statistics": {
             "options": [],
-            "text": "Hide statistics",
+            "text": "hunt.hideStatistics",
+            "type": "checkbox"
+        }
+    },
+    "hud": {
+        "hud_ui_scale": {
+            "options": [],
+            "text": "hunt.uiScale"
+        },
+        "hud_cursor_sensitivity": {
+            "options": [],
+            "text": "hunt.cursorSensitivity"
+        },
+        "hud_chatbox_opacity": {
+            "options": [],
+            "text": "hunt.chatboxOpacity"
+        },
+        "hud_compass_opacity": {
+            "options": [],
+            "text": "hunt.compassOpacity"
+        },
+        "hud_crosshair_opacity": {
+            "options": [],
+            "text": "hunt.crosshairOpacity"
+        },
+        "hud_equipment_opacity": {
+            "options": [],
+            "text": "hunt.equipmentOpacity"
+        },
+        "hud_health_and_stamina_display_opacity": {
+            "options": [],
+            "text": "hunt.healthAndStaminaDisplayOpacity"
+        },
+        "hud_objective_status_opacity": {
+            "options": [],
+            "text": "hunt.objectiveStatusOpacity"
+        },
+        "hud_indicator_opacity": {
+            "options": [],
+            "text": "hunt.indicatorOpacity"
+        },
+        "hud_auto_hide_ammo_display": {
+            "options": [],
+            "text": "hunt.autoHideAmmoDisplay",
+            "type": "checkbox"
+        },
+        "hud_auto_hide_chatbox": {
+            "options": [],
+            "text": "hunt.autoHideChatbox",
+            "type": "checkbox"
+        },
+        "hud_auto_hide_equipment_display": {
+            "options": [],
+            "text": "hunt.autoHideEquipmentDisplay",
+            "type": "checkbox"
+        },
+        "hud_auto_hide_health_and_stamina_displays": {
+            "options": [],
+            "text": "hunt.autoHideHealthAndStaminaDisplays",
+            "type": "checkbox"
+        },
+        "hud_show_ping_marker": {
+            "options": [],
+            "text": "hunt.showPingMarker",
+            "type": "checkbox"
+        },
+        "hud_show_player_names": {
+            "options": [],
+            "text": "hunt.showPlayerNames",
+            "type": "checkbox"
+        },
+        "hud_highlight_interactable_objects": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.none"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.all"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.excludeDoorsAndWindows"
+                }
+            ],
+            "text": "hunt.highlightInteractableObjects"
+        },
+        "hud_high_contrast_prompts": {
+            "options": [],
+            "text": "hunt.highContrastPrompts",
+            "type": "checkbox"
+        }
+    },
+    "audio": {
+        "audio_master": {
+            "options": [],
+            "text": "hunt.master"
+        },
+        "audio_sfx": {
+            "options": [],
+            "text": "hunt.sfx"
+        },
+        "audio_music": {
+            "options": [],
+            "text": "hunt.music"
+        },
+        "audio_communication": {
+            "options": [],
+            "text": "hunt.communication"
+        },
+        "audio_menu_ambience": {
+            "options": [],
+            "text": "hunt.menuAmbience"
+        },
+        "audio_dialogue": {
+            "options": [],
+            "text": "hunt.dialogue"
+        },
+        "audio_dialogue_subtitles": {
+            "options": [],
+            "text": "hunt.dialogueSubtitles",
+            "type": "checkbox"
+        },
+        "audio_voice_chat_mode": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.continuous"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.pushToTalk"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.pushToMute"
+                },
+                {
+                    "id": 3,
+                    "text": "hunt.muted"
+                }
+            ],
+            "text": "hunt.voiceChatMode"
+        },
+        "audio_hide_voip_icons": {
+            "options": [],
+            "text": "hunt.hideVoipIcons",
+            "type": "checkbox"
+        },
+        "audio_mute_voip_on_death": {
+            "options": [],
+            "text": "hunt.muteVoipOnDeath",
+            "type": "checkbox"
+        },
+        "audio_ignore_window_focus": {
+            "options": [],
+            "text": "hunt.ignoreWindowFocus",
+            "type": "checkbox"
+        }
+    },
+    "graphics": {
+        "graphics_basic_settings": {
+            "type": "title",
+            "text": "hunt.basicSettings"
+        },
+        "graphics_resolution": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "800 x 600"
+                },
+                {
+                    "id": 1,
+                    "text": "1024 x 768"
+                },
+                {
+                    "id": 2,
+                    "text": "1152 x 864"
+                },
+                {
+                    "id": 3,
+                    "text": "1176 x 664"
+                },
+                {
+                    "id": 4,
+                    "text": "1280 x 720"
+                },
+                {
+                    "id": 5,
+                    "text": "1280 x 768"
+                },
+                {
+                    "id": 6,
+                    "text": "1280 x 800"
+                },
+                {
+                    "id": 7,
+                    "text": "1280 x 960"
+                },
+                {
+                    "id": 8,
+                    "text": "1280 x 1024"
+                },
+                {
+                    "id": 9,
+                    "text": "1360 x 768"
+                },
+                {
+                    "id": 10,
+                    "text": "1366 x 768"
+                },
+                {
+                    "id": 11,
+                    "text": "1440 x 900"
+                },
+                {
+                    "id": 12,
+                    "text": "1440 x 1080"
+                },
+                {
+                    "id": 13,
+                    "text": "1600 x 900"
+                },
+                {
+                    "id": 14,
+                    "text": "1600 x 1024"
+                },
+                {
+                    "id": 15,
+                    "text": "1680 x 1050"
+                },
+                {
+                    "id": 16,
+                    "text": "1768 x 992"
+                },
+                {
+                    "id": 17,
+                    "text": "1920 x 1080"
+                }
+            ],
+            "text": "hunt.resolution"
+        },
+        "graphics_window_mode": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.windowed"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.borderless"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.fullscreenWindowed"
+                },
+                {
+                    "id": 3,
+                    "text": "hunt.fullscreen"
+                }
+            ],
+            "text": "hunt.windowMode"
+        },
+        "graphics_render_resolution_scale": {
+            "options": [],
+            "text": "hunt.renderResolutionScale"
+        },
+        "graphics_gamma": {
+            "options": [],
+            "text": "hunt.gamma"
+        },
+        "graphics_video_memory_usage_target": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "70%"
+                },
+                {
+                    "id": 1,
+                    "text": "80%"
+                },
+                {
+                    "id": 2,
+                    "text": "90%"
+                }
+            ],
+            "text": "hunt.videoMemoryUsageTarget"
+        },
+        "graphics_global_graphics_quality": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.low"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.medium"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.high"
+                },
+                {
+                    "id": 3,
+                    "text": "hunt.custom"
+                }
+            ],
+            "text": "hunt.globalGraphicsQuality"
+        },
+        "graphics_object_quality": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.low"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.medium"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.high"
+                }
+
+            ],
+            "text": "hunt.objectQuality"
+        },
+        "graphics_texture_quality": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.low"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.medium"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.high"
+                }
+
+            ],
+            "text": "hunt.textureQuality"
+        },
+        "graphics_texture_filtering": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.texture1X"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.texture2X"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.texture4X"
+                },
+                {
+                    "id": 3,
+                    "text": "hunt.texture6X"
+                },
+                {
+                    "id": 4,
+                    "text": "hunt.texture8X"
+                },
+                {
+                    "id": 5,
+                    "text": "hunt.texture16X"
+                }
+            ],
+            "text": "hunt.textureFiltering"
+        },
+        "graphics_anti_aliasing": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.off"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.smaa1x"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.smaa1tx"
+                },
+                {
+                    "id": 3,
+                    "text": "hunt.smaa2tx"
+                }
+            ],
+            "text": "hunt.antiAliasing"
+        },
+        "graphics_lighting_quality": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.low"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.medium"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.high"
+                }
+
+            ],
+            "text": "hunt.lightingQuality"
+        },
+        "graphics_shadow_quality": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.low"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.medium"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.high"
+                }
+
+            ],
+            "text": "hunt.shadowQuality"
+        },
+        "graphics_effect_quality": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.off"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.low"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.medium"
+                },
+                {
+                    "id": 3,
+                    "text": "hunt.high"
+                }
+
+            ],
+            "text": "hunt.effectQuality"
+        },
+        "graphics_post_process_quality": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.off"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.low"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.medium"
+                },
+                {
+                    "id": 3,
+                    "text": "hunt.high"
+                }
+
+            ],
+            "text": "hunt.postProcessQuality"
+        },
+        "graphics_particle_quality": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.low"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.medium"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.high"
+                }
+
+            ],
+            "text": "hunt.particleQuality"
+        },
+        "graphics_perfomance_stats": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": "hunt.none"
+                },
+                {
+                    "id": 1,
+                    "text": "hunt.warningIconsOnly"
+                },
+                {
+                    "id": 2,
+                    "text": "hunt.basic"
+                },
+                {
+                    "id": 3,
+                    "text": "hunt.detailed"
+                },
+                {
+                    "id": 4,
+                    "text": "hunt.extended"
+                }
+            ],
+            "text": "hunt.perfomanceStats"
+        },
+        "graphics_v_sync": {
+            "options": [],
+            "text": "hunt.vSync",
+            "type": "checkbox"
+        },
+        "graphics_max_fps": {
+            "options": [
+                {
+                    "id": 0,
+                    "text": ">9000"
+                },
+                {
+                    "id": 1,
+                    "text": "30"
+                },
+                {
+                    "id": 2,
+                    "text": "45"
+                },
+                {
+                    "id": 3,
+                    "text": "48"
+                },
+                {
+                    "id": 4,
+                    "text": "60"
+                },
+                {
+                    "id": 5,
+                    "text": "72"
+                },
+                {
+                    "id": 6,
+                    "text": "90"
+                },
+                {
+                    "id": 7,
+                    "text": "120"
+                },
+                {
+                    "id": 8,
+                    "text": "144"
+                },
+                {
+                    "id": 9,
+                    "text": "180"
+                }
+            ],
+            "text": "hunt.maxFps"
+        },
+        "graphics_depth_of_field": {
+            "options": [],
+            "text": "hunt.depthOfField",
+            "type": "checkbox"
+        },
+        "graphics_motion_blur": {
+            "options": [],
+            "text": "hunt.motionBlur",
+            "type": "checkbox"
+        },
+        "graphics_advanced_settings": {
+            "type": "title",
+            "text": "hunt.advancedSettings"
+        },
+        "graphics_surface_format_optimization": {
+            "options": [],
+            "text": "hunt.surfaceFormatOptimization",
+            "type": "checkbox"
+        },
+        "graphics_toggle_gpu_tessellation": {
+            "options": [],
+            "text": "hunt.toggleGpuTessellation",
+            "type": "checkbox"
+        },
+        "graphics_use_2_pass_scene_rendering": {
+            "options": [],
+            "text": "hunt.use2PassSceneRendering",
+            "type": "checkbox"
+        },
+        "graphics_use_2_pass_lighting": {
+            "options": [],
+            "text": "hunt.use2PassLighting",
             "type": "checkbox"
         }
     }
