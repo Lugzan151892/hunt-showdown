@@ -18,7 +18,8 @@
 
 	useHead({
 		title: 'Hunter Service',
-		link: [{ rel: 'icon', type: 'image/svg', href: '/hunt.svg' }]
+		link: [{ rel: 'icon', type: 'image/svg', href: '/hunt.svg' }],
+		meta: [{ name: 'google-site-verification', content: 'bbvdxbWc8vl9PfAAiJz60uPjed4T1sKwpf57g7AHlHc' }]
 	});
 
 	useSeoMeta({
