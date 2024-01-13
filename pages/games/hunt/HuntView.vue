@@ -1,12 +1,7 @@
 <template>
 	<div class="hunt">
 		<div class="hunt__content">
-			<UiCustomExpander
-				v-for="(group, key) in huntDefaultSettings"
-				:key="key"
-				:title="`hunt.${key}`"
-				:opened="Boolean(key === 'game')"
-			>
+			<UiCustomExpander v-for="(group, key) in huntDefaultSettings" :key="key" :title="`hunt.${key}`">
 				<div
 					v-for="(settings, settingsKey) in group"
 					:key="`${key}` + settingsKey"
