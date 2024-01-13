@@ -120,6 +120,8 @@
 		"toggleGpuTessellation": "Toggle GPU Tessellation",
 		"use2PassSceneRendering": "Use 2 Pass Scene Rendering",
 		"use2PassLighting": "Use 2 Pass Lighting",
-		"maxFps": "Max FPS"
+		"maxFps": "Max FPS",
+		"showRecommendedSettings": "Показать рекомендуемые настройки",
+		"showMySettings": "Показать мои настройки"
 	}
 }

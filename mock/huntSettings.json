@@ -15,7 +15,9 @@
         },
         "game_field_of_view": {
             "options": [],
-            "text": "hunt.fieldOfView"
+            "text": "hunt.fieldOfView",
+            "min": 85,
+            "max": 110
         },
         "game_lowered_state_field_of_view": {
             "options": [
@@ -79,31 +81,45 @@
         },
         "game_sensitivity_default": {
             "options": [],
-            "text": "hunt.default"
+            "text": "hunt.default",
+            "min": 0.1,
+            "max": 3
         },
         "game_sensitivity_shoulder_aim": {
             "options": [],
-            "text": "hunt.shoulderAim"
+            "text": "hunt.shoulderAim",
+            "min": 0.1,
+            "max": 3
         },
         "game_sensitivity_aim_down_sights": {
             "options": [],
-            "text": "hunt.aimDownSights"
+            "text": "hunt.aimDownSights",
+            "min": 0.1,
+            "max": 3
         },
         "game_sensitivity_deadeye_scope": {
             "options": [],
-            "text": "hunt.deadeyeScope"
+            "text": "hunt.deadeyeScope",
+            "min": 0.1,
+            "max": 3
         },
         "game_sensitivity_marksman_scope": {
             "options": [],
-            "text": "hunt.marksmanScope"
+            "text": "hunt.marksmanScope",
+            "min": 0.1,
+            "max": 3
         },
         "game_sensitivity_sniper_scope": {
             "options": [],
-            "text": "hunt.sniperScope"
+            "text": "hunt.sniperScope",
+            "min": 0.1,
+            "max": 3
         },
         "game_sensitivity_aperture": {
             "options": [],
-            "text": "hunt.aperture"
+            "text": "hunt.aperture",
+            "min": 0.1,
+            "max": 3
         },
         "game_title_miscellaneous_settings": {
             "type": "title",
@@ -200,39 +216,57 @@
     "hud": {
         "hud_ui_scale": {
             "options": [],
-            "text": "hunt.uiScale"
+            "text": "hunt.uiScale",
+            "min": 80,
+            "max": 100
         },
         "hud_cursor_sensitivity": {
             "options": [],
-            "text": "hunt.cursorSensitivity"
+            "text": "hunt.cursorSensitivity",
+            "min": 0.1,
+            "max": 3
         },
         "hud_chatbox_opacity": {
             "options": [],
-            "text": "hunt.chatboxOpacity"
+            "text": "hunt.chatboxOpacity",
+            "min": 0,
+            "max": 100
         },
         "hud_compass_opacity": {
             "options": [],
-            "text": "hunt.compassOpacity"
+            "text": "hunt.compassOpacity",
+            "min": 0,
+            "max": 100
         },
         "hud_crosshair_opacity": {
             "options": [],
-            "text": "hunt.crosshairOpacity"
+            "text": "hunt.crosshairOpacity",
+            "min": 0,
+            "max": 100
         },
         "hud_equipment_opacity": {
             "options": [],
-            "text": "hunt.equipmentOpacity"
+            "text": "hunt.equipmentOpacity",
+            "min": 0,
+            "max": 100
         },
         "hud_health_and_stamina_display_opacity": {
             "options": [],
-            "text": "hunt.healthAndStaminaDisplayOpacity"
+            "text": "hunt.healthAndStaminaDisplayOpacity",
+            "min": 0,
+            "max": 100
         },
         "hud_objective_status_opacity": {
             "options": [],
-            "text": "hunt.objectiveStatusOpacity"
+            "text": "hunt.objectiveStatusOpacity",
+            "min": 0,
+            "max": 100
         },
         "hud_indicator_opacity": {
             "options": [],
-            "text": "hunt.indicatorOpacity"
+            "text": "hunt.indicatorOpacity",
+            "min": 0,
+            "max": 100
         },
         "hud_auto_hide_ammo_display": {
             "options": [],
@@ -290,27 +324,39 @@
     "audio": {
         "audio_master": {
             "options": [],
-            "text": "hunt.master"
+            "text": "hunt.master",
+            "min": 0,
+            "max": 100
         },
         "audio_sfx": {
             "options": [],
-            "text": "hunt.sfx"
+            "text": "hunt.sfx",
+            "min": 0,
+            "max": 100
         },
         "audio_music": {
             "options": [],
-            "text": "hunt.music"
+            "text": "hunt.music",
+            "min": 0,
+            "max": 100
         },
         "audio_communication": {
             "options": [],
-            "text": "hunt.communication"
+            "text": "hunt.communication",
+            "min": 0,
+            "max": 100
         },
         "audio_menu_ambience": {
             "options": [],
-            "text": "hunt.menuAmbience"
+            "text": "hunt.menuAmbience",
+            "min": 0,
+            "max": 100
         },
         "audio_dialogue": {
             "options": [],
-            "text": "hunt.dialogue"
+            "text": "hunt.dialogue",
+            "min": 0,
+            "max": 100
         },
         "audio_dialogue_subtitles": {
             "options": [],
@@ -459,11 +505,15 @@
         },
         "graphics_render_resolution_scale": {
             "options": [],
-            "text": "hunt.renderResolutionScale"
+            "text": "hunt.renderResolutionScale",
+            "min": 50,
+            "max": 100
         },
         "graphics_gamma": {
             "options": [],
-            "text": "hunt.gamma"
+            "text": "hunt.gamma",
+            "min": 0.85,
+            "max": 1.45
         },
         "graphics_video_memory_usage_target": {
             "options": [
