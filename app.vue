@@ -12,10 +12,6 @@
 
 	const authStore = useAuthStore();
 
-	onMounted(() => {
-		authStore.handleCheckIsAuth();
-	});
-
 	useHead({
 		title: 'Hunter Service',
 		link: [{ rel: 'icon', type: 'image/svg', href: '/hunt.svg' }],
@@ -28,6 +24,8 @@
 		keywords: 'Hunt, Hunt-Showdown, Hunter, hunt, hunt showdown, guides, settings, help, issue',
 		viewport: 'width=device-width, initial-scale=1.0'
 	});
+
+	authStore.handleCheckIsAuth();
 </script>
 <style lang="scss" scoped>
 	.content {

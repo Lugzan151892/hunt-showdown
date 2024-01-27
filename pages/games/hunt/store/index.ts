@@ -89,10 +89,10 @@ export const useHuntStore = defineStore('hunt', () => {
 
 	const saveUserSettings = async () => {
 		try {
-			const result = await api.put('/user/set', { ...mainStore.user, settings: settings.value });
+			const result = await api.put('/user/set', { ...mainStore.user, hunt_settings: settings.value });
 			if (result.status === 200 && !result.error) {
-				mainStore.user = result.user;
-				Object.assign(settings.value, result.user.settings);
+				mainStore.user = result.data.user;
+				Object.assign(settings.value, result.data.user.hunt_settings);
 				mainStore.openModal('Настройки успешно сохранены');
 			} else {
 				mainStore.openModal(result.message, undefined, 'error');
@@ -106,16 +106,16 @@ export const useHuntStore = defineStore('hunt', () => {
 		const token = localStorage.getItem('token');
 		if (token) {
 			try {
-				const result = await api.get('/user/get', token);
+				const result = await api.get('/user/get');
 				if (result.status === 200 && !result.error) {
-					mainStore.user = result.user;
-					Object.assign(settings.value, result.user.settings);
+					mainStore.user = result.data.user;
+					Object.assign(settings.value, result.data.user.hunt_settings);
 				} else mainStore.openModal(result.message, undefined, 'error');
 			} catch (e) {
 				mainStore.openModal(e as string, undefined, 'error');
 			}
 		} else {
-			Object.assign(settings.value, mainStore.user?.settings);
+			Object.assign(settings.value, mainStore.user?.hunt_settings);
 		}
 	};
 
@@ -126,7 +126,7 @@ export const useHuntStore = defineStore('hunt', () => {
 	const isSettingsChanged = computed(() => {
 		if (!currentUser.value) return false;
 		else {
-			return Object.keys(settings.value).some((key) => settings.value[key] !== currentUser.value?.settings[key]);
+			return Object.keys(settings.value).some((key) => settings.value[key] !== currentUser.value?.hunt_settings[key]);
 		}
 	});
 
@@ -139,7 +139,7 @@ export const useHuntStore = defineStore('hunt', () => {
 
 	const isUserHasSettings = computed(() => {
 		if (!currentUser.value) return false;
-		else return !!Object.values(currentUser.value.settings).length;
+		else return !!Object.values(currentUser.value.hunt_settings).length;
 	});
 
 	return {
