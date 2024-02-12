@@ -1,14 +1,15 @@
-const defaultPath = 'https://api.hunter-service.fun/api';
+const defaultPath = 'https://hunter-service.fun/api';
+const authToken = localStorage.getItem('token');
 class Api {
 	path;
 	constructor() {
 		this.path = defaultPath;
 	}
 
-	async get(path: string, token?: string) {
+	async get(path: string) {
 		const response = await fetch(this.path + path, {
 			headers: {
-				...(token && { Authorization: 'Bearer ' + token })
+				...(authToken && { Authorization: 'Bearer ' + authToken })
 			}
 		});
 		const result = await response.json();
@@ -20,7 +21,8 @@ class Api {
 			const response = await fetch(this.path + path, {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json;charset=utf-8'
+					'Content-Type': 'application/json;charset=utf-8',
+					...(authToken && { Authorization: 'Bearer ' + authToken })
 				},
 				body: JSON.stringify(options)
 			});
@@ -36,7 +38,8 @@ class Api {
 			const response = await fetch(this.path + path, {
 				method: 'PUT',
 				headers: {
-					'Content-Type': 'application/json;charset=utf-8'
+					'Content-Type': 'application/json;charset=utf-8',
+					...(authToken && { Authorization: 'Bearer ' + authToken })
 				},
 				body: JSON.stringify(options)
 			});
