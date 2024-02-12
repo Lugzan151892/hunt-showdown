@@ -14,8 +14,9 @@ type TTranslateMain = {
 
 interface IUserData {
 	id: string;
-	settings: {[key: string]: any},
-	email: string;
+	hunt_settings: {[key: string]: any},
+	username: string;
+	spectated_users: Array<string>
 }
 
 export as namespace COMMON;

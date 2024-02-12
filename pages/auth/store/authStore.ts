@@ -65,9 +65,9 @@ export const useAuthStore = defineStore('authStore', () => {
 				password: password.value
 			});
 			if (result.status === 200 && !result.error) {
-				mainStore.user = result.user;
+				mainStore.user = result.data.user;
 				mainStore.isAuth = true;
-				localStorage.setItem('token', result.token);
+				localStorage.setItem('token', result.data.token);
 				handleClearFields();
 				return true;
 			} else {
@@ -84,8 +84,8 @@ export const useAuthStore = defineStore('authStore', () => {
 				const result = await api.get('/user/auth', token);
 				if (result.status === 200 && !result.error) {
 					mainStore.isAuth = true;
-					mainStore.user = result.user;
-					localStorage.setItem('token', result.token);
+					mainStore.user = result.data.user;
+					localStorage.setItem('token', result.data.token);
 				} else if (result.status === 401 && result.error) localStorage.removeItem('token');
 				else mainStore.openModal(result.message, undefined, 'error');
 			} catch (e) {
