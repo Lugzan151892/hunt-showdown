@@ -20,7 +20,12 @@ export default <RouterConfig>{
 		{
 			name: 'hunt-showdown',
 			path: '/games/hunt-showdown',
-			component: () => import('~/pages/games/hunt/HuntView.vue').then((r) => r.default || r)
+			component: () => import('~/pages/hunt/HuntView.vue').then((r) => r.default || r)
+		},
+		{
+			name: 'suspicious-players',
+			path: '/suspicious-players',
+			component: () => import('~/pages/banned-list/BannedListView.vue').then((r) => r.default || r)
 		}
 	]
 };

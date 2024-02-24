@@ -18,13 +18,6 @@
 				>
 					<img :src="item.img" :alt="item.img" class="header__left__menu--item-logo" />
 				</div>
-				<div
-					class="header__left__menu--item"
-					:class="{ 'header__left__menu--item-active': $route.fullPath === '/' }"
-					@click="handleClickRoute('home')"
-				>
-					<img src="../assets/images/home.svg" alt="home" class="header__left__menu--item-logo" />
-				</div>
 			</div>
 			<div class="header__left__bottom">
 				<div v-if="user" class="header__left__bottom-user">
@@ -38,6 +31,17 @@
 		</div>
 		<div class="header__right" :class="{ 'header__right--active': menu }">
 			<div class="header__right-title">{{ $t('main.menuTitle') }}</div>
+			<div class="header__right__menu">
+				<div
+					v-for="item in items"
+					:key="`${item}-key`"
+					class="header__right__menu--item"
+					:class="{ 'header__right__menu--item-active': $route.name === item.route }"
+					@click="handleClickRoute(item.route)"
+				>
+					{{ $t(item.text) }}
+				</div>
+			</div>
 			<form v-if="menu" class="header__right-form">
 				<div class="header__right-form__language">
 					<label for="locale-select">{{ $t('main.chooseLanguage') }}</label>
@@ -54,7 +58,8 @@
 	import huntIcon from '@/assets/images/hunt.svg';
 	import { useMainStore } from '~/store/mainStore';
 	import menuIcon from '@/assets/images/menu.svg';
-	// import cs from '~/assets/images/counter-strike.svg';
+	import home from '@/assets/images/home.svg';
+	import ban from '@/assets/images/ban.svg';
 
 	const mainStore = useMainStore();
 
@@ -66,8 +71,9 @@
 	const router = useRouter();
 
 	const items = [
-		// { name: 'Counter-Strike-2', img: cs, route: 'counter-strike' },
-		{ name: 'Hunt Showdown', img: huntIcon, route: 'hunt-showdown' }
+		{ name: 'Main Page', img: home, route: 'home', text: 'main.mainPage' },
+		{ name: 'Hunt Showdown', img: huntIcon, route: 'hunt-showdown', text: 'main.huntSettingsPage' },
+		{ name: 'Banned list', img: ban, route: 'suspicious-players', text: 'main.bannedListPage' }
 	];
 	const handleLogin = () => {
 		router.push({ name: 'login' });
@@ -107,17 +113,14 @@
 			}
 			&__menu {
 				margin: 0 auto;
-				width: 40px;
+				width: 50px;
 				margin-top: 15px;
-				&-active {
-					width: 225px;
-				}
 				&--item {
 					border-radius: 10px;
 					cursor: pointer;
 					display: grid;
 					justify-items: center;
-					padding: 5px;
+					padding: 10px;
 					margin-bottom: 10px;
 					&-logo {
 						height: 30px;
@@ -147,15 +150,40 @@
 			width: 0px;
 			transition: width ease-in-out 0.5s;
 			display: grid;
-			grid-template-rows: 40px max-content;
-			row-gap: 15px;
+			min-height: 100%;
+			grid-template-rows: max-content 1fr max-content;
 			&--active {
-				width: 150px;
+				width: 200px;
+				padding-right: 10px;
+			}
+			&__menu {
+				margin-top: 15px;
+				&--item {
+					@extend .header__left__menu--item;
+					height: 50px;
+					display: grid;
+					align-items: center;
+					text-align: center;
+					&-active {
+						@extend .header__left__menu--item-active;
+					}
+				}
+				&--item:last-child {
+					margin-bottom: 0;
+				}
 			}
 			&-title {
 				margin: auto 0;
+				height: 40px;
+				display: grid;
+				align-items: center;
+				text-align: center;
+				background-color: var(--menu-icon-active);
+				border-radius: 10px;
 			}
 			&-form {
+				grid-area: 3 / 1 / 4 / 2;
+				padding: 0 5px 15px;
 				&__language {
 					display: grid;
 					grid-template-rows: min-content min-content;

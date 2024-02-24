@@ -1,7 +1,14 @@
 <template>
 	<div class="wrapper">
 		<div class="container" :class="{ 'container-error': errors }">
-			<input v-model="value" class="container__input" :type="computedType" :placeholder="placeholder" />
+			<input
+				v-model="value"
+				class="container__input"
+				:type="computedType"
+				:placeholder="placeholder"
+				@input="$emit('input', $event)"
+				@change="$emit('change', $event)"
+			/>
 			<img
 				v-if="props.type === 'password'"
 				:src="showPassword ? visibly : visiblyOff"
@@ -15,7 +22,7 @@
 <script lang="ts" setup>
 	import visibly from '@/assets/images/password_hide.png';
 	import visiblyOff from '@/assets/images/password_show.png';
-	const emit = defineEmits(['update:modelValue']);
+	const emit = defineEmits(['update:modelValue', 'input', 'change']);
 	const props = defineProps({
 		modelValue: {
 			type: String,

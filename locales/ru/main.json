@@ -8,6 +8,9 @@
 		"accept": "Принять",
 		"save": "Сохранить",
 		"mainTitle": "Hunter Service",
-		"menuTitle": "Основное меню"
+		"menuTitle": "Основное меню",
+		"mainPage": "На главную",
+		"huntSettingsPage": "Настройки Hunt: Showdown",
+		"bannedListPage": "Бан лист игроков"
 	}
 }

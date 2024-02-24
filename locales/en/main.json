@@ -8,6 +8,9 @@
 		"accept": "Accept",
 		"save": "Save",
 		"mainTitle": "Hunter Service",
-		"menuTitle": "Main menu"
+		"menuTitle": "Main menu",
+		"mainPage": "Main page",
+		"huntSettingsPage": "Hunt: Showdown Settings",
+		"bannedListPage": "Suspicious players list"
 	}
 }
