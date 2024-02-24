@@ -11,6 +11,7 @@
 		"menuTitle": "Основное меню",
 		"mainPage": "На главную",
 		"huntSettingsPage": "Настройки Hunt: Showdown",
-		"bannedListPage": "Бан лист игроков"
+		"bannedListPage": "Бан лист игроков",
+		"delete": "Удалить"
 	}
 }

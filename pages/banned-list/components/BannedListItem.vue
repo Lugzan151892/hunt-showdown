@@ -4,6 +4,10 @@
 		<div>Name: {{ user.personaname }}</div>
 		<div>SteamID: {{ user.steamid }}</div>
 		<div>Status: {{ user.personastate }}</div>
+		<div class="content__banned" :class="{ 'content__banned--active': user.banned }">
+			Is VAC on ACC: {{ user.banned }}
+		</div>
+		<UiCustomButton title="main.delete" @click="$emit('delete', user.steamid)" />
 	</div>
 </template>
 <script lang="ts" setup>
@@ -13,6 +17,8 @@
 			required: true
 		}
 	});
+
+	defineEmits(['delete']);
 </script>
 <style lang="scss" scoped>
 	.content {
@@ -25,6 +31,12 @@
 		padding: 10px;
 		&__image {
 			border-radius: 20px;
+		}
+		&__banned {
+			color: lightgreen;
+			&--active {
+				color: red;
+			}
 		}
 	}
 </style>

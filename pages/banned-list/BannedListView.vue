@@ -7,7 +7,13 @@
 			<UiCustomButton title="banned.add" @click="handleChange" />
 		</div>
 		<div class="banned__list">
-			<BannedListItem v-for="(user, index) in bannedList" :key="index" :user="user" class="banned__list--item" />
+			<BannedListItem
+				v-for="(user, index) in bannedList"
+				:key="index"
+				:user="user"
+				class="banned__list--item"
+				@delete="handleDelete($event)"
+			/>
 		</div>
 		<div class="banned__bottom">
 			<UiCustomButton v-if="currentUser" title="banned.loadList" @click="loadBannedUsers" />
@@ -28,6 +34,16 @@
 	const currentUser = computed(() => mainStore.user);
 	const spectatedUsers = computed(() => mainStore.user?.spectated_users || []);
 
+	const loadBannedUsers = async () => {
+		// @todo fix etu huyny
+		const data = await api.post<any, BANNED.ISteamBannedUsersResponse>('/steam/list', {
+			banned_list: spectatedUsers.value
+		});
+		if (data) {
+			bannedList.value = data.data.players;
+		}
+	};
+
 	const handleChange = async () => {
 		// @todo fix etu huyny
 		const data = await api.get<any, any>('/steam/steamid/get', { path: newPlayer.value });
@@ -43,19 +59,32 @@
 			if (!result.error) {
 				mainStore.user = result.data.user;
 				newPlayer.value = '';
+				loadBannedUsers();
 			}
 		}
 	};
 
-	const loadBannedUsers = async () => {
-		// @todo fix etu huyny
-		const data = await api.post<any, BANNED.ISteamBannedUsersResponse>('/steam/list', {
-			banned_list: spectatedUsers.value
-		});
-		if (data) {
-			bannedList.value = data.data.players;
+	const handleDelete = async (steamId: string) => {
+		if (!mainStore.user) return;
+		mainStore.user.spectated_users = mainStore.user.spectated_users.filter((id) => String(id) !== String(steamId));
+		try {
+			const result = await api.put<any, any>('/user/set', mainStore.user);
+			if (result.status === 200 && !result.error) {
+				mainStore.user = result.data.user;
+				loadBannedUsers();
+			} else {
+				mainStore.openModal(result.message, undefined, 'error');
+			}
+		} catch (e) {
+			mainStore.openModal(e as string, undefined, 'error');
 		}
 	};
+
+	onMounted(() => {
+		if (currentUser.value) {
+			loadBannedUsers();
+		}
+	});
 </script>
 <style lang="scss" scoped>
 	.banned {

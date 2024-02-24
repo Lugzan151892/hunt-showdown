@@ -13,6 +13,7 @@ export interface ISteamBannedUser {
 	profileurl: string;
 	steamid: string;
 	timecreated: number;
+	banned: boolean;
 }
 
 export interface ISteamBannedUsersResponse extends COMMON.IDefaultResponse {

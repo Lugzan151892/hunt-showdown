@@ -11,6 +11,7 @@
 		"menuTitle": "Main menu",
 		"mainPage": "Main page",
 		"huntSettingsPage": "Hunt: Showdown Settings",
-		"bannedListPage": "Suspicious players list"
+		"bannedListPage": "Suspicious players list",
+		"delete": "Delete"
 	}
 }
