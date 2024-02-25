@@ -4,13 +4,16 @@
 		<div class="content">
 			<NuxtPage />
 		</div>
-		<InfoModal />
+		<InfoModal v-if="mainStore.mainModal" />
+		<LoadingView v-if="mainStore.loading" />
 	</div>
 </template>
 <script lang="ts" setup>
 	import { useAuthStore } from './pages/auth/store/authStore';
+	import { useMainStore } from './store/mainStore';
 
 	const authStore = useAuthStore();
+	const mainStore = useMainStore();
 
 	useHead({
 		title: 'Hunter Service',

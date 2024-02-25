@@ -1,5 +1,5 @@
 <template>
-	<div v-if="mainStore.mainModal" class="wrapper" @click.self="closeModal">
+	<div class="wrapper" @click.self="closeModal">
 		<div class="modal">
 			<div class="modal__content">
 				<img

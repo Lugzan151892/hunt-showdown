@@ -20,6 +20,9 @@ class Api {
 				...(authToken && { Authorization: 'Bearer ' + authToken })
 			}
 		});
+		if (!response.ok) {
+			throw new Error('Something went wrong, try again');
+		}
 		const result = await response.json();
 		return result;
 	}
@@ -37,6 +40,9 @@ class Api {
 				},
 				body: JSON.stringify(options)
 			});
+			if (!response.ok) {
+				throw new Error('Something went wrong, try again');
+			}
 			const result = await response.json();
 			return result;
 		} catch (e) {
@@ -57,6 +63,9 @@ class Api {
 				},
 				body: JSON.stringify(options)
 			});
+			if (!response.ok) {
+				throw new Error('Something went wrong, try again');
+			}
 			const result = await response.json();
 			return result;
 		} catch (e) {
