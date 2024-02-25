@@ -1,5 +1,5 @@
-// const defaultPath = 'https://hunter-service.fun/api';
-const defaultPath = 'http://127.0.0.1:5000/api';
+const defaultPath = 'https://hunter-service.fun/api';
+// const defaultPath = 'http://127.0.0.1:5000/api';
 // const authToken = localStorage.getItem('token');
 class Api {
 	path;
