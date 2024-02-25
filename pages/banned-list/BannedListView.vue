@@ -36,31 +36,47 @@
 
 	const loadBannedUsers = async () => {
 		// @todo fix etu huyny
-		const data = await api.post<any, BANNED.ISteamBannedUsersResponse>('/steam/list', {
-			banned_list: spectatedUsers.value
-		});
-		if (data) {
-			bannedList.value = data.data.players;
+		try {
+			mainStore.loadingStart();
+			const data = await api.post<any, BANNED.ISteamBannedUsersResponse>('/steam/list', {
+				banned_list: spectatedUsers.value
+			});
+			if (data) {
+				bannedList.value = data.data.players;
+			}
+			mainStore.loadingStop();
+		} catch (e) {
+			mainStore.openModal('Something went wrong, try again', undefined, 'error');
+		} finally {
+			mainStore.loadingStop();
 		}
 	};
 
 	const handleChange = async () => {
 		// @todo fix etu huyny
-		const data = await api.get<any, any>('/steam/steamid/get', { path: newPlayer.value });
-		if (!data.error && data.data.steamId && currentUser.value) {
-			if (currentUser.value.spectated_users.includes(data.data.steamId)) {
-				mainStore.openModal('banned.userAlreadyInList', undefined, 'error');
-				return;
+		try {
+			mainStore.loadingStart();
+			const data = await api.get<any, any>('/steam/steamid/get', { path: newPlayer.value });
+			if (!data.error && data.data.steamId && currentUser.value) {
+				if (currentUser.value.spectated_users.includes(data.data.steamId)) {
+					mainStore.openModal('banned.userAlreadyInList', undefined, 'error');
+					return;
+				}
+				const result = await api.put<any, any>('/user/set', {
+					...mainStore.user,
+					spectated_users: [...currentUser.value.spectated_users, data.data.steamId]
+				});
+				if (!result.error) {
+					mainStore.user = result.data.user;
+					newPlayer.value = '';
+					loadBannedUsers();
+				}
 			}
-			const result = await api.put<any, any>('/user/set', {
-				...mainStore.user,
-				spectated_users: [...currentUser.value.spectated_users, data.data.steamId]
-			});
-			if (!result.error) {
-				mainStore.user = result.data.user;
-				newPlayer.value = '';
-				loadBannedUsers();
-			}
+			mainStore.loadingStop();
+		} catch (e) {
+			mainStore.openModal('Something went wrong, try again', undefined, 'error');
+		} finally {
+			mainStore.loadingStop();
 		}
 	};
 
@@ -68,6 +84,7 @@
 		if (!mainStore.user) return;
 		mainStore.user.spectated_users = mainStore.user.spectated_users.filter((id) => String(id) !== String(steamId));
 		try {
+			mainStore.loadingStart();
 			const result = await api.put<any, any>('/user/set', mainStore.user);
 			if (result.status === 200 && !result.error) {
 				mainStore.user = result.data.user;
@@ -75,8 +92,11 @@
 			} else {
 				mainStore.openModal(result.message, undefined, 'error');
 			}
+			mainStore.loadingStop();
 		} catch (e) {
-			mainStore.openModal(e as string, undefined, 'error');
+			mainStore.openModal('Something went wrong, try again', undefined, 'error');
+		} finally {
+			mainStore.loadingStop();
 		}
 	};
 

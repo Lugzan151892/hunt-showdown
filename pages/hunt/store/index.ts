@@ -89,6 +89,7 @@ export const useHuntStore = defineStore('hunt', () => {
 
 	const saveUserSettings = async () => {
 		try {
+			mainStore.loadingStart();
 			const result = await api.put<any, any>('/user/set', { ...mainStore.user, hunt_settings: settings.value });
 			if (result.status === 200 && !result.error) {
 				mainStore.user = result.data.user;
@@ -97,8 +98,9 @@ export const useHuntStore = defineStore('hunt', () => {
 			} else {
 				mainStore.openModal(result.message, undefined, 'error');
 			}
+			mainStore.loadingStop();
 		} catch (e) {
-			mainStore.openModal(e as string, undefined, 'error');
+			mainStore.openModal('Something went wrong, try again', undefined, 'error');
 		}
 	};
 
@@ -106,6 +108,7 @@ export const useHuntStore = defineStore('hunt', () => {
 		const token = localStorage.getItem('token');
 		if (token) {
 			try {
+				mainStore.loadingStart();
 				const result = await api.get<any, any>('/user/get');
 				if (!result) {
 					mainStore.openModal('hunt.somethingWentWrongWhileSaving', undefined, 'error');
@@ -115,8 +118,9 @@ export const useHuntStore = defineStore('hunt', () => {
 					mainStore.user = result.data.user;
 					Object.assign(settings.value, result.data.user.hunt_settings);
 				} else mainStore.openModal(result.message, undefined, 'error');
+				mainStore.loadingStop();
 			} catch (e) {
-				mainStore.openModal(e as string, undefined, 'error');
+				mainStore.openModal('Something went wrong, try again', undefined, 'error');
 			}
 		} else {
 			Object.assign(settings.value, mainStore.user?.hunt_settings);
