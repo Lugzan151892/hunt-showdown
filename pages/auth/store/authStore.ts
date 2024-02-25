@@ -36,10 +36,14 @@ export const useAuthStore = defineStore('authStore', () => {
 				email: userName.value,
 				password: password.value
 			});
+			if (!result) {
+				mainStore.openModal('auth.somethingWentWrong', undefined, 'error');
+				return;
+			}
 			if (result.status === 200 && !result.error) {
 				mainStore.user = result.user;
 				mainStore.isAuth = true;
-				localStorage.setItem('token', result.token);
+				localStorage.setItem('token', result.data.token);
 				mainStore.openModal('auth.userRegistrySuccess', '/games/hunt-showdown');
 				handleClearFields();
 			} else {
@@ -64,6 +68,10 @@ export const useAuthStore = defineStore('authStore', () => {
 				email: userName.value,
 				password: password.value
 			});
+			if (!result) {
+				mainStore.openModal('auth.somethingWentWrong', undefined, 'error');
+				return;
+			}
 			if (result.status === 200 && !result.error) {
 				mainStore.user = result.data.user;
 				mainStore.isAuth = true;

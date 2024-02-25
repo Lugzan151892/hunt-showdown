@@ -122,6 +122,7 @@
 		"use2PassLighting": "Use 2 Pass Lighting",
 		"maxFps": "Max FPS",
 		"showRecommendedSettings": "Show recommended settings",
-		"showMySettings": "Show my settings"
+		"showMySettings": "Show my settings",
+		"somethingWentWrongWhileSaving": "Something went wrong. Settings not saved. Press save button again"
 	}
 }
