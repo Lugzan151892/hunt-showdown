@@ -122,6 +122,7 @@
 		"use2PassLighting": "Use 2 Pass Lighting",
 		"maxFps": "Max FPS",
 		"showRecommendedSettings": "Показать рекомендуемые настройки",
-		"showMySettings": "Показать мои настройки"
+		"showMySettings": "Показать мои настройки",
+		"somethingWentWrongWhileSaving": "Что то пошло не так при сохранении настроек. Настройки не сохранены на сервере, но не сброшены на сайте. Нажмите кнопку сохранить еще раз"
 	}
 }
