@@ -59,6 +59,7 @@
 			const data = await api.get<any, any>('/steam/steamid/get', { path: newPlayer.value });
 			if (!data.error && data.data.steamId && currentUser.value) {
 				if (currentUser.value.spectated_users.includes(data.data.steamId)) {
+					mainStore.loadingStop();
 					mainStore.openModal('banned.userAlreadyInList', undefined, 'error');
 					return;
 				}

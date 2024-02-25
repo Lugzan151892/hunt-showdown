@@ -28,7 +28,9 @@
 		viewport: 'width=device-width, initial-scale=1.0'
 	});
 
-	authStore.handleCheckIsAuth();
+	if (!mainStore.user) {
+		authStore.handleCheckIsAuth();
+	}
 </script>
 <style lang="scss" scoped>
 	.content {

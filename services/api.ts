@@ -1,6 +1,6 @@
-const defaultPath = 'https://hunter-service.fun/api';
-// const defaultPath = 'http://127.0.0.1:5000/api';
-const authToken = localStorage.getItem('token');
+// const defaultPath = 'https://hunter-service.fun/api';
+const defaultPath = 'http://127.0.0.1:5000/api';
+// const authToken = localStorage.getItem('token');
 class Api {
 	path;
 	constructor() {
@@ -15,6 +15,7 @@ class Api {
 				''
 			);
 		}
+		const authToken = localStorage.getItem('token');
 		const response = await fetch(this.path + path + requestParams, {
 			headers: {
 				...(authToken && { Authorization: 'Bearer ' + authToken })
@@ -32,6 +33,7 @@ class Api {
 		options: Request
 	): Promise<Response | undefined> {
 		try {
+			const authToken = localStorage.getItem('token');
 			const response = await fetch(this.path + path, {
 				method: 'POST',
 				headers: {
@@ -55,6 +57,7 @@ class Api {
 		options: Request
 	): Promise<Response | undefined> {
 		try {
+			const authToken = localStorage.getItem('token');
 			const response = await fetch(this.path + path, {
 				method: 'PUT',
 				headers: {

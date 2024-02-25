@@ -2,11 +2,16 @@
 	<div class="content">
 		<div class="content__title">{{ $t('main.mainTitle') }}</div>
 		<ContentBlock
-			class="content__hunt"
 			title="info.huntInfoTitle"
 			text="info.huntInfoText"
 			redirect-path="/games/hunt-showdown"
 			button-title="info.huntInfoButton"
+		/>
+		<ContentBlock
+			title="info.bannedListInfoTitle"
+			text="info.bannedListInfoDescription"
+			redirect-path="/suspicious-players"
+			button-title="info.bannedListInfoButton"
 		/>
 		<ContentBlock class="content__updates" title="info.updatesInfoTitle">
 			<UpdatesInfoBlock />
