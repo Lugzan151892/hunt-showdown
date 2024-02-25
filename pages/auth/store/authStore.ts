@@ -74,6 +74,7 @@ export const useAuthStore = defineStore('authStore', () => {
 				password: password.value
 			});
 			if (!result) {
+				mainStore.loadingStop();
 				mainStore.openModal('auth.somethingWentWrong', undefined, 'error');
 				return;
 			}
@@ -114,5 +115,38 @@ export const useAuthStore = defineStore('authStore', () => {
 		}
 	};
 
-	return { userName, password, repeatedPassword, handleRegistry, validationErrors, handleCheckIsAuth, handleLogin };
+	const loadUser = async () => {
+		const token = localStorage.getItem('token');
+		if (token) {
+			try {
+				mainStore.loadingStart();
+				const result = await api.get<any, any>('/user/get');
+				if (result.status === 200 && !result.error) {
+					mainStore.isAuth = true;
+					mainStore.user = result.data.user;
+					localStorage.setItem('token', result.data.token);
+				} else if (result.status === 401 && result.error) {
+					localStorage.removeItem('token');
+					mainStore.openModal(result.message, undefined, 'error');
+				} else mainStore.openModal(result.message, undefined, 'error');
+				mainStore.loadingStop();
+			} catch (e) {
+				mainStore.loadingStop();
+				mainStore.openModal('Something went wrong, try again', undefined, 'error');
+			} finally {
+				mainStore.loadingStop();
+			}
+		}
+	};
+
+	return {
+		userName,
+		password,
+		repeatedPassword,
+		handleRegistry,
+		validationErrors,
+		handleCheckIsAuth,
+		handleLogin,
+		loadUser
+	};
 });

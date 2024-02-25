@@ -111,6 +111,7 @@ export const useHuntStore = defineStore('hunt', () => {
 				mainStore.loadingStart();
 				const result = await api.get<any, any>('/user/get');
 				if (!result) {
+					mainStore.loadingStop();
 					mainStore.openModal('hunt.somethingWentWrongWhileSaving', undefined, 'error');
 					return;
 				}
@@ -120,6 +121,7 @@ export const useHuntStore = defineStore('hunt', () => {
 				} else mainStore.openModal(result.message, undefined, 'error');
 				mainStore.loadingStop();
 			} catch (e) {
+				mainStore.loadingStop();
 				mainStore.openModal('Something went wrong, try again', undefined, 'error');
 			}
 		} else {

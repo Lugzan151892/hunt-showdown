@@ -7,6 +7,18 @@
         "addNewPlayer": "Add new suspicious player",
 		"loginToSeeList": "Log in to load players list",
 		"loadList": "Update players list",
-		"userAlreadyInList": "This user already added"
+		"userAlreadyInList": "This user already added",
+		"offline": "Offline",
+		"online": "Online",
+		"busy": "Busy",
+		"away": "Away",
+		"snooze": "Snooze",
+		"lookingToTrade": "Looking to trade",
+		"lookingToPlay": "Looking to play",
+		"status": "Status",
+		"name": "Name",
+		"profileVacStatus": "Profile VAC status",
+		"notBanned": "Not banned",
+		"banned": "VAC banned"
 	}
 }
