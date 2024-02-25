@@ -107,6 +107,10 @@ export const useHuntStore = defineStore('hunt', () => {
 		if (token) {
 			try {
 				const result = await api.get<any, any>('/user/get');
+				if (!result) {
+					mainStore.openModal('hunt.somethingWentWrongWhileSaving', undefined, 'error');
+					return;
+				}
 				if (result.status === 200 && !result.error) {
 					mainStore.user = result.data.user;
 					Object.assign(settings.value, result.data.user.hunt_settings);
