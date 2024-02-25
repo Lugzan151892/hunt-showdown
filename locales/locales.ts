@@ -8,5 +8,20 @@ import validationEn from './en/validation.json';
 import validationRu from './ru/validation.json';
 import infoRu from './ru/info.json';
 import infoEn from './en/info.json';
+import bannedEn from './en/banned.json';
+import bannedRu from './ru/banned.json';
 
-export { authEn, authRu, mainEn, mainRu, huntRu, huntEn, validationEn, validationRu, infoRu, infoEn };
+export {
+	authEn,
+	authRu,
+	mainEn,
+	mainRu,
+	huntRu,
+	huntEn,
+	validationEn,
+	validationRu,
+	infoRu,
+	infoEn,
+	bannedRu,
+	bannedEn
+};

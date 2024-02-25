@@ -32,7 +32,7 @@ export const useAuthStore = defineStore('authStore', () => {
 			return;
 		}
 		try {
-			const result = await api.post('/user/registration', {
+			const result = await api.post<any, any>('/user/registration', {
 				email: userName.value,
 				password: password.value
 			});
@@ -60,7 +60,7 @@ export const useAuthStore = defineStore('authStore', () => {
 			return;
 		}
 		try {
-			const result = await api.post('/user/login', {
+			const result = await api.post<any, any>('/user/login', {
 				email: userName.value,
 				password: password.value
 			});
@@ -81,7 +81,7 @@ export const useAuthStore = defineStore('authStore', () => {
 		const token = localStorage.getItem('token');
 		if (token) {
 			try {
-				const result = await api.get('/user/auth', token);
+				const result = await api.get<any, any>('/user/auth');
 				if (result.status === 200 && !result.error) {
 					mainStore.isAuth = true;
 					mainStore.user = result.data.user;

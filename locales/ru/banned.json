@@ -1,0 +1,12 @@
+{
+	"name": "banned",
+	"locale": "ru",
+	"translations": {
+        "addSteamLink": "Вставьте ссылку на профиль steam",
+        "add": "Добавить",
+        "addNewPlayer": "Добавьте подозрительного игрока",
+		"loginToSeeList": "Войдите, чтобы загрузить список пользователей",
+		"loadList": "Обновить список",
+		"userAlreadyInList": "Указанный пользователь уже добавлен в список"
+	}
+}

@@ -18,7 +18,7 @@
 	</div>
 </template>
 <script lang="ts" setup>
-	import { useHuntStore } from '@/pages/games/hunt/store';
+	import { useHuntStore } from '@/pages/hunt/store';
 	defineProps({
 		settings: {
 			type: Object,

@@ -89,7 +89,7 @@ export const useHuntStore = defineStore('hunt', () => {
 
 	const saveUserSettings = async () => {
 		try {
-			const result = await api.put('/user/set', { ...mainStore.user, hunt_settings: settings.value });
+			const result = await api.put<any, any>('/user/set', { ...mainStore.user, hunt_settings: settings.value });
 			if (result.status === 200 && !result.error) {
 				mainStore.user = result.data.user;
 				Object.assign(settings.value, result.data.user.hunt_settings);
@@ -106,7 +106,7 @@ export const useHuntStore = defineStore('hunt', () => {
 		const token = localStorage.getItem('token');
 		if (token) {
 			try {
-				const result = await api.get('/user/get');
+				const result = await api.get<any, any>('/user/get');
 				if (result.status === 200 && !result.error) {
 					mainStore.user = result.data.user;
 					Object.assign(settings.value, result.data.user.hunt_settings);
