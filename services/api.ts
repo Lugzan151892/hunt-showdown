@@ -1,4 +1,5 @@
 const defaultPath = 'https://hunter-service.fun/api';
+// const defaultPath = 'http://127.0.0.1:5000/api';
 const authToken = localStorage.getItem('token');
 class Api {
 	path;
@@ -6,8 +7,15 @@ class Api {
 		this.path = defaultPath;
 	}
 
-	async get(path: string) {
-		const response = await fetch(this.path + path, {
+	async get<Request, Response extends COMMON.IDefaultResponse>(path: string, params?: Request): Promise<Response> {
+		let requestParams = '';
+		if (params) {
+			requestParams = Object.keys(params).reduce(
+				(acc, curr) => `${acc}${acc ? '&' : '?'}${curr}=${(params as { [key: string]: string })[curr]}`,
+				''
+			);
+		}
+		const response = await fetch(this.path + path + requestParams, {
 			headers: {
 				...(authToken && { Authorization: 'Bearer ' + authToken })
 			}
@@ -16,7 +24,10 @@ class Api {
 		return result;
 	}
 
-	async post(path: string, options: any) {
+	async post<Request, Response extends COMMON.IDefaultResponse>(
+		path: string,
+		options: Request
+	): Promise<Response | undefined> {
 		try {
 			const response = await fetch(this.path + path, {
 				method: 'POST',
@@ -33,7 +44,10 @@ class Api {
 		}
 	}
 
-	async put(path: string, options: any) {
+	async put<Request, Response extends COMMON.IDefaultResponse>(
+		path: string,
+		options: Request
+	): Promise<Response | undefined> {
 		try {
 			const response = await fetch(this.path + path, {
 				method: 'PUT',

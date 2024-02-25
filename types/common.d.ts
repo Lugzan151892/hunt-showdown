@@ -19,4 +19,9 @@ interface IUserData {
 	spectated_users: Array<string>
 }
 
+export interface IDefaultResponse {
+	error: boolean;
+	status: number;
+}
+
 export as namespace COMMON;

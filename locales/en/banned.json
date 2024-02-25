@@ -1,0 +1,12 @@
+{
+	"name": "banned",
+	"locale": "en",
+	"translations": {
+        "addSteamLink": "Input steam profile link",
+        "add": "Add",
+        "addNewPlayer": "Add new suspicious player",
+		"loginToSeeList": "Log in to load players list",
+		"loadList": "Update players list",
+		"userAlreadyInList": "This user already added"
+	}
+}

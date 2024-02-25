@@ -1,4 +1,4 @@
-import { createI18n } from 'vue-i18n';
+import { createI18n, useI18n } from 'vue-i18n';
 
 import {
 	authRu,
@@ -10,10 +10,25 @@ import {
 	validationEn,
 	validationRu,
 	infoEn,
-	infoRu
+	infoRu,
+	bannedEn,
+	bannedRu
 } from '@/locales/locales';
 
-const dataList = [authEn, mainEn, authRu, mainRu, huntEn, huntRu, validationEn, validationRu, infoEn, infoRu];
+const dataList = [
+	authEn,
+	mainEn,
+	authRu,
+	mainRu,
+	huntEn,
+	huntRu,
+	validationEn,
+	validationRu,
+	infoEn,
+	infoRu,
+	bannedEn,
+	bannedRu
+];
 
 function getTranslate(arr: Array<COMMON.TTranslate>): COMMON.TTranslateMain {
 	const newData = arr.reduce((obj: COMMON.TTranslateMain, item: COMMON.TTranslate) => {
@@ -36,3 +51,8 @@ export default defineNuxtPlugin(({ vueApp }) => {
 	});
 	vueApp.use(i18n);
 });
+
+export const useTranslate = () => {
+	const { t } = useI18n();
+	return t;
+};

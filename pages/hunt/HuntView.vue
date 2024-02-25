@@ -30,8 +30,8 @@
 </template>
 <script lang="ts" setup>
 	import huntSettings from '@/mock/huntSettings.json';
-	import HuntSettingsItem from '@/pages/games/hunt/components/HuntSettingsItem.vue';
-	import { useHuntStore } from '@/pages/games/hunt/store';
+	import HuntSettingsItem from '@/pages/hunt/components/HuntSettingsItem.vue';
+	import { useHuntStore } from '@/pages/hunt/store';
 
 	const huntStore = useHuntStore();
 	const huntDefaultSettings = computed(() => huntSettings as unknown as HUNT.IHuntSettings);

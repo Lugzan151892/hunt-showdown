@@ -7,6 +7,11 @@
 		"toMainPage": "Back to main page",
 		"accept": "Accept",
 		"save": "Save",
-		"mainTitle": "Hunter Service"
+		"mainTitle": "Hunter Service",
+		"menuTitle": "Main menu",
+		"mainPage": "Main page",
+		"huntSettingsPage": "Hunt: Showdown Settings",
+		"bannedListPage": "Suspicious players list",
+		"delete": "Delete"
 	}
 }
