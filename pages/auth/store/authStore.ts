@@ -32,6 +32,7 @@ export const useAuthStore = defineStore('authStore', () => {
 			return;
 		}
 		try {
+			mainStore.loadingStart();
 			const result = await api.post<any, any>('/user/registration', {
 				email: userName.value,
 				password: password.value
@@ -49,8 +50,11 @@ export const useAuthStore = defineStore('authStore', () => {
 			} else {
 				mainStore.openModal(result.message, undefined, 'error');
 			}
+			mainStore.loadingStop();
 		} catch (e) {
-			mainStore.openModal(e as string, undefined, 'error');
+			mainStore.openModal('Something went wrong, try again', undefined, 'error');
+		} finally {
+			mainStore.loadingStop();
 		}
 	};
 
@@ -64,6 +68,7 @@ export const useAuthStore = defineStore('authStore', () => {
 			return;
 		}
 		try {
+			mainStore.loadingStart();
 			const result = await api.post<any, any>('/user/login', {
 				email: userName.value,
 				password: password.value
@@ -81,14 +86,18 @@ export const useAuthStore = defineStore('authStore', () => {
 			} else {
 				mainStore.openModal(result.message, undefined, 'error');
 			}
+			mainStore.loadingStop();
 		} catch (e) {
-			mainStore.openModal(e as string, undefined, 'error');
+			mainStore.openModal('Something went wrong, try again', undefined, 'error');
+		} finally {
+			mainStore.loadingStop();
 		}
 	};
 	const handleCheckIsAuth = async () => {
 		const token = localStorage.getItem('token');
 		if (token) {
 			try {
+				mainStore.loadingStart();
 				const result = await api.get<any, any>('/user/auth');
 				if (result.status === 200 && !result.error) {
 					mainStore.isAuth = true;
@@ -96,8 +105,11 @@ export const useAuthStore = defineStore('authStore', () => {
 					localStorage.setItem('token', result.data.token);
 				} else if (result.status === 401 && result.error) localStorage.removeItem('token');
 				else mainStore.openModal(result.message, undefined, 'error');
+				mainStore.loadingStop();
 			} catch (e) {
-				mainStore.openModal(e as string, undefined, 'error');
+				mainStore.openModal('Something went wrong, try again', undefined, 'error');
+			} finally {
+				mainStore.loadingStop();
 			}
 		}
 	};
