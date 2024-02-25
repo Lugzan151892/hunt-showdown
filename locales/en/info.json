@@ -22,6 +22,9 @@
                 "updatesLogicList6": "Добавление мобильной версии приложения",
                 "updatesLogicList7": "Добавление возможности скачивания сохраненных настроек в виде файла",
                 "authInfoTitle": "Войти, для отображения всех функций",
-                "authInfoText": "Войдите в свой аккаунт, для того, чтобы пользоваться всем доступным функционалом сервиса."
+                "authInfoText": "Войдите в свой аккаунт, для того, чтобы пользоваться всем доступным функционалом сервиса.",
+                "bannedListInfoTitle": "Suspicious players list",
+                "bannedListInfoDescription": "Here you can add a suspicious player to the list and track the status of his profile.",
+                "bannedListInfoButton": "Go to suspicious list page"
         }
 }
