@@ -1,9 +1,9 @@
 <template>
 	<div class="content">
-		<img class="content__image" :src="user.avatarmedium" alt="Avatar" />
+		<img class="content__image" :src="user.avatarmedium" alt="Avatar" @click="handleGoSteam()" />
 		<div class="content__item">
 			<p>{{ $t('banned.name') }}:</p>
-			<p>{{ user.personaname }}</p>
+			<p class="content__item-name" @click="handleGoSteam()">{{ user.personaname }}</p>
 		</div>
 		<div />
 		<div class="content__item">
@@ -12,7 +12,7 @@
 		</div>
 		<div class="content__item">
 			<p>{{ $t('banned.status') }}:</p>
-			<p>{{ $t(userStatus) }}</p>
+			<p :style="{ color: userStatus.color }">{{ $t(userStatus.text) }}</p>
 		</div>
 		<div class="content__banned content__item" :class="{ 'content__banned--active': user.banned }">
 			<p>{{ $t('banned.profileVacStatus') }}:</p>
@@ -31,30 +31,34 @@
 		}
 	});
 
+	defineEmits(['delete']);
+
 	const userStatus = computed(() => {
 		switch (props.user.personastate) {
 			case EUSERSTATUS.OFFLINE:
-				return 'banned.offline';
+				return { text: 'banned.offline', color: 'var(--user-offline)' };
 			case EUSERSTATUS.ONLINE:
-				return 'banned.online';
+				return { text: 'banned.online', color: 'var(--user-online)' };
 			case EUSERSTATUS.BUSY:
-				return 'banned.busy';
+				return { text: 'banned.busy', color: 'var(--user-busy)' };
 			case EUSERSTATUS.AWAY:
-				return 'banned.away';
+				return { text: 'banned.away', color: 'var(--user-away)' };
 			case EUSERSTATUS.SNOOZE:
-				return 'banned.snooze';
+				return { text: 'banned.snooze', color: 'var(--user-away)' };
 			case EUSERSTATUS.LOOKING_FOR_TRADE:
-				return 'banned.lookingToTrade';
+				return { text: 'banned.lookingToTrade', color: 'var(--user-other)' };
 			case EUSERSTATUS.LOOKING_FOR_PLAY:
-				return 'banned.lookingToPlay';
+				return { text: 'banned.lookingToPlay', color: 'var(--user-other)' };
 			default:
-				return '';
+				return { text: '', color: '' };
 		}
 	});
 
 	const bannedStatusTitle = computed(() => (props.user.banned ? 'banned.banned' : 'banned.notBanned'));
 
-	defineEmits(['delete']);
+	const handleGoSteam = () => {
+		window.open(props.user.profileurl, '_blank');
+	};
 </script>
 <style lang="scss" scoped>
 	.content {
@@ -68,11 +72,18 @@
 		padding: 10px;
 		&__image {
 			border-radius: 20px;
+			cursor: pointer;
 		}
 		&__item {
 			display: grid;
 			grid-template-rows: min-content min-content;
 			row-gap: 5px;
+			&-name {
+				cursor: pointer;
+			}
+			&-name:hover {
+				color: var(--bg-additional-blue);
+			}
 		}
 		&__banned {
 			color: lightgreen;
