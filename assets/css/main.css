@@ -6,6 +6,13 @@
 	--text-color-primary: #ffffff;
 	--additional-dark-blue: #3137c9;
 	--menu-icon-active: #58585823;
+
+	/* STEAM COLORS */
+	--user-online: #57cbde;
+	--user-offline: #898989;
+	--user-away: #A7BACC;
+	--user-busy: #E35E1C;
+	--user-other: #FFC82C;
 }
 
 * {

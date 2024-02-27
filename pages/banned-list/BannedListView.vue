@@ -32,14 +32,13 @@
 	const bannedList = ref<BANNED.ISteamBannedUser[]>([]);
 
 	const currentUser = computed(() => mainStore.user);
-	const spectatedUsers = computed(() => mainStore.user?.spectated_users || []);
 
 	const loadBannedUsers = async () => {
 		// @todo fix etu huyny
 		try {
 			mainStore.loadingStart();
 			const data = await api.post<any, BANNED.ISteamBannedUsersResponse>('/steam/list', {
-				banned_list: spectatedUsers.value
+				banned_list: mainStore.user?.spectated_users
 			});
 			if (data) {
 				bannedList.value = data.data.players;
@@ -53,7 +52,6 @@
 	};
 
 	const handleChange = async () => {
-		// @todo fix etu huyny
 		try {
 			mainStore.loadingStart();
 			const data = await api.get<any, any>('/steam/steamid/get', { path: newPlayer.value });
@@ -70,10 +68,9 @@
 				if (!result.error) {
 					mainStore.user = result.data.user;
 					newPlayer.value = '';
-					loadBannedUsers();
+					await loadBannedUsers();
 				}
 			}
-			mainStore.loadingStop();
 		} catch (e) {
 			mainStore.openModal('Something went wrong, try again', undefined, 'error');
 		} finally {
@@ -89,17 +86,25 @@
 			const result = await api.put<any, any>('/user/set', mainStore.user);
 			if (result.status === 200 && !result.error) {
 				mainStore.user = result.data.user;
-				loadBannedUsers();
+				bannedList.value = bannedList.value.filter((user) => user.steamid !== steamId);
 			} else {
 				mainStore.openModal(result.message, undefined, 'error');
 			}
-			mainStore.loadingStop();
 		} catch (e) {
 			mainStore.openModal('Something went wrong, try again', undefined, 'error');
 		} finally {
 			mainStore.loadingStop();
 		}
 	};
+
+	watch(
+		() => currentUser.value,
+		(user, notUser) => {
+			if (!notUser && user) {
+				loadBannedUsers();
+			}
+		}
+	);
 
 	onMounted(() => {
 		if (currentUser.value) {
