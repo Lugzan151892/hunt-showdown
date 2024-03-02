@@ -1,6 +1,6 @@
 <template>
-	<div class="banned">
-		<div class="banned__title">{{ $t('main.bannedListPage') }}</div>
+	<article class="banned">
+		<h1 class="banned__title">{{ $t('main.bannedListPage') }}</h1>
 		<div class="banned__add">
 			<div>{{ $t('banned.addNewPlayer') }}</div>
 			<UiCustomInput v-model="newPlayer" :placeholder="$t('banned.addSteamLink')" />
@@ -19,7 +19,7 @@
 			<UiCustomButton v-if="currentUser" title="banned.loadList" @click="loadBannedUsers" />
 			<div v-else class="banned__bottom-error">{{ $t('banned.loginToSeeList') }}</div>
 		</div>
-	</div>
+	</article>
 </template>
 <script lang="ts" setup>
 	import BannedListItem from './components/BannedListItem.vue';

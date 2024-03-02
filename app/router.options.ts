@@ -26,6 +26,11 @@ export default <RouterConfig>{
 			name: 'suspicious-players',
 			path: '/suspicious-players',
 			component: () => import('~/pages/banned-list/BannedListView.vue').then((r) => r.default || r)
+		},
+		{
+			name: 'hunt-calculator',
+			path: '/hunt-calculator',
+			component: () => import('~/pages/calculator/CalculatorView.vue')
 		}
 	]
 };

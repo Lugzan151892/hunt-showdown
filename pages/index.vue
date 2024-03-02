@@ -1,6 +1,6 @@
 <template>
-	<div class="content">
-		<div class="content__title">{{ $t('main.mainTitle') }}</div>
+	<article class="content">
+		<h1 class="content__title">{{ $t('main.mainTitle') }}</h1>
 		<ContentBlock
 			title="info.huntInfoTitle"
 			text="info.huntInfoText"
@@ -23,7 +23,7 @@
 			button-title="auth.loginTitle"
 			redirect-path="/login"
 		/>
-	</div>
+	</article>
 </template>
 
 <script setup lang="ts">
