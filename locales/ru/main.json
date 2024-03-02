@@ -12,6 +12,7 @@
 		"mainPage": "На главную",
 		"huntSettingsPage": "Настройки Hunt: Showdown",
 		"bannedListPage": "Бан лист игроков",
-		"delete": "Удалить"
+		"delete": "Удалить",
+		"huntCalculator": "Калькулятор чувствительности"
 	}
 }

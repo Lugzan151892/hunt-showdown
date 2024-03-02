@@ -1,0 +1,8 @@
+{
+    "name": "calc",
+    "locale": "en",
+    "translations": {
+        "calculatorTitle": "Mouse sensitivity calculator for Hunt Showdown",
+        "inputSensitivity": "Введите значение"
+    }
+}

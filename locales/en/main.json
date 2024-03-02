@@ -12,6 +12,7 @@
 		"mainPage": "Main page",
 		"huntSettingsPage": "Hunt: Showdown Settings",
 		"bannedListPage": "Suspicious players list",
-		"delete": "Delete"
+		"delete": "Delete",
+		"huntCalculator": "Sensitivity calculator"
 	}
 }

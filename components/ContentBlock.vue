@@ -1,10 +1,10 @@
 <template>
-	<div class="wrapper">
-		<div class="wrapper__title">{{ $t(title) }}</div>
-		<div class="wrapper__text">{{ $t(text) }}</div>
+	<section class="wrapper">
+		<h2 class="wrapper__title">{{ $t(title) }}</h2>
+		<p class="wrapper__text">{{ $t(text) }}</p>
 		<slot />
 		<UiCustomButton v-if="redirectPath" class="wrapper__button" :title="$t(buttonTitle)" @click="handleRedirect" />
-	</div>
+	</section>
 </template>
 <script lang="ts" setup>
 	const props = defineProps({
