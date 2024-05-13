@@ -38,14 +38,21 @@
 		display: grid;
 		margin-top: 20px;
 		grid-template-columns: 1fr 1fr;
+		@media (max-width: 768px) {
+			grid-template-columns: 1fr;
+		}
 		gap: 20px;
 		&__title {
-			grid-area: 1 / 1 / 2 / 3;
+			@media (min-width: 768px) {
+				grid-area: 1 / 1 / 2 / 3;
+			}
 			text-align: center;
 			font-size: 30px;
 		}
 		&__updates {
-			grid-area: 2 / 2 / 6 / 3;
+			@media (min-width: 768px) {
+				grid-area: 2 / 2 / 6 / 3;
+			}
 		}
 	}
 </style>

@@ -1,5 +1,11 @@
 <template>
-	<div class="container">
+	<div
+		class="container"
+		:class="{
+			'container--disabled': disabled,
+			pointer: !disabled
+		}"
+	>
 		<div ref="lineRef" class="line" @click="handleMouseDown($event)">
 			<div class="line__filled" :style="{ width: `${fillPercent}%` }" />
 		</div>
@@ -23,6 +29,10 @@
 		modelValue: {
 			type: Number,
 			default: 0
+		},
+		disabled: {
+			type: Boolean,
+			default: false
 		}
 	});
 
@@ -42,6 +52,7 @@
 	const fillPercent = ref(0);
 
 	const handleMouseDown = (e: MouseEvent) => {
+		if (props.disabled) return;
 		if (lineRef.value) {
 			const rangeDifference = e.clientX - lineRef.value.offsetLeft;
 			const currentLineWidth = lineRef.value.clientWidth;
@@ -67,12 +78,14 @@
 		grid-template-columns: 1fr max-content;
 		column-gap: 10px;
 		align-items: center;
+		&--disabled {
+			opacity: 0.5;
+		}
 	}
 	.line {
 		height: 10px;
 		width: 100%;
 		border: 1px solid white;
-		cursor: pointer;
 		&__filled {
 			height: 100%;
 			background-color: white;
@@ -80,5 +93,8 @@
 	}
 	.number {
 		width: 30px;
+	}
+	.pointer {
+		cursor: pointer;
 	}
 </style>
