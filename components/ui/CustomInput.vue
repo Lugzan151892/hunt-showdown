@@ -59,11 +59,8 @@
 		}
 
 		if (props.type === 'number') {
-			console.log(props.type, inputElement.value, props.max);
-			console.log(props.max && +inputElement.value > props.max);
 			if (props.max && +inputElement.value > props.max) return;
 		}
-		console.log(inputElement.value);
 		value.value = inputElement.value;
 		emit('input', inputElement.value);
 		emit('change', inputElement.value);
