@@ -60,7 +60,7 @@
 	import menuIcon from '@/assets/images/menu.svg';
 	import home from '@/assets/images/home.svg';
 	import ban from '@/assets/images/ban.svg';
-	import calculator from '@/assets/images/calculator.svg';
+	// import calculator from '@/assets/images/calculator.svg';
 
 	const mainStore = useMainStore();
 
@@ -74,8 +74,8 @@
 	const items = [
 		{ name: 'Main Page', img: home, route: 'home', text: 'main.mainPage' },
 		{ name: 'Hunt Showdown', img: huntIcon, route: 'hunt-showdown', text: 'main.huntSettingsPage' },
-		{ name: 'Banned list', img: ban, route: 'suspicious-players', text: 'main.bannedListPage' },
-		{ name: 'Calculator', img: calculator, route: 'hunt-calculator', text: 'main.huntCalculator' }
+		{ name: 'Banned list', img: ban, route: 'suspicious-players', text: 'main.bannedListPage' }
+		// { name: 'Calculator', img: calculator, route: 'hunt-calculator', text: 'main.huntCalculator' }
 	];
 	const handleLogin = () => {
 		router.push({ name: 'login' });
