@@ -2,12 +2,13 @@
 	<div class="wrapper">
 		<div class="container" :class="{ 'container-error': errors }">
 			<input
-				v-model="value"
 				class="container__input"
 				:type="computedType"
 				:placeholder="placeholder"
-				@input="$emit('input', $event)"
-				@change="$emit('change', $event)"
+				:max="max"
+				:model-value="value"
+				@input="handleInput($event)"
+				@change="handleInput($event)"
 			/>
 			<img
 				v-if="props.type === 'password'"
@@ -22,12 +23,8 @@
 <script lang="ts" setup>
 	import visibly from '@/assets/images/password_hide.png';
 	import visiblyOff from '@/assets/images/password_show.png';
-	const emit = defineEmits(['update:modelValue', 'input', 'change']);
+	const emit = defineEmits(['input', 'change']);
 	const props = defineProps({
-		modelValue: {
-			type: [Number, String],
-			default: ''
-		},
 		placeholder: {
 			type: String,
 			default: ''
@@ -39,24 +36,35 @@
 		errors: {
 			type: String,
 			default: ''
-		}
-	});
-
-	const value = computed({
-		get() {
-			return props.modelValue;
 		},
-		set(val) {
-			emit('update:modelValue', val);
+		max: {
+			type: Number,
+			default: 0
 		}
 	});
 
+	const value = defineModel<string | number>();
 	const showPassword = ref(false);
 
 	const computedType = computed(() => {
 		if (props.type !== 'password') return props.type;
 		else return showPassword.value ? 'text' : 'password';
 	});
+
+	const handleInput = (e: Event) => {
+		const inputElement = e.target as HTMLInputElement;
+
+		if (!value.value) {
+			value.value = '';
+		}
+
+		if (props.type === 'number') {
+			if (props.max && +inputElement.value > props.max) return;
+		}
+		value.value = inputElement.value;
+		emit('input', inputElement.value);
+		emit('change', inputElement.value);
+	};
 </script>
 <style lang="scss" scoped>
 	.wrapper {
