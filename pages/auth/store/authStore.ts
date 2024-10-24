@@ -44,7 +44,9 @@ export const useAuthStore = defineStore('authStore', () => {
 			if (result.status === 200 && !result.error) {
 				mainStore.user = result.user;
 				mainStore.isAuth = true;
-				localStorage.setItem('token', result.data.token);
+				if (result.data.token) {
+					localStorage.setItem('token', result.data.token);
+				}
 				mainStore.openModal('auth.userRegistrySuccess', '/games/hunt-showdown');
 				handleClearFields();
 			} else {
@@ -81,11 +83,13 @@ export const useAuthStore = defineStore('authStore', () => {
 			if (result.status === 200 && !result.error) {
 				mainStore.user = result.data.user;
 				mainStore.isAuth = true;
-				localStorage.setItem('token', result.data.token);
+				if (result.data.token) {
+					localStorage.setItem('token', result.data.token);
+				}
 				handleClearFields();
 				return true;
 			} else {
-				mainStore.openModal(result.message, undefined, 'error');
+				mainStore.openModal(result.message || '', undefined, 'error');
 			}
 			mainStore.loadingStop();
 		} catch (e) {
@@ -103,9 +107,11 @@ export const useAuthStore = defineStore('authStore', () => {
 				if (result.status === 200 && !result.error) {
 					mainStore.isAuth = true;
 					mainStore.user = result.data.user;
-					localStorage.setItem('token', result.data.token);
+					if (result.data.token) {
+						localStorage.setItem('token', result.data.token);
+					}
 				} else if (result.status === 401 && result.error) localStorage.removeItem('token');
-				else mainStore.openModal(result.message, undefined, 'error');
+				else mainStore.openModal(result.errorMessage || '', undefined, 'error');
 				mainStore.loadingStop();
 			} catch (e) {
 				mainStore.openModal('Something went wrong, try again', undefined, 'error');
@@ -124,7 +130,9 @@ export const useAuthStore = defineStore('authStore', () => {
 				if (result.status === 200 && !result.error) {
 					mainStore.isAuth = true;
 					mainStore.user = result.data.user;
-					localStorage.setItem('token', result.data.token);
+					if (result.data.token) {
+						localStorage.setItem('token', result.data.token);
+					}
 				} else if (result.status === 401 && result.error) {
 					localStorage.removeItem('token');
 					mainStore.openModal(result.message, undefined, 'error');

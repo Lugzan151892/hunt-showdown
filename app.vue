@@ -2,7 +2,9 @@
 	<div class="app">
 		<HeaderComponent />
 		<div class="content">
-			<NuxtPage />
+			<div class="content__wrapper">
+				<NuxtPage />
+			</div>
 		</div>
 		<InfoModal v-if="mainStore.mainModal" />
 		<LoadingView v-if="mainStore.loading" />
@@ -34,23 +36,29 @@
 </script>
 <style lang="scss" scoped>
 	.content {
-		margin: 0 auto;
-		max-width: 1240px;
-
-		@media (max-width: 1440px) and (min-width: 1281px) {
-			max-width: 1024px;
-		}
-
-		@media (max-width: 1280px) and (min-width: 1080px) {
-			max-width: 920px;
-		}
-
-		@media (max-width: 1079px) and (min-width: 768px) {
-			max-width: 520px;
-		}
-
 		@media (max-width: 767px) {
-			max-width: 240px;
+			margin-left: 80px;
+		}
+
+		&__wrapper {
+			margin: 0 auto;
+			max-width: 1240px;
+
+			@media (max-width: 1440px) and (min-width: 1281px) {
+				max-width: 1024px;
+			}
+
+			@media (max-width: 1280px) and (min-width: 1080px) {
+				max-width: 920px;
+			}
+
+			@media (max-width: 1079px) and (min-width: 768px) {
+				max-width: 520px;
+			}
+
+			@media (max-width: 767px) {
+				max-width: 240px;
+			}
 		}
 	}
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<div class="hunt">
+	<article class="hunt">
 		<div class="hunt__content">
 			<UiCustomExpander v-for="(group, key) in huntDefaultSettings" :key="key" :title="`hunt.${key}`">
 				<div
@@ -26,7 +26,7 @@
 				/>
 			</div>
 		</div>
-	</div>
+	</article>
 </template>
 <script lang="ts" setup>
 	import huntSettings from '@/mock/huntSettings.json';
