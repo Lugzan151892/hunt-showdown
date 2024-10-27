@@ -31,7 +31,7 @@
 	});
 
 	if (!mainStore.user) {
-		authStore.handleCheckIsAuth();
+		authStore.loadUser();
 	}
 </script>
 <style lang="scss" scoped>

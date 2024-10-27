@@ -18,7 +18,8 @@ class Api {
 		const response = await fetch(this.path + path + requestParams, {
 			headers: {
 				...(authToken && { Authorization: 'Bearer ' + authToken })
-			}
+			},
+			credentials: 'include'
 		});
 		if (!response.ok) {
 			throw new Error('Something went wrong, try again');
@@ -39,10 +40,14 @@ class Api {
 					'Content-Type': 'application/json;charset=utf-8',
 					...(authToken && { Authorization: 'Bearer ' + authToken })
 				},
-				body: JSON.stringify(options)
+				body: JSON.stringify(options),
+				credentials: 'include'
 			});
-			if (!response.ok) {
-				throw new Error('Something went wrong, try again');
+			if (response.ok) {
+				const token = response.headers.get('Authorization');
+				if (token) {
+					localStorage.setItem('token', token);
+				}
 			}
 			const result = await response.json();
 			return result;
@@ -63,7 +68,8 @@ class Api {
 					'Content-Type': 'application/json;charset=utf-8',
 					...(authToken && { Authorization: 'Bearer ' + authToken })
 				},
-				body: JSON.stringify(options)
+				body: JSON.stringify(options),
+				credentials: 'include'
 			});
 			if (!response.ok) {
 				throw new Error('Something went wrong, try again');
