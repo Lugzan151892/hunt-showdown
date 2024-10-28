@@ -10,12 +10,18 @@ export default <RouterConfig>{
 		{
 			name: 'login',
 			path: '/login',
-			component: () => import('~/pages/auth/LoginView.vue').then((r) => r.default || r)
+			component: () => import('~/pages/auth/LoginView.vue').then((r) => r.default || r),
+			meta: {
+				guestOnly: true
+			}
 		},
 		{
 			name: 'registration',
 			path: '/registration',
-			component: () => import('~/pages/auth/LoginView.vue').then((r) => r.default || r)
+			component: () => import('~/pages/auth/LoginView.vue').then((r) => r.default || r),
+			meta: {
+				guestOnly: true
+			}
 		},
 		{
 			name: 'hunt-showdown',

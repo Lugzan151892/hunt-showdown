@@ -37,12 +37,14 @@ export const useAuthStore = defineStore('authStore', () => {
 				email: userName.value,
 				password: password.value
 			});
+			console.log(result);
+
 			if (!result) {
 				mainStore.openModal('auth.somethingWentWrong', undefined, 'error');
 				return;
 			}
 			if (result.status === 200 && !result.error) {
-				mainStore.user = result.user;
+				mainStore.user = result.data;
 				mainStore.isAuth = true;
 				if (result.data.token) {
 					localStorage.setItem('token', result.data.token);
@@ -50,7 +52,11 @@ export const useAuthStore = defineStore('authStore', () => {
 				mainStore.openModal('auth.userRegistrySuccess', '/games/hunt-showdown');
 				handleClearFields();
 			} else {
-				mainStore.openModal(result.message, undefined, 'error');
+				mainStore.openModal(
+					result.message || result.errorMessage || 'Something went wrong, try again',
+					undefined,
+					'error'
+				);
 			}
 			mainStore.loadingStop();
 		} catch (e) {
@@ -81,7 +87,7 @@ export const useAuthStore = defineStore('authStore', () => {
 				return;
 			}
 			if (result.status === 200 && !result.error) {
-				mainStore.user = result.data.user;
+				mainStore.user = result.data;
 				mainStore.isAuth = true;
 				if (result.data.token) {
 					localStorage.setItem('token', result.data.token);
@@ -98,52 +104,24 @@ export const useAuthStore = defineStore('authStore', () => {
 			mainStore.loadingStop();
 		}
 	};
-	const handleCheckIsAuth = async () => {
-		const token = localStorage.getItem('token');
-		if (token) {
-			try {
-				mainStore.loadingStart();
-				const result = await api.get<any, any>('/user/auth');
-				if (result.status === 200 && !result.error) {
-					mainStore.isAuth = true;
-					mainStore.user = result.data.user;
-					if (result.data.token) {
-						localStorage.setItem('token', result.data.token);
-					}
-				} else if (result.status === 401 && result.error) localStorage.removeItem('token');
-				else mainStore.openModal(result.errorMessage || '', undefined, 'error');
-				mainStore.loadingStop();
-			} catch (e) {
-				mainStore.openModal('Something went wrong, try again', undefined, 'error');
-			} finally {
-				mainStore.loadingStop();
-			}
-		}
-	};
 
 	const loadUser = async () => {
-		const token = localStorage.getItem('token');
-		if (token) {
-			try {
-				mainStore.loadingStart();
-				const result = await api.get<any, any>('/user/get');
-				if (result.status === 200 && !result.error) {
-					mainStore.isAuth = true;
-					mainStore.user = result.data.user;
-					if (result.data.token) {
-						localStorage.setItem('token', result.data.token);
-					}
-				} else if (result.status === 401 && result.error) {
-					localStorage.removeItem('token');
-					mainStore.openModal(result.message, undefined, 'error');
-				} else mainStore.openModal(result.message, undefined, 'error');
-				mainStore.loadingStop();
-			} catch (e) {
-				mainStore.loadingStop();
-				mainStore.openModal('Something went wrong, try again', undefined, 'error');
-			} finally {
-				mainStore.loadingStop();
-			}
+		try {
+			mainStore.loadingStart();
+			const result = await api.get<any, any>('/user/get');
+			if (result.status === 200 && !result.error) {
+				mainStore.isAuth = true;
+				mainStore.user = result.data;
+			} else if (result.status === 401 && result.error) {
+				localStorage.removeItem('token');
+				mainStore.openModal(result.message, undefined, 'error');
+			} else mainStore.openModal(result.message, undefined, 'error');
+			mainStore.loadingStop();
+		} catch (e) {
+			mainStore.loadingStop();
+			mainStore.openModal('Something went wrong, try again', undefined, 'error');
+		} finally {
+			mainStore.loadingStop();
 		}
 	};
 
@@ -153,7 +131,6 @@ export const useAuthStore = defineStore('authStore', () => {
 		repeatedPassword,
 		handleRegistry,
 		validationErrors,
-		handleCheckIsAuth,
 		handleLogin,
 		loadUser
 	};

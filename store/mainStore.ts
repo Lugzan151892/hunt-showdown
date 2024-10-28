@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import api from '~/services/api';
 type TInfoModalIconType = 'success' | 'error' | 'warning';
 interface IInfoModalSettings {
 	type: TInfoModalIconType;
@@ -33,11 +34,23 @@ export const useMainStore = defineStore('mainStore', () => {
 		mainModalSettings.value = defaultModalSettings();
 	};
 
-	const handleLogout = () => {
-		localStorage.removeItem('token');
-		user.value = null;
-		isAuth.value = false;
-		clearData();
+	const handleLogout = async () => {
+		try {
+			loadingStart();
+			const result = await api.post('/user/logout', { userName: user.value?.username || '' });
+
+			if (result) {
+				console.log(result);
+			}
+			localStorage.removeItem('token');
+			user.value = null;
+			isAuth.value = false;
+			clearData();
+		} catch (e: any) {
+			console.log(e);
+		} finally {
+			loadingStop();
+		}
 	};
 
 	const loadingStart = () => {
