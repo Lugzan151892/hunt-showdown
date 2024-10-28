@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { useAuthStore } from '~/pages/auth/store/authStore';
 import api from '~/services/api';
 import { useMainStore } from '~/store/mainStore';
 
@@ -81,86 +82,150 @@ const defaultSettings = (): { [key: string]: any } => ({
 	graphics_use_2_pass_lighting: false
 });
 
-export const useHuntStore = defineStore('hunt', () => {
-	const hunt = ref('Hunt Showdown');
-	const mainStore = useMainStore();
-
-	const settings = ref<{ [key: string]: any }>(defaultSettings());
-
-	const saveUserSettings = async () => {
-		try {
-			mainStore.loadingStart();
-			const result = await api.put<any, any>('/user/set', { ...mainStore.user, hunt_settings: settings.value });
-			if (result.status === 200 && !result.error) {
-				mainStore.user = result.data.user;
-				Object.assign(settings.value, result.data.user.hunt_settings);
-				mainStore.openModal('Настройки успешно сохранены');
-			} else {
-				mainStore.openModal(result.message, undefined, 'error');
+export const useHuntStore = defineStore('huntStore', {
+	state() {
+		const mainStore = useMainStore();
+		const authStore = useAuthStore();
+		return {
+			mainStore,
+			authStore,
+			settings: defaultSettings()
+		};
+	},
+	getters: {
+		isSettingsChanged(): boolean {
+			if (!this.mainStore.user || !this.mainStore.user.hunt_settings) {
+				return false;
 			}
-			mainStore.loadingStop();
-		} catch (e) {
-			mainStore.openModal('Something went wrong, try again', undefined, 'error');
-		}
-	};
 
-	const handleFillSettings = async () => {
-		const token = localStorage.getItem('token');
-		if (token) {
+			return Object.keys(this.settings).some((key) => this.settings[key] !== this.mainStore.user!.hunt_settings[key]);
+		},
+
+		isNotRecommendedSettings(): boolean {
+			const defaultData = defaultSettings();
+			return Object.keys(this.settings).some((key) => this.settings[key] !== defaultData[key]);
+		},
+
+		isUserHasSettings(): boolean {
+			return !this.mainStore.user || !!Object.values(this.mainStore.user?.hunt_settings || {}).length;
+		}
+	},
+	actions: {
+		async saveUserSettings() {
 			try {
-				mainStore.loadingStart();
-				const result = await api.get<any, any>('/user/get');
-				if (!result) {
-					mainStore.loadingStop();
-					mainStore.openModal('hunt.somethingWentWrongWhileSaving', undefined, 'error');
-					return;
+				this.mainStore.loadingStart();
+				const result = await api.put<any, any>('/user/set', { ...this.mainStore.user, hunt_settings: this.settings });
+				if (result.success) {
+					await this.handleFillSettings();
+					this.mainStore.openModal('Настройки успешно сохранены');
+				} else {
+					this.mainStore.openModal(result.errorMessage, undefined, 'error');
 				}
-				if (result.status === 200 && !result.error) {
-					mainStore.user = result.data.user;
-					Object.assign(settings.value, result.data.user.hunt_settings);
-				} else mainStore.openModal(result.message, undefined, 'error');
-				mainStore.loadingStop();
 			} catch (e) {
-				mainStore.loadingStop();
-				mainStore.openModal('Something went wrong, try again', undefined, 'error');
+				this.mainStore.openModal('Something went wrong, try again', undefined, 'error');
+			} finally {
+				this.mainStore.loadingStop();
 			}
-		} else {
-			Object.assign(settings.value, mainStore.user?.hunt_settings);
+		},
+
+		async handleFillSettings() {
+			try {
+				this.mainStore.loadingStart();
+				await this.authStore.loadUser();
+
+				if (this.mainStore.user && !this.mainStore.user?.hunt_settings) {
+					this.mainStore.user.hunt_settings = defaultSettings();
+				}
+
+				Object.assign(this.settings, this.mainStore.user?.hunt_settings || {});
+			} catch (e) {
+				this.mainStore.openModal('Something went wrong, try again', undefined, 'error');
+			} finally {
+				this.mainStore.loadingStop();
+			}
+		},
+
+		fillDefaultSettings() {
+			Object.assign(this.settings, defaultSettings());
 		}
-	};
-
-	const fillDefaultSettings = () => {
-		Object.assign(settings.value, defaultSettings());
-	};
-
-	const isSettingsChanged = computed(() => {
-		if (!currentUser.value) return false;
-		else {
-			return Object.keys(settings.value).some((key) => settings.value[key] !== currentUser.value?.hunt_settings[key]);
-		}
-	});
-
-	const isNotRecommendedSettings = computed(() => {
-		const defaultData = defaultSettings();
-		return Object.keys(settings.value).some((key) => settings.value[key] !== defaultData[key]);
-	});
-
-	const currentUser = computed(() => mainStore.user);
-
-	const isUserHasSettings = computed(() => {
-		if (!currentUser.value) return false;
-		else return !!Object.values(currentUser.value.hunt_settings).length;
-	});
-
-	return {
-		hunt,
-		settings,
-		saveUserSettings,
-		handleFillSettings,
-		currentUser,
-		isSettingsChanged,
-		isNotRecommendedSettings,
-		fillDefaultSettings,
-		isUserHasSettings
-	};
+	}
 });
+
+// export const useHuntStore = defineStore('hunt', () => {
+// 	const hunt = ref('Hunt Showdown');
+// 	const mainStore = useMainStore();
+// 	const authStore = useAuthStore();
+
+// 	const settings = ref<{ [key: string]: any }>(defaultSettings());
+
+// 	const saveUserSettings = async () => {
+// 		try {
+// 			mainStore.loadingStart();
+// 			const result = await api.put<any, any>('/user/set', { ...mainStore.user, hunt_settings: settings.value });
+// 			if (result.success) {
+// 				await handleFillSettings();
+// 				mainStore.openModal('Настройки успешно сохранены');
+// 			} else {
+// 				mainStore.openModal(result.errorMessage, undefined, 'error');
+// 			}
+// 			mainStore.loadingStop();
+// 		} catch (e) {
+// 			mainStore.openModal('Something went wrong, try again', undefined, 'error');
+// 		}
+// 	};
+
+// 	const handleFillSettings = async () => {
+// 		const token = localStorage.getItem('token');
+// 		if (token) {
+// 			try {
+// 				mainStore.loadingStart();
+// 				await authStore.loadUser();
+
+// 				if (mainStore.user && !mainStore.user?.hunt_settings) {
+// 					mainStore.user.hunt_settings = defaultSettings();
+// 				}
+
+// 				Object.assign(settings.value, mainStore.user?.hunt_settings || {});
+// 			} catch (e) {
+// 				mainStore.openModal('Something went wrong, try again', undefined, 'error');
+// 			} finally {
+// 				mainStore.loadingStop();
+// 			}
+// 		} else {
+// 			Object.assign(settings.value, mainStore.user?.hunt_settings);
+// 		}
+// 	};
+
+// 	const fillDefaultSettings = () => {
+// 		Object.assign(settings.value, defaultSettings());
+// 	};
+
+// 	const isSettingsChanged = computed(() => {
+// 		if (!mainStore.user || !mainStore.user.hunt_settings) {
+// 			return false;
+// 		}
+
+// 		return Object.keys(settings.value).some((key) => settings.value[key] !== mainStore.user!.hunt_settings[key]);
+// 	});
+
+// 	const isNotRecommendedSettings = computed(() => {
+// 		const defaultData = defaultSettings();
+// 		return Object.keys(settings.value).some((key) => settings.value[key] !== defaultData[key]);
+// 	});
+
+// 	const isUserHasSettings = computed(() => {
+// 		if (!mainStore.user) return false;
+// 		else return !!Object.values(mainStore.user?.hunt_settings || {}).length;
+// 	});
+
+// 	return {
+// 		hunt,
+// 		settings,
+// 		saveUserSettings,
+// 		handleFillSettings,
+// 		isSettingsChanged,
+// 		isNotRecommendedSettings,
+// 		fillDefaultSettings,
+// 		isUserHasSettings
+// 	};
+// });

@@ -89,22 +89,16 @@ export const useAuthStore = defineStore('authStore', {
 			try {
 				this.mainStore.loadingStart();
 				const result = await api.get<any, any>('/user/get');
-				console.log(result);
 
 				if (result.success) {
-					console.log(result.success);
 					this.mainStore.isAuth = true;
 					this.mainStore.user = result.data;
 				} else {
-					console.log(result.success);
-
 					localStorage.removeItem('token');
 					this.mainStore.openModal(result.errorMessage, undefined, 'error');
 				}
 			} catch (e) {
 				this.mainStore.loadingStop();
-				console.log(e);
-
 				this.mainStore.openModal('Something went wrong, try again', undefined, 'error');
 			} finally {
 				this.mainStore.loadingStop();
