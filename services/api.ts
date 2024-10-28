@@ -1,85 +1,121 @@
 // const defaultPath = 'https://hunter-service.fun/api';
-const defaultPath = 'http://localhost:8000/api';
-class Api {
-	path;
-	constructor() {
-		this.path = defaultPath;
-	}
+// const defaultPath = 'http://localhost:8000/api';
+const API_PATH = window.location.origin === 'http://localhost:3000' ? 'http://localhost:8000/api' : '/api';
 
-	async get<Request, Response extends COMMON.IDefaultResponse>(path: string, params?: Request): Promise<Response> {
+class Api {
+	static async get<T, R>(path: string, options: T | {} = {}): Promise<API.IResponse<R>> {
 		let requestParams = '';
-		if (params) {
-			requestParams = Object.keys(params).reduce(
-				(acc, curr) => `${acc}${acc ? '&' : '?'}${curr}=${(params as { [key: string]: string })[curr]}`,
+
+		if (options) {
+			requestParams = Object.keys(options).reduce(
+				(acc, curr) => `${acc}${acc ? '&' : '?'}${curr}=${(options as { [key: string]: string })[curr]}`,
 				''
 			);
 		}
+
 		const authToken = localStorage.getItem('token');
-		const response = await fetch(this.path + path + requestParams, {
+
+		const response = await fetch(API_PATH + path + requestParams, {
 			headers: {
-				...(authToken && { Authorization: 'Bearer ' + authToken })
+				'Content-Type': 'application/json;charset=utf-8',
+				...(authToken && { Authorization: `Bearer ${authToken}` })
 			},
 			credentials: 'include'
 		});
-		if (!response.ok) {
-			throw new Error('Something went wrong, try again');
+
+		if (!response.ok && response.status < 500 && response.status !== 401) {
+			const error = await response.json();
+
+			return {
+				success: false,
+				...error
+			};
+		} else if (!response.ok && response.status === 401) {
+			localStorage.removeItem('token');
+			return {
+				success: false,
+				error: true,
+				errorMessage: 'Unauthorized',
+				status: response.status
+			};
+		} else if (response.ok) {
+			const token = response.headers.get('authorization');
+			if (token) {
+				localStorage.setItem('token', token);
+			}
+			const result = await response.text();
+
+			if (response.status === 204 || !result) {
+				return {
+					success: true,
+					error: false,
+					status: response.status,
+					data: {} as R
+				};
+			}
+
+			return {
+				success: true,
+				...JSON.parse(result)
+			};
+		} else {
+			/** @todo обработка ошибок */
+			throw new Error('Произошла ошибка. Свяжитесь с разработчиками');
 		}
-		const result = await response.json();
-		return result;
 	}
 
-	async post<Request, Response extends COMMON.IDefaultResponse>(
-		path: string,
-		options: Request
-	): Promise<Response | undefined> {
-		try {
-			const authToken = localStorage.getItem('token');
-			const response = await fetch(this.path + path, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json;charset=utf-8',
-					...(authToken && { Authorization: 'Bearer ' + authToken })
-				},
-				body: JSON.stringify(options),
-				credentials: 'include'
-			});
-			if (response.ok) {
-				const token = response.headers.get('Authorization');
-				if (token) {
-					localStorage.setItem('token', token);
-				}
-			}
-			const result = await response.json();
-			return result;
-		} catch (e) {
-			console.log(e);
-		}
-	}
+	static async post<T, R>(path: string, options: T | {} = {}): Promise<API.IResponse<R>> {
+		const authToken = localStorage.getItem('token');
+		const response = await fetch(API_PATH + path, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8',
+				...(authToken && { Authorization: `Bearer ${authToken}` })
+			},
+			credentials: 'include',
+			body: JSON.stringify(options)
+		});
 
-	async put<Request, Response extends COMMON.IDefaultResponse>(
-		path: string,
-		options: Request
-	): Promise<Response | undefined> {
-		try {
-			const authToken = localStorage.getItem('token');
-			const response = await fetch(this.path + path, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json;charset=utf-8',
-					...(authToken && { Authorization: 'Bearer ' + authToken })
-				},
-				body: JSON.stringify(options),
-				credentials: 'include'
-			});
-			if (!response.ok) {
-				throw new Error('Something went wrong, try again');
+		if (!response.ok && response.status < 500 && response.status !== 401) {
+			const error = await response.json();
+
+			return {
+				success: false,
+				...error
+			};
+		} else if (!response.ok && response.status === 401) {
+			localStorage.removeItem('token');
+			return {
+				success: false,
+				error: true,
+				errorMessage: 'Unauthorized',
+				status: response.status
+			};
+		} else if (response.ok) {
+			const token = response.headers.get('authorization');
+			if (token) {
+				localStorage.setItem('token', token);
 			}
-			const result = await response.json();
-			return result;
-		} catch (e) {
-			console.log(e);
+			const result = await response.text();
+
+			if (response.status === 204 || !result) {
+				return {
+					success: true,
+					error: false,
+					status: response.status,
+					data: {} as R
+				};
+			}
+
+			return {
+				success: true,
+				...JSON.parse(result)
+			};
+		} else {
+			/** @todo обработка ошибок */
+			throw new Error('Произошла ошибка. Свяжитесь с разработчиками');
 		}
 	}
 }
 
-export default new Api();
+export default Api;

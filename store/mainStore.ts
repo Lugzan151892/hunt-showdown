@@ -15,62 +15,48 @@ const defaultModalSettings = (): IInfoModalSettings => ({
 	redirect: ''
 });
 
-export const useMainStore = defineStore('mainStore', () => {
-	const mainModal = ref(false);
-	const mainModalSettings = ref<IInfoModalSettings>(defaultModalSettings());
-	const loading = ref(false);
+export const useMainStore = defineStore('mainStore', {
+	state() {
+		return {
+			mainModal: false,
+			mainModalSettings: defaultModalSettings(),
+			loading: false,
+			user: null as null | COMMON.IUserData,
+			isAuth: false
+		};
+	},
 
-	const user = ref<null | COMMON.IUserData>(null);
-	const isAuth = ref(false);
-
-	const openModal = (text: string, redirect: string = '', type: TInfoModalIconType = 'success') => {
-		mainModalSettings.value.text = text;
-		mainModalSettings.value.type = type;
-		mainModalSettings.value.redirect = redirect;
-		mainModal.value = true;
-	};
-
-	const clearData = () => {
-		mainModalSettings.value = defaultModalSettings();
-	};
-
-	const handleLogout = async () => {
-		try {
-			loadingStart();
-			const result = await api.post('/user/logout', { userName: user.value?.username || '' });
-
-			if (result) {
-				console.log(result);
+	actions: {
+		openModal(text: string, redirect: string = '', type: TInfoModalIconType = 'success') {
+			this.mainModalSettings.text = text;
+			this.mainModalSettings.type = type;
+			this.mainModalSettings.redirect = redirect;
+			this.mainModal = true;
+		},
+		clearData() {
+			this.mainModalSettings = defaultModalSettings();
+		},
+		async handleLogout() {
+			try {
+				this.loadingStart();
+				await api.post('/user/logout', { userName: this.user?.username || '' });
+				localStorage.removeItem('token');
+				this.user = null;
+				this.isAuth = false;
+				this.clearData();
+			} catch (e: any) {
+				this.openModal(e || 'Something went wrong, try again', undefined, 'error');
+			} finally {
+				this.loadingStop();
 			}
-			localStorage.removeItem('token');
-			user.value = null;
-			isAuth.value = false;
-			clearData();
-		} catch (e: any) {
-			console.log(e);
-		} finally {
-			loadingStop();
+		},
+
+		loadingStart() {
+			this.loading = true;
+		},
+
+		loadingStop() {
+			this.loading = false;
 		}
-	};
-
-	const loadingStart = () => {
-		loading.value = true;
-	};
-
-	const loadingStop = () => {
-		loading.value = false;
-	};
-
-	return {
-		mainModal,
-		mainModalSettings,
-		openModal,
-		clearData,
-		user,
-		isAuth,
-		handleLogout,
-		loading,
-		loadingStart,
-		loadingStop
-	};
+	}
 });

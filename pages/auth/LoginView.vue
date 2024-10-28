@@ -44,10 +44,10 @@
 	};
 	const handleSubmit = async () => {
 		if (isLogin.value) {
-			const loginResult = await authStore.handleLogin();
-			if (loginResult) {
-				router.push('/');
-			}
+			await authStore.handleLogin();
+			// if (loginResult) {
+			// 	router.push('/');
+			// }
 		} else {
 			await authStore.handleRegistry();
 		}
