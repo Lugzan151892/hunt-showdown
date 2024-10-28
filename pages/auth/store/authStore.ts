@@ -87,7 +87,7 @@ export const useAuthStore = defineStore('authStore', () => {
 				return;
 			}
 			if (result.status === 200 && !result.error) {
-				mainStore.user = result.data.user;
+				mainStore.user = result.data;
 				mainStore.isAuth = true;
 				if (result.data.token) {
 					localStorage.setItem('token', result.data.token);

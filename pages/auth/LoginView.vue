@@ -32,11 +32,6 @@
 <script lang="ts" setup>
 	import { useAuthStore } from '@/pages/auth/store/authStore';
 
-	definePageMeta({
-		// This is an example of inline middleware
-		middleware: 'auth'
-	});
-
 	const router = useRouter();
 	const isLogin = computed(() => router.currentRoute.value.name === 'login');
 	const authStore = useAuthStore();
