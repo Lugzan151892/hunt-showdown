@@ -1,18 +1,18 @@
-export interface IError {
-	errors?: Array<{
-		field: string;
-		message: string[];
-	}>;
-	message?: string;
-}
-
-interface IResponseSuccess<R> {
+export interface IResponseSuccess<R> {
 	data: R;
+	error: false;
+	errorMessage?: null;
+	message?: null;
+	status: number;
 	success: true;
 }
 
 interface IResponseError<R> {
-	error: IError;
+	data?: R | null;
+	error: true;
+	errorMessage: string;
+	message?: null;
+	status: number;
 	success: false;
 }
 
