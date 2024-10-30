@@ -1,6 +1,6 @@
 <template>
 	<div class="app">
-		<HeaderComponent />
+		<MenuComponent />
 		<div class="content">
 			<div class="content__wrapper">
 				<NuxtPage />

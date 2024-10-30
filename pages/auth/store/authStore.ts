@@ -75,7 +75,6 @@ export const useAuthStore = defineStore('authStore', {
 				if (result.success) {
 					this.mainStore.user = result.data;
 					this.mainStore.isAuth = true;
-					this.loadUser();
 				} else {
 					this.mainStore.openModal(result.errorMessage || '', undefined, 'error');
 				}

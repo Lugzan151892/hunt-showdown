@@ -45,9 +45,7 @@
 	const handleSubmit = async () => {
 		if (isLogin.value) {
 			await authStore.handleLogin();
-			// if (loginResult) {
-			// 	router.push('/');
-			// }
+			router.push({ name: 'home' });
 		} else {
 			await authStore.handleRegistry();
 		}
