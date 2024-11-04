@@ -1,6 +1,5 @@
-// const defaultPath = 'https://hunter-service.fun/api';
-// const defaultPath = 'http://localhost:8000/api';
-const API_PATH = window.location.origin === 'http://localhost:3000' ? 'http://localhost:8000/api' : '/api';
+const API_PATH =
+	window.location.origin === 'http://localhost:3000' ? 'http://localhost:8000/api' : `${window.location.origin}/api`;
 
 class Api {
 	static async get<T, R>(path: string, options: T | {} = {}): Promise<API.IResponse<R>> {
@@ -121,6 +120,59 @@ class Api {
 		const authToken = localStorage.getItem('token');
 		const response = await fetch(API_PATH + path, {
 			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8',
+				...(authToken && { Authorization: `Bearer ${authToken}` })
+			},
+			credentials: 'include',
+			body: JSON.stringify(options)
+		});
+
+		if (!response.ok && response.status < 500 && response.status !== 401) {
+			const error = await response.json();
+
+			return {
+				success: false,
+				...error
+			};
+		} else if (!response.ok && response.status === 401) {
+			localStorage.removeItem('token');
+			return {
+				success: false,
+				error: true,
+				errorMessage: 'Unauthorized',
+				status: response.status
+			};
+		} else if (response.ok) {
+			const token = response.headers.get('authorization');
+			if (token) {
+				localStorage.setItem('token', token);
+			}
+			const result = await response.text();
+
+			if (response.status === 204 || !result) {
+				return {
+					success: true,
+					error: false,
+					status: response.status,
+					data: {} as R
+				};
+			}
+
+			return {
+				success: true,
+				...JSON.parse(result)
+			};
+		} else {
+			/** @todo обработка ошибок */
+			throw new Error('Произошла ошибка. Свяжитесь с разработчиками');
+		}
+	}
+
+	static async delete<T, R>(path: string, options: T | {} = {}): Promise<API.IResponse<R>> {
+		const authToken = localStorage.getItem('token');
+		const response = await fetch(API_PATH + path, {
+			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8',
 				...(authToken && { Authorization: `Bearer ${authToken}` })
