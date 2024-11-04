@@ -16,7 +16,7 @@
 			/>
 		</div>
 		<div class="banned__bottom">
-			<UiCustomButton v-if="currentUser" title="banned.loadList" @click="loadBannedUsers" />
+			<UiCustomButton v-if="mainStore.user" title="banned.loadList" @click="loadBannedUsers" />
 			<div v-else class="banned__bottom-error">{{ $t('banned.loginToSeeList') }}</div>
 		</div>
 	</article>
@@ -31,21 +31,17 @@
 	const newPlayer = ref('');
 	const bannedList = ref<BANNED.ISteamBannedUser[]>([]);
 
-	const currentUser = computed(() => mainStore.user);
-
 	const loadBannedUsers = async () => {
 		// @todo fix etu huyny
 		try {
 			mainStore.loadingStart();
-			const data = await api.post<any, BANNED.ISteamBannedUsersResponse>('/steam/list', {
-				banned_list: mainStore.user?.spectated_users
-			});
-			if (data) {
-				bannedList.value = data.data.players;
+			const result = await api.get<any, BANNED.ISteamBannedUsersResponse>('/steam/list');
+			if (result.success) {
+				bannedList.value = result.data.bannedUsers.sort((a, b) => b.id - a.id);
 			}
 			mainStore.loadingStop();
 		} catch (e) {
-			mainStore.openModal('Something went wrong, try again', undefined, 'error');
+			mainStore.openModal('Something went wrong, try again ', undefined, 'error');
 		} finally {
 			mainStore.loadingStop();
 		}
@@ -55,21 +51,12 @@
 		try {
 			mainStore.loadingStart();
 			const data = await api.get<any, any>('/steam/steamid/get', { path: newPlayer.value });
-			if (!data.error && data.data.steamId && currentUser.value) {
-				if (currentUser.value.spectated_users.includes(data.data.steamId)) {
-					mainStore.loadingStop();
-					mainStore.openModal('banned.userAlreadyInList', undefined, 'error');
-					return;
-				}
-				const result = await api.put<any, any>('/user/set', {
-					...mainStore.user,
-					spectated_users: [...currentUser.value.spectated_users, data.data.steamId]
+			if (!data.error && data.data.steamId) {
+				await api.post<any, any>('/banned/add', {
+					steamId: data.data.steamId,
+					comment: ''
 				});
-				if (!result.error) {
-					mainStore.user = result.data.user;
-					newPlayer.value = '';
-					await loadBannedUsers();
-				}
+				newPlayer.value = '';
 			}
 		} catch (e) {
 			mainStore.openModal('Something went wrong, try again', undefined, 'error');
@@ -78,18 +65,11 @@
 		}
 	};
 
-	const handleDelete = async (steamId: string) => {
-		if (!mainStore.user) return;
-		mainStore.user.spectated_users = mainStore.user.spectated_users.filter((id) => String(id) !== String(steamId));
+	const handleDelete = async (id: number) => {
 		try {
 			mainStore.loadingStart();
-			const result = await api.put<any, any>('/user/set', mainStore.user);
-			if (result.status === 200 && !result.error) {
-				mainStore.user = result.data.user;
-				bannedList.value = bannedList.value.filter((user) => user.steamid !== steamId);
-			} else {
-				mainStore.openModal(result.message, undefined, 'error');
-			}
+			await api.delete<any, any>('/banned/delete', { id });
+			await loadBannedUsers();
 		} catch (e) {
 			mainStore.openModal('Something went wrong, try again', undefined, 'error');
 		} finally {
@@ -97,20 +77,7 @@
 		}
 	};
 
-	watch(
-		() => currentUser.value,
-		(user, notUser) => {
-			if (!notUser && user) {
-				loadBannedUsers();
-			}
-		}
-	);
-
-	onMounted(() => {
-		if (currentUser.value) {
-			loadBannedUsers();
-		}
-	});
+	loadBannedUsers();
 </script>
 <style lang="scss" scoped>
 	.banned {

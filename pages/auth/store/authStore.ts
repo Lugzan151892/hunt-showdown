@@ -93,7 +93,7 @@ export const useAuthStore = defineStore('authStore', {
 					this.mainStore.isAuth = true;
 					this.mainStore.user = result.data;
 				} else {
-					localStorage.removeItem('token');
+					// localStorage.removeItem('token');
 					this.mainStore.openModal(result.errorMessage, undefined, 'error');
 				}
 			} catch (e) {

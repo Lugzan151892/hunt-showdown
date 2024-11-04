@@ -1,25 +1,45 @@
+// export interface ISteamBannedUser {
+// 	avatar: string;
+// 	avatarfull: string;
+// 	avatarhash: string;
+// 	avatarmedium: string;
+// 	communityvisibilitystate: number;
+// 	lastlogoff: number;
+// 	personaname: string;
+// 	personastate: number;
+// 	personastateflags: number;
+// 	primaryclanid: string;
+// 	profilestate: number;
+// 	profileurl: string;
+// 	steamid: string;
+// 	timecreated: number;
+// 	banned: boolean;
+// }
+
 export interface ISteamBannedUser {
 	avatar: string;
-	avatarfull: string;
-	avatarhash: string;
-	avatarmedium: string;
-	communityvisibilitystate: number;
-	lastlogoff: number;
-	personaname: string;
-	personastate: number;
+	avatarFull: string;
+	avatarMedium: string;
+	banned: boolean;
+	comment: string;
+	commentPermission: number;
+	communityVisibilityState: number;
+	createdAt: string;
+	id: number;
+	lastlogoff: null;
+	personaName: string;
 	personastateflags: number;
 	primaryclanid: string;
-	profilestate: number;
-	profileurl: string;
-	steamid: string;
+	profileState: number;
+	profileUrl: string;
+	steamId: string;
 	timecreated: number;
-	banned: boolean;
+	updatedAt: string;
+	personastate: number;
 }
 
 export interface ISteamBannedUsersResponse extends COMMON.IDefaultResponse {
-    data: {
-        players: ISteamBannedUser[]
-    }
+	bannedUsers: ISteamBannedUser[];
 }
 
 export as namespace BANNED;
