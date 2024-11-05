@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import errorHandler from '~/utils/errorHandler';
 import api from '~/services/api';
 import validateAll from '~/services/validation';
 import { useMainStore } from '~/store/mainStore';
@@ -50,8 +51,8 @@ export const useAuthStore = defineStore('authStore', {
 				} else {
 					this.mainStore.openModal(result.errorMessage || 'Something went wrong, try again', undefined, 'error');
 				}
-			} catch (e) {
-				this.mainStore.openModal('Something went wrong, try again', undefined, 'error');
+			} catch (e: any) {
+				errorHandler(e);
 			} finally {
 				this.mainStore.loadingStop();
 			}
@@ -75,11 +76,9 @@ export const useAuthStore = defineStore('authStore', {
 				if (result.success) {
 					this.mainStore.user = result.data;
 					this.mainStore.isAuth = true;
-				} else {
-					this.mainStore.openModal(result.errorMessage || '', undefined, 'error');
 				}
-			} catch (e) {
-				this.mainStore.openModal('Something went wrong, try again', undefined, 'error');
+			} catch (e: any) {
+				errorHandler(e);
 			} finally {
 				this.mainStore.loadingStop();
 			}
@@ -87,18 +86,15 @@ export const useAuthStore = defineStore('authStore', {
 		async loadUser() {
 			try {
 				this.mainStore.loadingStart();
-				const result = await api.get<any, any>('/user/get');
+				const result = await api.getSilent<any, any>('/user/get');
 
 				if (result.success) {
 					this.mainStore.isAuth = true;
 					this.mainStore.user = result.data;
-				} else {
-					// localStorage.removeItem('token');
-					this.mainStore.openModal(result.errorMessage, undefined, 'error');
 				}
-			} catch (e) {
+			} catch (e: any) {
 				this.mainStore.loadingStop();
-				this.mainStore.openModal('Something went wrong, try again', undefined, 'error');
+				errorHandler(e);
 			} finally {
 				this.mainStore.loadingStop();
 			}
