@@ -2,12 +2,14 @@ type ErrorType = 'unknown' | 'server' | 'auth';
 
 export default class SystemError extends Error {
 	private type: ErrorType;
+	public status: number;
 
-	constructor(type: ErrorType = 'unknown') {
+	constructor(type: ErrorType = 'unknown', status: number = 500) {
 		super();
 
 		this.name = 'SystemError';
 		this.type = type;
+		this.status = status;
 
 		switch (this.type) {
 			case 'server':
@@ -20,9 +22,5 @@ export default class SystemError extends Error {
 				this.message = 'Произошла ошибка.\r\nСвяжитесь с разработчиками.';
 				break;
 		}
-	}
-
-	getType() {
-		return this.type;
 	}
 }

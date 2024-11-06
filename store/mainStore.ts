@@ -7,13 +7,15 @@ interface IInfoModalSettings {
 	text: string;
 	buttonText: string;
 	redirect: string;
+	errorStatus?: number;
 }
 
 const defaultModalSettings = (): IInfoModalSettings => ({
 	type: 'success',
 	text: '',
 	buttonText: 'main.accept',
-	redirect: ''
+	redirect: '',
+	errorStatus: 400
 });
 
 export const useMainStore = defineStore('mainStore', {
@@ -28,15 +30,34 @@ export const useMainStore = defineStore('mainStore', {
 	},
 
 	actions: {
-		openModal(text: string, redirect: string = '', type: TInfoModalIconType = 'success') {
+		openModal(text: string, redirect: string = '', type: TInfoModalIconType = 'success', status: number = 500) {
 			this.mainModalSettings.text = text;
 			this.mainModalSettings.type = type;
 			this.mainModalSettings.redirect = redirect;
+			this.mainModalSettings.errorStatus = status;
 			this.mainModal = true;
 		},
 		clearData() {
 			this.mainModalSettings = defaultModalSettings();
 		},
+
+		async loadUser() {
+			try {
+				this.loadingStart();
+				const result = await api.getSilent<any, any>('/user/get');
+
+				if (result.success) {
+					this.isAuth = true;
+					this.user = result.data;
+				}
+			} catch (e: any) {
+				this.loadingStop();
+				errorHandler(e);
+			} finally {
+				this.loadingStop();
+			}
+		},
+
 		async handleLogout() {
 			try {
 				this.loadingStart();

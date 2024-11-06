@@ -1,17 +1,15 @@
 // plugins/global-middleware.ts
 import { defineNuxtPlugin } from '#app';
-import { useAuthStore } from '~/pages/auth/store/authStore';
 import { useMainStore } from '~/store/mainStore';
 
 export default defineNuxtPlugin((_nuxtApp) => {
 	const router = useRouter();
 	const mainStore = useMainStore();
-	const authStore = useAuthStore();
 
 	router.beforeEach(async (to, _from, next) => {
 		const token = localStorage.getItem('token');
 		if (token) {
-			await authStore.loadUser();
+			await mainStore.loadUser();
 		}
 
 		if (to.meta.authRequired) {
