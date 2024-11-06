@@ -22,7 +22,7 @@
 	</article>
 </template>
 <script lang="ts" setup>
-	import BannedListItem from './components/BannedListItem.vue';
+	import BannedListItem from '~/pages/banned-list/components/BannedListItem.vue';
 	import api from '~/services/api';
 	import { useMainStore } from '~/store/mainStore';
 
@@ -32,7 +32,6 @@
 	const bannedList = ref<BANNED.ISteamBannedUser[]>([]);
 
 	const loadBannedUsers = async () => {
-		// @todo fix etu huyny
 		try {
 			mainStore.loadingStart();
 			const result = await api.get<any, BANNED.ISteamBannedUsersResponse>('/steam/list');
@@ -40,8 +39,8 @@
 				bannedList.value = result.data.bannedUsers.sort((a, b) => b.id - a.id);
 			}
 			mainStore.loadingStop();
-		} catch (e) {
-			mainStore.openModal('Something went wrong, try again ', undefined, 'error');
+		} catch (e: any) {
+			errorHandler(e);
 		} finally {
 			mainStore.loadingStop();
 		}
@@ -51,15 +50,15 @@
 		try {
 			mainStore.loadingStart();
 			const data = await api.get<any, any>('/steam/steamid/get', { path: newPlayer.value });
-			if (!data.error && data.data.steamId) {
+			if (data.data.steamId) {
 				await api.post<any, any>('/banned/add', {
 					steamId: data.data.steamId,
 					comment: ''
 				});
 				newPlayer.value = '';
 			}
-		} catch (e) {
-			mainStore.openModal('Something went wrong, try again', undefined, 'error');
+		} catch (e: any) {
+			errorHandler(e);
 		} finally {
 			mainStore.loadingStop();
 		}
@@ -70,8 +69,8 @@
 			mainStore.loadingStart();
 			await api.delete<any, any>('/banned/delete', { id });
 			await loadBannedUsers();
-		} catch (e) {
-			mainStore.openModal('Something went wrong, try again', undefined, 'error');
+		} catch (e: any) {
+			errorHandler(e);
 		} finally {
 			mainStore.loadingStop();
 		}

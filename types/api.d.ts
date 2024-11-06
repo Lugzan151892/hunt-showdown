@@ -16,6 +16,7 @@ interface IResponseError<R> {
 	success: false;
 }
 
-type IResponse<R> = IResponseError<R> | IResponseSuccess<R>;
+type IResponse<R> = IResponseSuccess<R>;
+type IResponseSilent<R> = IResponseError<R> | IResponseSuccess<R>;
 
 export as namespace API;
