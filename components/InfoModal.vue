@@ -2,7 +2,11 @@
 	<div class="wrapper" @click.self="closeModal">
 		<div class="modal">
 			<div class="modal__content">
+				<div v-if="mainStore.mainModalSettings.type === 'error'" class="modal__content-status">
+					{{ mainStore.mainModalSettings.errorStatus || 500 }}
+				</div>
 				<img
+					v-else
 					class="modal__content-image"
 					:src="icons[mainStore.mainModalSettings.type]"
 					:alt="mainStore.mainModalSettings.type"
@@ -69,6 +73,20 @@
 					height: 50px;
 					width: 50px;
 					margin-bottom: 30px;
+				}
+
+				&-status {
+					width: 50px;
+					height: 50px;
+					margin: 0 auto 20px;
+					background-color: #e04f5f;
+					color: white;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					border-radius: 50%;
+					font-weight: 600;
+					font-size: 24px;
 				}
 			}
 			&__actions {

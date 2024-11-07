@@ -65,7 +65,6 @@
 </template>
 
 <script lang="ts" setup>
-	import huntIcon from '@/assets/images/hunt.svg';
 	import { useMainStore } from '~/store/mainStore';
 	import menuIcon from '@/assets/images/menu.svg';
 	import home from '@/assets/images/home.svg';
@@ -84,7 +83,6 @@
 
 	const items = [
 		{ name: 'Main Page', img: home, route: 'home', text: 'main.mainPage' },
-		{ name: 'Hunt Showdown', img: huntIcon, route: 'hunt-showdown', text: 'main.huntSettingsPage' },
 		{ name: 'Banned list', img: ban, route: 'suspicious-players', text: 'main.bannedListPage' }
 	];
 

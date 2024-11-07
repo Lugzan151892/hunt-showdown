@@ -7,8 +7,7 @@ export interface IResponseSuccess<R> {
 	success: true;
 }
 
-interface IResponseError<R> {
-	data?: R | null;
+interface IResponseError {
 	error: true;
 	errorMessage: string;
 	message?: null;
@@ -17,6 +16,6 @@ interface IResponseError<R> {
 }
 
 type IResponse<R> = IResponseSuccess<R>;
-type IResponseSilent<R> = IResponseError<R> | IResponseSuccess<R>;
+type IResponseSilent<R> = IResponseError | IResponseSuccess<R>;
 
 export as namespace API;

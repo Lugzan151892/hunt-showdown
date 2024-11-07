@@ -1,5 +1,3 @@
-import SystemError from '~/utils/SystemError';
-
 const API_PATH =
 	window.location.origin === 'http://localhost:3000' ? 'http://localhost:8000/api' : `${window.location.origin}/api`;
 
@@ -9,9 +7,9 @@ type ResponseType<R, S extends boolean> = S extends true ? API.IResponseSilent<R
 class Api {
 	static handleRequestStatus(status: number, silentError: boolean = false) {
 		if (status >= 500 && status <= 599) {
-			throw new SystemError('server');
+			throw new SystemError('server', status);
 		} else if (status === 401 && !silentError) {
-			throw new SystemError('auth');
+			throw new SystemError('auth', status);
 		}
 	}
 
@@ -51,7 +49,7 @@ class Api {
 		if (!silent && !response.ok && response.status < 500) {
 			const error = await response.json();
 
-			throw new Error(error.errorMessage || error.message || 'Ошибка при выполнении запроса');
+			throw new UserError(error);
 		}
 
 		const result = await response.text();

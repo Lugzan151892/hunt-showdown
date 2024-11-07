@@ -2,12 +2,6 @@
 	<article class="content">
 		<h1 class="content__title">{{ $t('main.mainTitle') }}</h1>
 		<ContentBlock
-			title="info.huntInfoTitle"
-			text="info.huntInfoText"
-			redirect-path="/games/hunt-showdown"
-			button-title="info.huntInfoButton"
-		/>
-		<ContentBlock
 			title="info.bannedListInfoTitle"
 			text="info.bannedListInfoDescription"
 			redirect-path="/suspicious-players"
@@ -28,11 +22,6 @@
 
 <script setup lang="ts">
 	import { useMainStore } from '~/store/mainStore';
-
-	// definePageMeta({
-	// 	// This is an example of inline middleware
-	// 	middleware: 'auth'
-	// });
 
 	const mainStore = useMainStore();
 </script>
