@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { useAuthStore } from '~/pages/auth/store/authStore';
 import api from '~/services/api';
 import { useMainStore } from '~/store/mainStore';
 
@@ -85,10 +84,8 @@ const defaultSettings = (): { [key: string]: any } => ({
 export const useHuntStore = defineStore('huntStore', {
 	state() {
 		const mainStore = useMainStore();
-		const authStore = useAuthStore();
 		return {
 			mainStore,
-			authStore,
 			settings: defaultSettings()
 		};
 	},
@@ -114,7 +111,10 @@ export const useHuntStore = defineStore('huntStore', {
 		async saveUserSettings() {
 			try {
 				this.mainStore.loadingStart();
-				const result = await api.put<any, any>('/user/set', { ...this.mainStore.user, hunt_settings: this.settings });
+				const result = await api.putSilent<any, any>('/user/set', {
+					...this.mainStore.user,
+					hunt_settings: this.settings
+				});
 				if (result.success) {
 					await this.handleFillSettings();
 					this.mainStore.openModal('Настройки успешно сохранены');
@@ -128,10 +128,9 @@ export const useHuntStore = defineStore('huntStore', {
 			}
 		},
 
-		async handleFillSettings() {
+		handleFillSettings() {
 			try {
 				this.mainStore.loadingStart();
-				await this.authStore.loadUser();
 
 				if (this.mainStore.user && !this.mainStore.user?.hunt_settings) {
 					this.mainStore.user.hunt_settings = defaultSettings();
