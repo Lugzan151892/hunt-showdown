@@ -2,12 +2,6 @@
 	<article class="content">
 		<h1 class="content__title">{{ $t('main.mainTitle') }}</h1>
 		<ContentBlock
-			title="info.huntInfoTitle"
-			text="info.huntInfoText"
-			redirect-path="/games/hunt-showdown"
-			button-title="info.huntInfoButton"
-		/>
-		<ContentBlock
 			title="info.bannedListInfoTitle"
 			text="info.bannedListInfoDescription"
 			redirect-path="/suspicious-players"

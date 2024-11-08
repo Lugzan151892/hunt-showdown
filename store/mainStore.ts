@@ -1,63 +1,84 @@
 import { defineStore } from 'pinia';
+import api from '~/services/api';
+import errorHandler from '~/utils/errorHandler';
 type TInfoModalIconType = 'success' | 'error' | 'warning';
 interface IInfoModalSettings {
 	type: TInfoModalIconType;
 	text: string;
 	buttonText: string;
 	redirect: string;
+	errorStatus?: number;
 }
 
 const defaultModalSettings = (): IInfoModalSettings => ({
 	type: 'success',
 	text: '',
 	buttonText: 'main.accept',
-	redirect: ''
+	redirect: '',
+	errorStatus: 400
 });
 
-export const useMainStore = defineStore('mainStore', () => {
-	const mainModal = ref(false);
-	const mainModalSettings = ref<IInfoModalSettings>(defaultModalSettings());
-	const loading = ref(false);
+export const useMainStore = defineStore('mainStore', {
+	state() {
+		return {
+			mainModal: false,
+			mainModalSettings: defaultModalSettings(),
+			loading: false,
+			user: null as null | COMMON.IUserData,
+			isAuth: false
+		};
+	},
 
-	const user = ref<null | COMMON.IUserData>(null);
-	const isAuth = ref(false);
+	actions: {
+		openModal(text: string, redirect: string = '', type: TInfoModalIconType = 'success', status: number = 500) {
+			this.mainModalSettings.text = text;
+			this.mainModalSettings.type = type;
+			this.mainModalSettings.redirect = redirect;
+			this.mainModalSettings.errorStatus = status;
+			this.mainModal = true;
+		},
+		clearData() {
+			this.mainModalSettings = defaultModalSettings();
+		},
 
-	const openModal = (text: string, redirect: string = '', type: TInfoModalIconType = 'success') => {
-		mainModalSettings.value.text = text;
-		mainModalSettings.value.type = type;
-		mainModalSettings.value.redirect = redirect;
-		mainModal.value = true;
-	};
+		async loadUser() {
+			try {
+				this.loadingStart();
+				const result = await api.getSilent<any, any>('/user/get');
 
-	const clearData = () => {
-		mainModalSettings.value = defaultModalSettings();
-	};
+				if (result.success) {
+					this.isAuth = true;
+					this.user = result.data;
+				}
+			} catch (e: any) {
+				this.loadingStop();
+				errorHandler(e);
+			} finally {
+				this.loadingStop();
+			}
+		},
 
-	const handleLogout = () => {
-		localStorage.removeItem('token');
-		user.value = null;
-		isAuth.value = false;
-		clearData();
-	};
+		async handleLogout() {
+			try {
+				this.loadingStart();
+				await api.postSilent('/user/logout', { userName: this.user?.username || '' });
+				localStorage.removeItem('token');
+				this.user = null;
+				this.isAuth = false;
+				this.clearData();
+			} catch (e: any) {
+				errorHandler(e);
+			} finally {
+				this.loadingStop();
+			}
+		},
 
-	const loadingStart = () => {
-		loading.value = true;
-	};
+		loadingStart() {
+			this.loading = true;
+		},
 
-	const loadingStop = () => {
-		loading.value = false;
-	};
-
-	return {
-		mainModal,
-		mainModalSettings,
-		openModal,
-		clearData,
-		user,
-		isAuth,
-		handleLogout,
-		loading,
-		loadingStart,
-		loadingStop
-	};
+		loadingStop() {
+			this.loading = false;
+		}
+	}
 });

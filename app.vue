@@ -1,6 +1,6 @@
 <template>
 	<div class="app">
-		<HeaderComponent />
+		<MenuComponent />
 		<div class="content">
 			<div class="content__wrapper">
 				<NuxtPage />
@@ -11,10 +11,8 @@
 	</div>
 </template>
 <script lang="ts" setup>
-	import { useAuthStore } from './pages/auth/store/authStore';
 	import { useMainStore } from './store/mainStore';
 
-	const authStore = useAuthStore();
 	const mainStore = useMainStore();
 
 	useHead({
@@ -29,10 +27,6 @@
 		keywords: 'Hunt, Hunt-Showdown, Hunter, hunt, hunt showdown, guides, settings, help, issue',
 		viewport: 'width=device-width, initial-scale=1.0'
 	});
-
-	if (!mainStore.user) {
-		authStore.handleCheckIsAuth();
-	}
 </script>
 <style lang="scss" scoped>
 	.content {

@@ -1,14 +1,14 @@
 <template>
 	<div class="content">
-		<img class="content__image" :src="user.avatarmedium" alt="Avatar" @click="handleGoSteam()" />
+		<img class="content__image" :src="user.avatarMedium" alt="Avatar" @click="handleGoSteam()" />
 		<div class="content__item">
 			<p>{{ $t('banned.name') }}:</p>
-			<p class="content__item-name" @click="handleGoSteam()">{{ user.personaname }}</p>
+			<p class="content__item-name" @click="handleGoSteam()">{{ user.personaName }}</p>
 		</div>
 		<div />
 		<div class="content__item">
 			<p>SteamID:</p>
-			<p>{{ user.steamid }}</p>
+			<p>{{ user.steamId }}</p>
 		</div>
 		<div class="content__item">
 			<p>{{ $t('banned.status') }}:</p>
@@ -18,7 +18,7 @@
 			<p>{{ $t('banned.profileVacStatus') }}:</p>
 			<p>{{ $t(bannedStatusTitle) }}</p>
 		</div>
-		<UiCustomButton title="main.delete" @click="$emit('delete', user.steamid)" />
+		<UiCustomButton title="main.delete" @click="$emit('delete', user.id)" />
 	</div>
 </template>
 <script lang="ts" setup>
@@ -57,7 +57,7 @@
 	const bannedStatusTitle = computed(() => (props.user.banned ? 'banned.banned' : 'banned.notBanned'));
 
 	const handleGoSteam = () => {
-		window.open(props.user.profileurl, '_blank');
+		window.open(props.user.profileUrl, '_blank');
 	};
 </script>
 <style lang="scss" scoped>

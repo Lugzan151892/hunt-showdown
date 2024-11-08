@@ -6,7 +6,7 @@
 				:type="computedType"
 				:placeholder="placeholder"
 				:max="max"
-				:model-value="value"
+				:value="modelValue"
 				@input="handleInput($event)"
 				@change="handleInput($event)"
 			/>
@@ -23,27 +23,28 @@
 <script lang="ts" setup>
 	import visibly from '@/assets/images/password_hide.png';
 	import visiblyOff from '@/assets/images/password_show.png';
-	const emit = defineEmits(['input', 'change']);
-	const props = defineProps({
-		placeholder: {
-			type: String,
-			default: ''
-		},
-		type: {
-			type: String,
-			default: 'text'
-		},
-		errors: {
-			type: String,
-			default: ''
-		},
-		max: {
-			type: Number,
-			default: 0
+	const emit = defineEmits<{
+		input: [string | number];
+		change: [string | number];
+		'update:modelValue': [string | number];
+	}>();
+	const props = withDefaults(
+		defineProps<{
+			modelValue: string | number;
+			placeholder?: string;
+			type?: string;
+			errors?: string;
+			max?: number;
+		}>(),
+		{
+			modelValue: '',
+			placeholder: '',
+			type: 'text',
+			errors: '',
+			max: 0
 		}
-	});
+	);
 
-	const value = defineModel<string | number>();
 	const showPassword = ref(false);
 
 	const computedType = computed(() => {
@@ -54,16 +55,12 @@
 	const handleInput = (e: Event) => {
 		const inputElement = e.target as HTMLInputElement;
 
-		if (!value.value) {
-			value.value = '';
-		}
-
 		if (props.type === 'number') {
 			if (props.max && +inputElement.value > props.max) return;
 		}
-		value.value = inputElement.value;
 		emit('input', inputElement.value);
 		emit('change', inputElement.value);
+		emit('update:modelValue', inputElement.value);
 	};
 </script>
 <style lang="scss" scoped>
