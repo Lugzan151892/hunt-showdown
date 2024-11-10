@@ -52,6 +52,11 @@ class Api {
 			throw new UserError(error);
 		}
 
+		const authToken = response.headers.get('Authorization');
+		if (authToken) {
+			localStorage.setItem('token', authToken);
+		}
+
 		const result = await response.text();
 
 		return {
