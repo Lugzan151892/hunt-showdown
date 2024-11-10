@@ -7,10 +7,7 @@ export default defineNuxtPlugin((_nuxtApp) => {
 	const mainStore = useMainStore();
 
 	router.beforeEach(async (to, _from, next) => {
-		const token = localStorage.getItem('token');
-		if (token) {
-			await mainStore.loadUser();
-		}
+		await mainStore.loadUser();
 
 		if (to.meta.authRequired) {
 			if (!mainStore.user) {
