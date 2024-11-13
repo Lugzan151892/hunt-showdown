@@ -44,12 +44,17 @@ class Api {
 	): Promise<ResponseType<R, S>> {
 		const response = await this.request<T>(path, method, options);
 
-		this.handleRequestStatus(response.status);
+		this.handleRequestStatus(response.status, silent);
 
 		if (!silent && !response.ok && response.status < 500) {
 			const error = await response.json();
 
 			throw new UserError(error);
+		}
+
+		const authToken = response.headers.get('Authorization');
+		if (authToken) {
+			localStorage.setItem('token', authToken);
 		}
 
 		const result = await response.text();
