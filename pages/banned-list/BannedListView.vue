@@ -57,6 +57,7 @@
 				});
 				newPlayer.value = '';
 			}
+			await loadBannedUsers();
 		} catch (e: any) {
 			errorHandler(e);
 		} finally {
